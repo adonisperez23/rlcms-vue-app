@@ -49,7 +49,7 @@
 </template>
 
 <script setup lang="ts">
-import {ref,reactive, computed} from 'vue'
+import {ref, computed} from 'vue'
 import axios , {AxiosError} from 'axios'
 import {useEstadoAlerta} from '../stores/estadoAlerta'
 
@@ -137,7 +137,6 @@ const validarClave = [ value => {
 const registrarUsuario = () =>{
 
   axios.post(import.meta.env.VITE_API_REGISTRAR_USUARIO, datosRegistro(nombre.value,email.value,linea.value, telefono.value, claveUno.value) )
-   // axios.post('https://localhost:3000/api/registrar/usuario', datosRegistro(nombre.value,email.value,claveUno.value,claveDos.value) )
     .then((respuesta:Respuesta)=>{
 
       alert.gestionarRespuesta(respuesta)
