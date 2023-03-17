@@ -1,0 +1,301 @@
+[
+    {
+       "id": 1,
+       "nombreFoto": "punta trasera con pasta y tajada",
+       "direccionUrl": "/fotos/punta-pasta-tajadas.jpg",
+       "producto": [{
+           "id":2,
+           "nombreProducto":"Punta Trasera en salsa",
+           "categoria":"Almuerzo",
+           "descripcion":"nada aun",
+           "precio":"7",
+           "disponible":true
+       }]
+   },
+   {
+       "id": 2,
+       "nombreFoto": "punta trasera con cocida y tajada",
+       "direccionUrl": "/fotos/punta-cocida.jpg",
+       "producto": [{
+           "id":2,
+           "nombreProducto":"Punta Trasera en salsa",
+           "categoria":"Almuerzo",
+           "descripcion":"nada aun",
+           "precio":"7",
+           "disponible":true
+       }]
+   },
+   {
+       "id": 3,
+       "nombreFoto": "filet de cochino con todo",
+       "direccionUrl": "/fotos/cochino-contodo.jpg",
+       "producto": [{
+           "id":8,
+           "nombreProducto":"filet de cochino",
+           "categoria":"Almuerzo",
+           "descripcion":"nada aun",
+           "precio":"8.5",
+           "disponible":true
+       }]
+   },
+   {
+       "id": 4,
+       "nombreFoto": "filet de cochino con papas fritas",
+       "direccionUrl": "/fotos/cochino-papafrita.jpg",
+       "producto": [{
+           "id":8,
+           "nombreProducto":"filet de cochino",
+           "categoria":"Almuerzo",
+           "descripcion":"nada aun",
+           "precio":"8.5",
+           "disponible":true
+       }]
+   },
+   {
+       "id": 5,
+       "nombreFoto": "filet de cochino con papas fritas y verde",
+       "direccionUrl": "/fotos/cochino-papasfritas-verde.jpg",
+       "producto": [{
+           "id":8,
+           "nombreProducto":"filet de cochino",
+           "categoria":"Almuerzo",
+           "descripcion":"nada aun",
+           "precio":"8.5",
+           "disponible":true
+       }]
+   },
+   {
+       "id": 6,
+       "nombreFoto": "filet de cochino con papas fritas y verde 2",
+       "direccionUrl": "/fotos/cochino-papasfritas-verde2.jpg",
+       "producto": [{
+           "id":8,
+           "nombreProducto":"filet de cochino",
+           "categoria":"Almuerzo",
+           "descripcion":"nada aun",
+           "precio":"8.5",
+           "disponible":true
+       }]
+   },
+   {
+       "id": 7,
+       "nombreFoto": "filet de cochino con papas fritas 2",
+       "direccionUrl": "/fotos/cochino-papasfritas.jpg",
+       "producto": [{
+           "id":8,
+           "nombreProducto":"filet de cochino",
+           "categoria":"Almuerzo",
+           "descripcion":"nada aun",
+           "precio":"8.5",
+           "disponible":true
+       }]
+   },
+   {
+       "id": 8,
+       "nombreFoto": "filet de cochino con pure y verde",
+       "direccionUrl": "/fotos/cochino-pure-verde.jpg",
+       "producto": [{
+           "id":8,
+           "nombreProducto":"filet de cochino",
+           "categoria":"Almuerzo",
+           "descripcion":"nada aun",
+           "precio":"8.5",
+           "disponible":true
+       }]
+   },
+   {
+       "id": 9,
+       "nombreFoto": "filet de cochino con papas al vapor y verde",
+       "direccionUrl": "/fotos/cochino-verde-papasvapor.jpg",
+       "producto": [{
+           "id":8,
+           "nombreProducto":"filet de cochino",
+           "categoria":"Almuerzo",
+           "descripcion":"nada aun",
+           "precio":"8.5",
+           "disponible":true
+       }]
+   },
+   {
+       "id": 10,
+       "nombreFoto": "filet de cochino con papas al vapor y verde 2",
+       "direccionUrl": "/fotos/cochino-verde-papasvapor2.jpg",
+       "producto": [{
+           "id":8,
+           "nombreProducto":"filet de cochino",
+           "categoria":"Almuerzo",
+           "descripcion":"nada aun",
+           "precio":"8.5",
+           "disponible":true
+       }]
+   },
+   {
+       "id": 11,
+       "nombreFoto": "costillas con pure y verde",
+       "direccionUrl": "/fotos/costillas-pure-verde.jpg",
+       "producto": [{
+           "id":4,
+           "nombreProducto":"Costillas guisadas",
+           "categoria":"Almuerzo",
+           "descripcion":"nada aun",
+           "precio":"7",
+           "disponible":true
+       }]
+   },
+   {
+       "id": 12,
+       "nombreFoto": "filet de merluza",
+       "direccionUrl": "/fotos/filetmerluza-contodo.jpg",
+       "producto": [{
+         "id":9,
+         "nombreProducto":"filet de merluza",
+         "categoria":"Almuerzo",
+         "descripcion":"nada aun",
+         "precio":"8.5",
+         "disponible":true
+       }]
+   },
+   {
+       "id": 13,
+       "nombreFoto": "lengua en salsa con verde",
+       "direccionUrl": "/fotos/lengua-fritas-verde.jpg",
+       "producto": [{
+         "id":10,
+         "nombreProducto":"lengua en salsa",
+         "categoria":"Almuerzo",
+         "descripcion":"nada aun",
+         "precio":"7.5",
+         "disponible":true
+       }]
+   },
+   {
+       "id": 14,
+       "nombreFoto": "lomito con arroz y frijol",
+       "direccionUrl": "/fotos/lomito-arroz-frijol.jpg",
+       "producto": [{
+         "id":5,
+         "nombreProducto":"lomito con pimenton",
+         "categoria":"Almuerzo",
+         "descripcion":"nada aun",
+         "precio":"8.5",
+         "disponible":true
+       }]
+   },
+   {
+       "id": 15,
+       "nombreFoto": "lomito con todo",
+       "direccionUrl": "/fotos/lomito-con-todo.jpg",
+       "producto": [{
+         "id":5,
+         "nombreProducto":"lomito con pimenton",
+         "categoria":"Almuerzo",
+         "descripcion":"nada aun",
+         "precio":"8.5",
+         "disponible":true
+       }]
+   },
+   {
+       "id": 16,
+       "nombreFoto": "lomito con papas fritas y cocida",
+       "direccionUrl": "/fotos/lomito-fritas-cocida.jpg",
+       "producto": [{
+         "id":5,
+         "nombreProducto":"lomito con pimenton",
+         "categoria":"Almuerzo",
+         "descripcion":"nada aun",
+         "precio":"8.5",
+         "disponible":true
+       }]
+   },
+   {
+       "id": 17,
+       "nombreFoto": "lomito con pure y verde",
+       "direccionUrl": "/fotos/lomito-pure-verde.jpg",
+       "producto": [{
+         "id":5,
+         "nombreProducto":"lomito con pimenton",
+         "categoria":"Almuerzo",
+         "descripcion":"nada aun",
+         "precio":"8.5",
+         "disponible":true
+       }]
+   },
+   {
+       "id": 18,
+       "nombreFoto": "lomito con verde y papas al vapor",
+       "direccionUrl": "/fotos/lomito-verde-papasvapor.jpg",
+       "producto": [{
+         "id":5,
+         "nombreProducto":"lomito con pimenton",
+         "categoria":"Almuerzo",
+         "descripcion":"nada aun",
+         "precio":"8.5",
+         "disponible":true
+       }]
+   },
+   {
+       "id": 19,
+       "nombreFoto": "lomito con verde y papas al vapor",
+       "direccionUrl": "/fotos/lomito-verde-vapor.jpg",
+       "producto": [{
+         "id":5,
+         "nombreProducto":"lomito con pimenton",
+         "categoria":"Almuerzo",
+         "descripcion":"nada aun",
+         "precio":"8.5",
+         "disponible":true
+       }]
+   },
+   {
+       "id": 20,
+       "nombreFoto": "pescado frito verde y papafrita",
+       "direccionUrl": "/fotos/pescadofrito-verde-papafrita.jpg",
+       "producto": [{
+         "id":7,
+         "nombreProducto":"pescado frito",
+         "categoria":"Almuerzo",
+         "descripcion":"nada aun",
+         "precio":"8",
+         "disponible":true
+       }]
+   },
+   {
+       "id": 21,
+       "nombreFoto": "plato navideno con punta",
+       "direccionUrl": "/fotos/platonavideno-punta.jpg",
+       "producto": [{
+         "id":11,
+         "nombreProducto":"plato navideno",
+         "categoria":"Almuerzo",
+         "descripcion":"nada aun",
+         "precio":"10",
+         "disponible":true
+       }]
+   },
+   {
+       "id": 22,
+       "nombreFoto": "bisteck de solomo pure y tajadas",
+       "direccionUrl": "/fotos/solomo-pure-tajada.jpg",
+       "producto": [{
+         "id":6,
+         "nombreProducto":"bisteck de solomo",
+         "categoria":"Almuerzo",
+         "descripcion":"nada aun",
+         "precio":"8.5",
+         "disponible":true
+       }]
+   },
+   {
+       "id": 23,
+       "nombreFoto": "bisteck de solomo con verde y papasfritas",
+       "direccionUrl": "/fotos/solomo-verde-papasfritas.jpg",
+       "producto": [{
+         "id":6,
+         "nombreProducto":"bisteck de solomo",
+         "categoria":"Almuerzo",
+         "descripcion":"nada aun",
+         "precio":"8.5",
+         "disponible":true
+       }]
+   }
+]

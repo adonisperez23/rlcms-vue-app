@@ -9,7 +9,7 @@
       ></v-text-field>
       <v-text-field
         v-model="email"
-        :rules="validarEmail"
+        :rules="useValidarEmail"
         label="Correo electronico"
         prepend-inner-icon="mdi-email-outline"
       ></v-text-field>
@@ -51,20 +51,11 @@
 <script setup lang="ts">
 import {ref, computed} from 'vue'
 import axios , {AxiosError} from 'axios'
+import {Usuario,Respuesta} from "../types/interfaces.ts"
+import {useValidarEmail} from "../composables/validadores"
 import {useEstadoAlerta} from '../stores/estadoAlerta'
 
-interface Usuario{
-  nombre:string,
-  telefono:string
-  email:string,
-  claveUno:string
-}
 
-interface Respuesta {
-  data:string,
-  status:number,
-  headers:string,
-}
 
 const alert = useEstadoAlerta()
 
@@ -104,14 +95,6 @@ const validarNombre = [ value => {
     return 'Ha superado el limite de caracteres'
 
 }]
-
-const validarEmail = [(value) => {
-
-        if (/^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/.test(value)) return true
-
-          return 'Debe ingresar un correo electronico valido'
-
-        }]
 const validarTelefono =[ value => {
 
       if(value.length === 7) return true

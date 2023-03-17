@@ -1,0 +1,90 @@
+[
+  {
+    "id":1,
+    "nombreProducto":"pabellon criollo",
+    "categoria":"Almuerzo",
+    "descripcion":"No tiene una descripcion todavia",
+    "precio":"6",
+    "disponible":true
+  },
+  {
+    "id":2,
+    "nombreProducto":"Punta Trasera en salsa",
+    "categoria":"Almuerzo",
+    "descripcion":"No tiene una descripcion todavia",
+    "precio":"7",
+    "disponible":true
+  },
+  {
+    "id":3,
+    "nombreProducto":"asado negro",
+    "categoria":"Almuerzo",
+    "descripcion":"No tiene una descripcion todavia",
+    "precio":"7",
+    "disponible":true
+  },
+  {
+    "id":4,
+    "nombreProducto":"Costillas guisadas",
+    "categoria":"Almuerzo",
+    "descripcion":"No tiene una descripcion todavia",
+    "precio":"7",
+    "disponible":true
+  },
+  {
+    "id":5,
+    "nombreProducto":"lomito con pimenton",
+    "categoria":"Almuerzo",
+    "descripcion":"No tiene una descripcion todavia",
+    "precio":"8.5",
+    "disponible":true
+  },
+  {
+    "id":6,
+    "nombreProducto":"bisteck de solomo",
+    "categoria":"Almuerzo",
+    "descripcion":"No tiene una descripcion todavia",
+    "precio":"8.5",
+    "disponible":true
+  },
+  {
+    "id":7,
+    "nombreProducto":"pescado frito",
+    "categoria":"Almuerzo",
+    "descripcion":"No tiene una descripcion todavia",
+    "precio":"8",
+    "disponible":true
+  },
+  {
+    "id":8,
+    "nombreProducto":"filet de cochino",
+    "categoria":"Almuerzo",
+    "descripcion":"No tiene una descripcion todavia",
+    "precio":"8.5",
+    "disponible":true
+  },
+  {
+    "id":9,
+    "nombreProducto":"filet de merluza",
+    "categoria":"Almuerzo",
+    "descripcion":"No tiene una descripcion todavia",
+    "precio":"8.5",
+    "disponible":true
+  },
+  {
+    "id":10,
+    "nombreProducto":"lengua en salsa",
+    "categoria":"Almuerzo",
+    "descripcion":"No tiene una descripcion todavia",
+    "precio":"7.5",
+    "disponible":true
+  },
+  {
+    "id":11,
+    "nombreProducto":"plato navideno",
+    "categoria":"Almuerzo",
+    "descripcion":"No tiene una descripcion todavia",
+    "precio":"10",
+    "disponible":true
+  }
+]
