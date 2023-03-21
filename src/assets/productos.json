@@ -86,5 +86,69 @@
     "descripcion":"No tiene una descripcion todavia",
     "precio":"10",
     "disponible":true
+  },
+  {
+    "id":12,
+    "nombreProducto":"arroz",
+    "categoria":"Contorno",
+    "descripcion":"No tiene una descripcion todavia",
+    "precio":"0",
+    "disponible":true
+  },
+  {
+    "id":13,
+    "nombreProducto":"pasta",
+    "categoria":"Contorno",
+    "descripcion":"No tiene una descripcion todavia",
+    "precio":"0",
+    "disponible":true
+  },
+  {
+    "id":14,
+    "nombreProducto":"ensalada cocida",
+    "categoria":"Contorno",
+    "descripcion":"No tiene una descripcion todavia",
+    "precio":"0",
+    "disponible":true
+  },
+  {
+    "id":15,
+    "nombreProducto":"ensalada verde",
+    "categoria":"Contorno",
+    "descripcion":"No tiene una descripcion todavia",
+    "precio":"0",
+    "disponible":true
+  },
+  {
+    "id":16,
+    "nombreProducto":"caraotas",
+    "categoria":"Contorno",
+    "descripcion":"No tiene una descripcion todavia",
+    "precio":"0",
+    "disponible":true
+  },
+  {
+    "id":17,
+    "nombreProducto":"frijoles",
+    "categoria":"Contorno",
+    "descripcion":"No tiene una descripcion todavia",
+    "precio":"0",
+    "disponible":true
+  },
+  {
+    "id":18,
+    "nombreProducto":"tajadas fritas",
+    "categoria":"Contorno",
+    "descripcion":"No tiene una descripcion todavia",
+    "precio":"0",
+    "disponible":true
+  },
+  {
+    "id":19,
+    "nombreProducto":"toston",
+    "categoria":"Contorno",
+    "descripcion":"No tiene una descripcion todavia",
+    "precio":"10",
+    "disponible":true
   }
 ]

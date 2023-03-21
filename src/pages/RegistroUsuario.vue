@@ -59,12 +59,12 @@ import {useEstadoAlerta} from '../stores/estadoAlerta'
 
 const alert = useEstadoAlerta()
 
-const nombre = ref('')
-const email = ref('')
-const linea = ref('')
-const telefono = ref('')
-const claveUno = ref('')
-const claveDos = ref('')
+const nombre = ref<string>('')
+const email = ref<string>('')
+const linea = ref<string>('')
+const telefono = ref<string>('')
+const claveUno = ref<string>('')
+const claveDos = ref<string>('')
 
 const activarBoton = computed<boolean>(()=>{
   if(nombre.value.length > 0 && email.value.length > 5 && claveUno.value.length >= 5 && claveDos.value === claveUno.value && telefono.value.length === 7 && linea.value.length === 6) return false

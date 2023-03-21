@@ -14,13 +14,10 @@
             </div>
           </v-card-text>
           <v-card-actions>
-            <v-btn
-            variant="text"
-            color="deep-purple-accent-4"
-            >
-            Pedir
-          </v-btn>
-        </v-card-actions>
+            <Pedido
+            :precio="precio"
+            :menuOpcion="nombreProducto"/>
+         </v-card-actions>
       </v-card>
     </v-col>
 
@@ -28,6 +25,8 @@
 
 <script setup lang="ts">
 import FotoMenu from "./FotoMenu.vue"
+import Pedido from "../Pedido.vue"
+
 const props = defineProps<{
 
     id:number,
@@ -35,7 +34,7 @@ const props = defineProps<{
     categoria:string,
     descripcion:string,
     precio:string,
-    disponible:boolean
+    disponible:boolean,
 
 }>()
 

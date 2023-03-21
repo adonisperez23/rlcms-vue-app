@@ -37,11 +37,11 @@ interface Respuesta {
   headers:string,
 }
 
-const correo = ref('');
-const clave = ref('');
+const correo = ref<string>('');
+const clave = ref<string>('');
 const alert = useEstadoAlerta();
 
-const autenticarUsuario = ()=> {
+const autenticarUsuario = ():void=> {
 
     axios.post(import.meta.env.VITE_API_AUTENTICAR_USUARIO, datosLogin(correo.value,clave.value))
           .then((res:Respuesta)=>{
@@ -58,10 +58,8 @@ const autenticarUsuario = ()=> {
  // .then((res:Respuesta)=>{console.log("respuesta buena",res)})
  // .catch((err:AxiosError)=>{ console.log("respuesta mala", err)})
  // console.log("data",data)
-
-
 }
-function datosLogin(correo:string,clave:string) {
+function datosLogin(correo:string,clave:string){
   return {
     "email":correo,
      "clave":clave
