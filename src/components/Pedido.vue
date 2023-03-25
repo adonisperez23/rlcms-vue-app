@@ -19,7 +19,7 @@
             <v-select
             label="Indique la cantidad a pedir"
             :items="[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]"
-            v-model="cantidad"
+            v-model="pedido.cantidad"
             density="compact"
             class="w-25"
             ></v-select>
@@ -37,15 +37,21 @@
             </v-row>
             <v-row>
               <div class="text-h5">
-                {{cantidad}} {{menuOpcion}} con : {{concatenarContornosSeleccionados}}
+                {{pedido.cantidad}} {{menuOpcion}} {{concatenarContornosSeleccionados}}
               </div>
             </v-row>
+
+            <Aviso
+              @activar-aviso="()=>propsAviso.activarAviso = false"
+              :mensaje="propsAviso.mensaje"
+              :dialog="propsAviso.activarAviso"/>
+
           </v-container>
         </v-card-text>
         <v-card-actions>
           <v-btn color="primary"  @click="dialog = false">Atras</v-btn>
           <v-btn color="primary"  @click="resetearSeleccion">Resetear seleccion</v-btn>
-          <v-btn color="primary"  @click="resetearSeleccion">Guardar pedido</v-btn>
+          <v-btn color="primary"  @click="guardarEnListaPedidos(pedido)">Guardar pedido</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -53,15 +59,44 @@
 </template>
 
 <script setup lang="ts">
-import {ref, computed, inject} from "vue"
+import {ref,reactive, computed, inject} from "vue"
+import {useListaPedidos} from '../stores/listaPedidos'
+import Aviso from "./Aviso.vue"
 
 const props = defineProps<{
   menuOpcion: string,
   precio:string,
-  // contornos:string[]
 }>()
 
-const contornosDisponibles = computed(()=>{
+interface Pedido {
+  nombreProducto:string,
+  precio:number,
+  cantidad:number,
+  contornosSeleccionados:string
+}
+
+interface Aviso {
+  activarAviso:boolean,
+  mensaje:string,
+  color?:string
+}
+
+const pedido:Pedido = reactive({
+  nombreProducto:props.menuOpcion,
+  precio:props.precio,
+  cantidad:1,
+  contornosSeleccionados:''
+})
+
+const propsAviso:Aviso = reactive({
+  activarAviso: false,
+  mensaje:"",
+  color:""
+})
+
+const lista = useListaPedidos()
+
+const contornosDisponibles = computed<number>(()=>{
   switch (contornosSeleccionados.value.length) {
     case 0: return 3
       break;
@@ -74,36 +109,44 @@ const contornosDisponibles = computed(()=>{
   }
 })
 
-const desactivar = computed(()=>{
+const desactivar = computed<boolean>(()=>{
   if(contornosDisponibles.value === 0) {
     return true
   } else {
     return false
   }
 })
-const cantidad = ref<number>(1)
 
-const contornosSeleccionados = ref<string[]>([])
+const contornosSeleccionados = ref<string[]>([]) // aqui se guardan los contornos que el cliente selecciona
 
-const listaProductos = inject('listaProductos')
+const listaProductos = inject('listaProductos') // productos.json
 
-const listaContornos = listaProductos.filter(producto => producto.categoria === 'Contorno')
+const listaContornos = listaProductos.filter(producto => producto.categoria === 'Contorno') // filtro para obtener de la lista solo los productos con categoria contorno
 
-const contornos = listaContornos.map(contorno => contorno.nombreProducto)
+const contornos = listaContornos.map(contorno => contorno.nombreProducto) // devuelve arreglo con solo los contornos disponibles
 
 const dialog = ref<boolean>(false) // variable que controla el display del componente Pedido.vue
 
-const resetearSeleccion = ():void =>{
+const resetearSeleccion = ():void =>{  //resetea los valores de los contornos seleccionados por el cliente
   contornosSeleccionados.value = []
 }
 
-const concatenarContornosSeleccionados = computed(()=>{
+const concatenarContornosSeleccionados = computed<string>(()=>{ // cadena de caracteres de los contornos seleccionados por el cliente
   let unionContornos:string = ''
   contornosSeleccionados.value.forEach(contorno => {
     unionContornos += (contorno + ' ')
   })
+  pedido.contornosSeleccionados = unionContornos // toma la concatenacion de los productos y los devuelve en el objeto de pedido
   return unionContornos
 })
+
+const guardarEnListaPedidos = (pedido:Pedido):void =>{
+  lista.listaPedidos.push(pedido)
+
+  propsAviso.activarAviso = true
+  propsAviso.mensaje = "El pedido ha sido enviado a la lista de pedidos"
+
+}
 
 </script>
 
