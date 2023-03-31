@@ -1,12 +1,8 @@
 import { ref, computed } from 'vue';
 import { defineStore } from 'pinia';
 import {AxiosError} from 'axios';
+import type {Respuesta} from '../types/interfaces.ts'
 
-interface Respuesta {
-  data:string,
-  status:number,
-  headers:string,
-}
 
 export const useEstadoAlerta = defineStore('alerta', () => {
   const mensaje = ref('')

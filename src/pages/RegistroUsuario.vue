@@ -1,63 +1,68 @@
 <template>
- <div class="d-flex justify-center mt-16">
+ <v-container>
    <v-sheet width="300" class="mx-auto">
-    <v-form fast-fail @submit.prevent="registrarUsuario">
-      <v-text-field
-        v-model="nombre"
-        :rules="validarNombre"
-        label="Nombre Completo"
-      ></v-text-field>
-      <v-text-field
-        v-model="email"
-        :rules="useValidarEmail"
-        label="Correo electronico"
-        prepend-inner-icon="mdi-email-outline"
-      ></v-text-field>
-      <v-select
-        label="Linea telefonica"
-        v-model="linea"
-        :items="['+58414', '+58424', '+58426', '+58416', '+58426']"
-      ></v-select>
-      <v-text-field
-        v-model="telefono"
-        :rules="validarTelefono"
-        label="Numero de telefono"
-      ></v-text-field>
-      <v-text-field
+     <v-form v-show="mostrarFormulario" fast-fail @submit.prevent="registrarUsuario">
+       <v-text-field
+       v-model="nombre"
+       :rules="useValidarNombre"
+       label="Nombre Completo"
+       ></v-text-field>
+       <v-text-field
+       v-model="email"
+       :rules="useValidarEmail"
+       label="Correo electronico"
+       prepend-inner-icon="mdi-email-outline"
+       ></v-text-field>
+       <v-select
+       label="Linea telefonica"
+       v-model="linea"
+       :items="['+58414', '+58424', '+58426', '+58416', '+58426']"
+       ></v-select>
+       <v-text-field
+       v-model="telefono"
+       :rules="useValidarTelefono"
+       label="Numero de telefono"
+       ></v-text-field>
+       <v-text-field
        type="password"
-        v-model="claveUno"
-        :rules="validarClaveUno"
-        label="Contraseña"
-      ></v-text-field>
-      <v-text-field
-        type="password"
-        v-model="claveDos"
-        :rules="validarClave"
-        label="Repita la contraseña"
-      ></v-text-field>
+       v-model="claveUno"
+       :rules="useValidarClaveUno"
+       label="Contraseña"
+       ></v-text-field>
+       <v-text-field
+       type="password"
+       v-model="claveDos"
+       :rules="validarClave"
+       label="Repita la contraseña"
+       ></v-text-field>
 
-      <v-btn :disabled="activarBoton" type="submit" block class="mt-2 mb-2">Registrarme</v-btn>
-      <v-alert
-        v-show="alert.mostrarAlert"
-        :color="alert.color"
-        :icon="alert.icon"
-        :text="alert.mensaje"
-      ></v-alert>
-    </v-form>
-  </v-sheet>
- </div>
+       <v-btn :disabled="activarBoton" type="submit" block class="mt-2 mb-2">Registrarme</v-btn>
+     </v-form>
+    <v-progress-circular class="ml-16 mb-2 " v-show="!mostrarFormulario" indeterminate :size="117">Cargando...</v-progress-circular>
+    <v-alert
+    v-show="alert.mostrarAlert"
+    :color="alert.color"
+    :icon="alert.icon"
+    :text="alert.mensaje"
+    ></v-alert>
+   </v-sheet>
+ </v-container>
+
 </template>
 
 <script setup lang="ts">
 import {ref, computed} from 'vue'
+import { useRouter } from 'vue-router'
 import axios , {AxiosError} from 'axios'
-import {Usuario,Respuesta} from "../types/interfaces.ts"
-import {useValidarEmail} from "../composables/validadores"
+import {Usuario,Respuesta} from "../types/interfaces"
+import {useValidarEmail,useValidarNombre,useValidarTelefono} from "../composables/validadores"
 import {useEstadoAlerta} from '../stores/estadoAlerta'
 
-
+const router = useRouter()
 
 const alert = useEstadoAlerta()
+
+const mostrarFormulario = ref<boolean>(true)
 
 const nombre = ref<string>('')
 const email = ref<string>('')
@@ -72,43 +77,6 @@ const activarBoton = computed<boolean>(()=>{
   return true
 })
 
-const validarNombre = [ value => {
-
-      if(value.length >= 3) return true
-
-      return 'Su nombre debe contener mas de 2 caracteres'
-
-    },
-
-    value => {
-
-      if (/^([a-zA-Z]+\s?){4}?$/.test(value) || value.length === 3) return true
-
-      return 'Verifique que no tenga numeros, simbolos o que excesos de caracteres'
-
-    },
-
-    value =>{
-
-    if (value.length <= 50) return true
-
-    return 'Ha superado el limite de caracteres'
-
-}]
-const validarTelefono =[ value => {
-
-      if(value.length === 7) return true
-
-      return 'El numero de telefono no es valido'
-
-}]
-const validarClaveUno = [value => {
-
-          if (value.length >= 5) return true
-
-          return 'Su clave debe contener mas de 5 caracteres'
-
-        }]
 
 const validarClave = [ value => {
 
@@ -124,10 +92,22 @@ const registrarUsuario = () =>{
 
       alert.gestionarRespuesta(respuesta)
 
+      mostrarFormulario.value = false
+
+      setTimeout(() => {
+        router.push('/login')
+      }, 5000);
+
     })
     .catch((error:AxiosError)=>{
 
+      mostrarFormulario.value = false
+
       alert.gestionarError(error)
+
+      setTimeout(() => {
+        mostrarFormulario.value = true
+      }, 4000);
 
     })
 }
@@ -143,6 +123,7 @@ function datosRegistro(nombre:string,email:string, linea:string, telefono:string
   }
 
 }
+
 
 </script>
 

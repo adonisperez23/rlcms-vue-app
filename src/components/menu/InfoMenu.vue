@@ -13,7 +13,7 @@
               {{descripcion}} .<br>
             </div>
           </v-card-text>
-          <v-card-actions>
+          <v-card-actions v-show="sesion.estadoSesion">
             <Pedido
             :precio="precio"
             :menuOpcion="nombreProducto"/>
@@ -26,6 +26,7 @@
 <script setup lang="ts">
 import FotoMenu from "./FotoMenu.vue"
 import Pedido from "../Pedido.vue"
+import {useSesionUsuario} from "../../stores/sesionUsuario"
 
 const props = defineProps<{
 
@@ -37,6 +38,8 @@ const props = defineProps<{
     disponible:boolean,
 
 }>()
+
+const sesion = useSesionUsuario()
 
 </script>
 

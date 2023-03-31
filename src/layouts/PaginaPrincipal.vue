@@ -1,24 +1,24 @@
 <template>
 
   <v-layout>
-
+   <PerfilUsuario v-if="sesion.estadoSesion"/>
    <v-app-bar>
       <template v-slot:prepend>
 
-        <v-btn variant="text" @click="router.push('/menu')">
+        <v-btn to="/menu" variant="text">
           Menu
         </v-btn>
-        <v-btn variant="text" @click="router.push('/lista-pedidos')">
+        <v-btn to="/lista-pedidos" v-show="sesion.estadoSesion" variant="text" >
           Pedidos
         </v-btn>
 
       </template>
 
       <template #append>
-        <v-btn variant="text" @click="router.push('/signin')">
+        <v-btn to="/signin" v-show="!sesion.estadoSesion" variant="text">
           Registrarse
         </v-btn>
-        <v-btn variant="text" @click="router.push('/login')">
+        <v-btn to="/login" v-show="!sesion.estadoSesion" variant="text" >
           Login
         </v-btn>
       </template>
@@ -37,11 +37,14 @@
 </template>
 
 <script setup lang="ts">
-import { useRouter, useRoute } from 'vue-router'
+import {useRoute } from 'vue-router'
 import {computed} from 'vue'
+import {useSesionUsuario} from '../stores/sesionUsuario'
+import PerfilUsuario from "../components/PerfilUsuario.vue"
 
-const router = useRouter()
 const route = useRoute()
+
+const sesion = useSesionUsuario()
 
 const tituloPagina = computed(()=>{
   return route.name

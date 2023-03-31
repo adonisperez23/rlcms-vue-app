@@ -15,10 +15,30 @@ interface Respuesta {
 }
 
 interface Usuario {
+  id:number,
   nombre:string,
   telefono:string
   email:string,
   claveUno:string
 }
 
-export {Producto,Respuesta,Usuario};
+interface Pedido {
+  nombreProducto:string,
+  precio:number,
+  cantidad:number,
+  contornosSeleccionados:string
+}
+
+interface Modal {
+  activarAviso:boolean,
+  mensaje:string,
+  color?:string
+}
+
+interface NuevaClave {
+  email:string,
+  passwordUno:string,
+  passwordDos:string
+}
+
+export type {Producto,Respuesta,Usuario,Pedido,Aviso,NuevaClave};

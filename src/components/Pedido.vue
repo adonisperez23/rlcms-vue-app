@@ -60,26 +60,14 @@
 
 <script setup lang="ts">
 import {ref,reactive, computed, inject} from "vue"
-import {useListaPedidos} from '../stores/listaPedidos'
+import {useSesionUsuario} from '../stores/sesionUsuario'
+import {Pedido,Modal} from '../types/interfaces.ts'
 import Aviso from "./Aviso.vue"
 
 const props = defineProps<{
   menuOpcion: string,
   precio:string,
 }>()
-
-interface Pedido {
-  nombreProducto:string,
-  precio:number,
-  cantidad:number,
-  contornosSeleccionados:string
-}
-
-interface Aviso {
-  activarAviso:boolean,
-  mensaje:string,
-  color?:string
-}
 
 const pedido:Pedido = reactive({
   nombreProducto:props.menuOpcion,
@@ -88,13 +76,13 @@ const pedido:Pedido = reactive({
   contornosSeleccionados:''
 })
 
-const propsAviso:Aviso = reactive({
+const propsAviso:Modal = reactive({
   activarAviso: false,
   mensaje:"",
   color:""
 })
 
-const lista = useListaPedidos()
+const lista = useSesionUsuario()
 
 const contornosDisponibles = computed<number>(()=>{
   switch (contornosSeleccionados.value.length) {

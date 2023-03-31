@@ -71,9 +71,9 @@
 
 <script setup lang="ts">
 import {onMounted,computed} from 'vue'
-import {useListaPedidos} from "../stores/listaPedidos"
+import {useSesionUsuario} from "../stores/sesionUsuario"
 
-const lista = useListaPedidos()
+const lista = useSesionUsuario()
 
 onMounted(()=>{
   console.log(lista.listaPedidos)
