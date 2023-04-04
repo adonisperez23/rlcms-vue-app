@@ -15,6 +15,7 @@
         ></v-text-field>
 
         <v-btn type="submit" block class="mt-2">Login</v-btn>
+        <v-btn  :to="{name:'Enviar correo'}" block class="mt-2">Olvido su contraseña?</v-btn>
       </v-form>
       <v-progress-circular class="ml-16 mb-2 " v-show="!mostrarFormulario" indeterminate :size="117">Cargando...</v-progress-circular>
       <v-alert

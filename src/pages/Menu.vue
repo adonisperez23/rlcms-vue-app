@@ -22,16 +22,15 @@ const listaMenu = listaProductos.filter(producto => producto.categoria === "Almu
 
 provide('listaProductos', listaProductos)
 
-  onMounted(()=>{
-    // axios.get(import.meta.env.VITE_API_LISTA_DE_PRODUCTOS)
-    //   .then((res:Respuesta)=>{
-    //       listaProductos.value = res.data
-    //       console.log("lista Productos", res.data,listaProductos.value)
-    //   })
-    //   .catch((err:AxiosError)=>{
-    //     console.log("error",err.response.data.error)
-    //   })
-  })
+
+// axios.get(import.meta.env.VITE_API_LISTA_DE_PRODUCTOS)
+//   .then((res:Respuesta)=>{
+//       listaProductos.value = res.data
+//       console.log("lista Productos", res.data,listaProductos.value)
+//   })
+//   .catch((err:AxiosError)=>{
+//     console.log("error",err.response.data.error)
+//   })
 
 </script>
 

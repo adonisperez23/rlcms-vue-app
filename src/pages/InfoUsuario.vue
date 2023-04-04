@@ -7,8 +7,8 @@
     :icon="alert.icon"
     :text="alert.mensaje"
     ></v-alert>
-    <v-form v-show="mostrarFormulario" fast-fail @submit.prevent>
-      <div v-show="seleccion === 'Cambiar contraseña' ">
+    <v-form v-show="mostrarFormulario" fast-fail @submit.prevent="actualizarDatos">
+
         <v-text-field
         v-model="sesion.informacionUsuario.nombre"
         :rules="useValidarNombre"
@@ -31,32 +31,7 @@
         :rules="useValidarTelefono"
         label="Numero de telefono"
         ></v-text-field>
-      </div>
-      <div v-show="seleccion === 'Actualizar datos' ">
-        <v-text-field
-        type="password"
-        v-model="nuevaClave.passwordUno"
-        :rules="useValidarClaveUno"
-        label="Contraseña"
-        ></v-text-field>
-        <v-text-field
-        type="password"
-        v-model="nuevaClave.passwordDos"
-        :rules="validarClave"
-        label="Repita la contraseña"
-        ></v-text-field>
-        <v-btn :disabled="activarCambiarClave" @click="cambiarClave">Cambiar contraseña</v-btn>
-      </div>
-      <v-btn v-show="seleccion === 'Cambiar contraseña'" @click="actualizarDatos">Actualizar</v-btn>
-      <div class="d-flex">
-        <v-switch
-        v-model="seleccion"
-        hide-details
-        true-value="Cambiar contraseña"
-        false-value="Actualizar datos"
-        :label="`${seleccion}`"
-        ></v-switch>
-      </div>
+        <v-btn type="submit">Actualizar Datos</v-btn>
     </v-form>
   </v-sheet>
 </v-container>
@@ -86,28 +61,7 @@ const datosActualizar = reactive<Usuario>({
   telefono:linea.value + numero.value
 })
 
-const nuevaClave = reactive<NuevaClave>({
-  email:sesion.informacionUsuario.email,
-  passwordUno:'',
-  passwordDos:''
-})
-
 const mostrarFormulario = ref<boolean>(true)
-const seleccion = ref<string>('Cambiar contraseña')
-
-const activarCambiarClave = computed<boolean>(()=>{
-  if(nuevaClave.passwordUno.length >= 5 && nuevaClave.passwordUno === nuevaClave.passwordDos){
-    return false
-  }
-  return true
-})
-
-const validarClave = [ value => {
-
-        if(value === nuevaClave.passwordUno) return true
-
-        return 'Su clave debe coincidir'
-      }]
 
 const actualizarDatos = ():void => {
   axios.put(import.meta.env.VITE_API_ACTUALIZAR_USUARIO+datosActualizar.id, datosActualizar)
@@ -130,26 +84,7 @@ const actualizarDatos = ():void => {
     })
 }
 
-const cambiarClave = ():void => {
-  axios.put(import.meta.env.VITE_API_CAMBIAR_CLAVE_USUARIO+localStorage.getItem('token'), nuevaClave)
-    .then((res:Resultado) => {
-      mostrarFormulario.value = false
-      alert.gestionarRespuesta(res)
-      console.log(res)
-      setTimeout(() => {
-        mostrarFormulario.value = true
-      }, 3000);
-    })
-    .catch((err:AxiosError) => {
 
-      mostrarFormulario.value = false
-      alert.gestionarError(err)
-
-      setTimeout(() => {
-        mostrarFormulario.value = true
-      }, 3000);
-    })
-}
 
 
 

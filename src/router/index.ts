@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHistory,createWebHashHistory } from 'vue-router'
 import AutenticarUsuario from '../pages/AutenticarUsuario.vue'
 import RegistroUsuario from '../pages/RegistroUsuario.vue'
 import Menu from '../pages/Menu.vue'
@@ -7,7 +7,7 @@ import Pedidos from '../pages/ListaPedidos.vue'
 import InfoUsuario from '../pages/InfoUsuario.vue'
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHashHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
@@ -37,7 +37,17 @@ const router = createRouter({
         {
           path: '/informacion-usuario',
           name: 'Informacion de Usuario',
-          component: InfoUsuario, 
+          component: InfoUsuario,
+        },
+        {
+          path: '/enviar-correo',
+          name: 'Enviar correo',
+          component: ()=>import('../pages/EnviarCorreo.vue'),
+        },
+        {
+          path: '/cambiar-clave/:email/:token',
+          name: 'Cambiar clave',
+          component: ()=>import('../pages/CambiarClave.vue'),
         }
       ]
     },
