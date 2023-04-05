@@ -9,7 +9,7 @@
           Menu
         </v-btn>
         <v-btn to="/lista-pedidos" v-show="sesion.estadoSesion" variant="text" >
-          Pedidos
+          Pedidos ({{cantidadProductos}})
         </v-btn>
 
       </template>
@@ -48,6 +48,16 @@ const sesion = useSesionUsuario()
 
 const tituloPagina = computed(()=>{
   return route.name
+})
+
+const cantidadProductos = computed<number>(()=>{
+  let totalProductos:number = 0
+
+  if(sesion.listaPedidos.length > 0){
+    totalProductos = sesion.listaPedidos.reduce((acum,producto)=> acum+=producto.cantidad,0)
+  }
+
+  return totalProductos
 })
 
 

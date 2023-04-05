@@ -23,10 +23,11 @@ interface Usuario {
 }
 
 interface Pedido {
+  producto:number,
   nombreProducto:string,
   precio:number,
   cantidad:number,
-  contornosSeleccionados:string
+  descripcion:string
 }
 
 interface Modal {

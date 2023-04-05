@@ -26,7 +26,7 @@
             <v-row>
               <v-col v-for="(contorno, index) in contornos" :key="index" cols="4">
                 <v-switch
-                v-model="contornosSeleccionados"
+                v-model="descripcion"
                 :label="contorno"
                 color="success"
                 :value="contorno"
@@ -65,15 +65,17 @@ import {Pedido,Modal} from '../types/interfaces.ts'
 import Aviso from "./Aviso.vue"
 
 const props = defineProps<{
+  idProducto:number,
   menuOpcion: string,
   precio:string,
 }>()
 
 const pedido:Pedido = reactive({
+  producto:props.idProducto,
   nombreProducto:props.menuOpcion,
   precio:props.precio,
   cantidad:1,
-  contornosSeleccionados:''
+  descripcion:''
 })
 
 const propsAviso:Modal = reactive({
@@ -85,7 +87,7 @@ const propsAviso:Modal = reactive({
 const lista = useSesionUsuario()
 
 const contornosDisponibles = computed<number>(()=>{
-  switch (contornosSeleccionados.value.length) {
+  switch (descripcion.value.length) {
     case 0: return 3
       break;
     case 1: return 2
@@ -105,9 +107,9 @@ const desactivar = computed<boolean>(()=>{
   }
 })
 
-const contornosSeleccionados = ref<string[]>([]) // aqui se guardan los contornos que el cliente selecciona
+const descripcion = ref<string[]>([]) // aqui se guardan los contornos que el cliente selecciona
 
-const listaProductos = inject('listaProductos') // productos.json
+const listaProductos = inject('listaProductos') // productos.json, mocks para pruebas
 
 const listaContornos = listaProductos.filter(producto => producto.categoria === 'Contorno') // filtro para obtener de la lista solo los productos con categoria contorno
 
@@ -116,20 +118,32 @@ const contornos = listaContornos.map(contorno => contorno.nombreProducto) // dev
 const dialog = ref<boolean>(false) // variable que controla el display del componente Pedido.vue
 
 const resetearSeleccion = ():void =>{  //resetea los valores de los contornos seleccionados por el cliente
-  contornosSeleccionados.value = []
+  descripcion.value = []
 }
 
 const concatenarContornosSeleccionados = computed<string>(()=>{ // cadena de caracteres de los contornos seleccionados por el cliente
   let unionContornos:string = ''
-  contornosSeleccionados.value.forEach(contorno => {
+  descripcion.value.forEach(contorno => {
     unionContornos += (contorno + ' ')
   })
-  pedido.contornosSeleccionados = unionContornos // toma la concatenacion de los productos y los devuelve en el objeto de pedido
+  pedido.descripcion = unionContornos // toma la concatenacion de los productos y los devuelve en el objeto de pedido
   return unionContornos
 })
 
 const guardarEnListaPedidos = (pedido:Pedido):void =>{
-  lista.listaPedidos.push(pedido)
+
+  if(lista.listaPedidos.some(ped => (ped.nombreProducto === pedido.nombreProducto) && (ped.descripcion === pedido.descripcion))){ //verifica si existe dentro de la lista un pedido igual al seleccionado
+
+    let pedidoEncontrado = lista.listaPedidos.find(ped => (ped.nombreProducto === pedido.nombreProducto) && (ped.descripcion === pedido.descripcion)) //obtiene el producto dentro de la lista igual al seleccionado por el usuario
+    let index = lista.listaPedidos.indexOf(pedidoEncontrado) // obtiene el indice del producto dentro de la lista de pedidos
+    pedido.cantidad += pedidoEncontrado.cantidad // Se suman las cantidades del producto dentro de la lista y el producto que ha sido igual al producto seleccionado por el cliente
+    lista.listaPedidos.splice(index,1) // elimina el producto dentro de la lista
+    lista.listaPedidos.push(pedido)// agrega el producto con las cantidades sumadas anteriormente
+
+  } else {
+    lista.listaPedidos.push(pedido) // si no hay coicidencia de productos dentro de la lista, se agrega un nuevo producto
+  }
+
 
   propsAviso.activarAviso = true
   propsAviso.mensaje = "El pedido ha sido enviado a la lista de pedidos"

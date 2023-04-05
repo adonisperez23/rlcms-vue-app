@@ -15,6 +15,7 @@
           </v-card-text>
           <v-card-actions v-show="sesion.estadoSesion">
             <Pedido
+            :idProducto="id"
             :precio="precio"
             :menuOpcion="nombreProducto"/>
          </v-card-actions>

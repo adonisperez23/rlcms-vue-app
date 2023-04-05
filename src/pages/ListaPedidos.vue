@@ -1,13 +1,19 @@
 <template>
   <v-container>
-
+    <v-progress-circular class="ml-16 mb-2 " v-show="!mostrarLista" indeterminate :size="117">Cargando...</v-progress-circular>
+    <v-alert
+    v-show="alert.mostrarAlert"
+    :color="alert.color"
+    :icon="alert.icon"
+    :text="alert.mensaje"
+    ></v-alert>
     <v-row justify="end">
       <v-col v-if="lista.listaPedidos.length === 0">
         <div class="text-h3">
           No hay pedidos realizados en la lista!
         </div>
       </v-col>
-      <v-col v-else cols="12">
+      <v-col v-else-if="mostrarLista" cols="12">
 
         <v-table>
 
@@ -57,7 +63,7 @@
             $ {{montoTotal}}
           </v-card-text>
           <v-card-actions>
-            <v-btn variant="outlined" rounded="pill" color="primary">
+            <v-btn variant="outlined" @click="enviarPedido" rounded="pill" color="primary">
               Enviar Pedido
             </v-btn>
           </v-card-actions>
@@ -70,14 +76,21 @@
 </template>
 
 <script setup lang="ts">
-import {onMounted,computed} from 'vue'
+import {onMounted,computed,ref} from 'vue'
+import axios, {AxiosError} from 'axios'
+import {Respuesta} from '../types/interfaces'
 import {useSesionUsuario} from "../stores/sesionUsuario"
+import {useEstadoAlerta} from "../stores/estadoAlerta"
 
 const lista = useSesionUsuario()
+const alert = useEstadoAlerta()
+
+const mostrarLista = ref<boolean>(true)
 
 onMounted(()=>{
   console.log(lista.listaPedidos)
 })
+
 
 const montoTotal = computed<number>(()=>{
 
@@ -89,6 +102,29 @@ const montoTotal = computed<number>(()=>{
 
   return total
 })
+
+function enviarPedido():void {
+  axios.post(import.meta.env.VITE_API_GENERAR_FACTURA,{usuario:lista.informacionUsuario.id,listaPedidos:lista.listaPedidos})
+    .then((res:Respuesta)=>{
+
+      mostrarLista.value = false
+      alert.gestionarRespuesta(res)
+
+      setTimeout(() => {
+        mostrarLista.value = true
+      }, 3000);
+    })
+    .catch((err:AxiosError)=>{
+
+      mostrarLista.value = false
+      alert.gestionarError(err)
+
+      setTimeout(() => {
+        mostrarLista.value = true
+      }, 3000);
+    })
+
+}
 
 </script>
 
