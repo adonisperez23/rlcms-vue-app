@@ -55,7 +55,7 @@ import {ref, computed} from 'vue'
 import { useRouter } from 'vue-router'
 import axios , {AxiosError} from 'axios'
 import {Usuario,Respuesta} from "../types/interfaces"
-import {useValidarEmail,useValidarNombre,useValidarTelefono} from "../composables/validadores"
+import {useValidarEmail,useValidarNombre,useValidarTelefono,useValidarClaveUno} from "../composables/validadores"
 import {useEstadoAlerta} from '../stores/estadoAlerta'
 
 const router = useRouter()

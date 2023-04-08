@@ -1,5 +1,5 @@
 interface Producto {
-  id:number,
+  id?:number,
   nombreProducto:string,
   categoria:string,
   descripcion:string,
@@ -33,7 +33,8 @@ interface Pedido {
 interface Modal {
   activarAviso:boolean,
   mensaje:string,
-  color?:string
+  color?:string,
+  idInfo?:number
 }
 
 interface NuevaClave {

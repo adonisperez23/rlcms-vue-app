@@ -11,6 +11,12 @@
         <v-btn to="/lista-pedidos" v-show="sesion.estadoSesion" variant="text" >
           Pedidos ({{cantidadProductos}})
         </v-btn>
+        <v-btn :to="{name:'Operaciones con productos'}" variant="text" >
+          operaciones con productos
+        </v-btn>
+        <v-btn :to="{name:'Lista de productos'}" variant="text" >
+          lista productos
+        </v-btn>
 
       </template>
 

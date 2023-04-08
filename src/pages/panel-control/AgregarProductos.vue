@@ -1,0 +1,138 @@
+<template>
+  <v-container>
+
+    <v-sheet width="300"  class="mx-auto">
+      <v-progress-circular class="ml-16 mb-2 " v-show="!mostrarFormulario" indeterminate :size="117">Cargando...</v-progress-circular>
+      <v-alert
+      v-show="alert.mostrarAlert"
+      :color="alert.color"
+      :icon="alert.icon"
+      :text="alert.mensaje"
+      ></v-alert>
+    <v-form v-show="mostrarFormulario" fast-fail @submit.prevent="registrarProducto">
+      <v-text-field
+        v-model="producto.nombreProducto"
+        :rules="validateProducto"
+        label="Nombre del producto"
+      ></v-text-field>
+
+      <v-select
+        v-model="producto.categoria"
+        label="Categoria"
+        :items="['Almuerzo','Contorno','Racion']"
+      ></v-select>
+      <v-text-field
+        v-model="producto.descripcion"
+        label="Descripcion del producto"
+      ></v-text-field>
+      <v-text-field
+        v-model.number="producto.precio"
+        label="Precio"
+        type="number"
+        :rules="validatePrecio"
+      ></v-text-field>
+      <v-checkbox v-model="producto.disponible" label="Producto disponible?"></v-checkbox>
+      <v-btn v-if="route.query.id" @click="actualizarProducto" block class="mt-2">Editar Producto</v-btn>
+      <v-btn v-else-if="producto.nombreProducto.length > 0" type="submit" block class="mt-2">Guardar Producto</v-btn>
+      <v-btn v-show="producto.nombreProducto.length > 0" @click="nuevoProducto" block class="mt-2">Nuevo Producto</v-btn>
+      <v-btn class="mt-2" :to="{name:'Lista de productos'}" block >Ver lista de productos</v-btn>
+    </v-form>
+  </v-sheet>
+  </v-container>
+</template>
+
+<script setup lang="ts">
+import {ref,reactive} from 'vue'
+import {useRoute} from 'vue-router'
+import {Producto,Respuesta} from '../../types/interfaces'
+import axios,{AxiosError} from 'axios'
+import {useEstadoAlerta} from '../../stores/estadoAlerta'
+
+const route = useRoute()
+
+console.log("ruta", route.query)
+
+
+const producto = reactive<Producto>({
+  nombreProducto:'',
+  categoria:'',
+  descripcion:'',
+  precio:0,
+  disponible:false
+})
+
+if(route.query.id){
+  producto.nombreProducto = route.query.nombreProducto
+  producto.categoria = route.query.categoria
+  producto.descripcion = route.query.descripcion
+  producto.precio = Number(route.query.precio)
+  producto.disponible = (route.query.disponible === 'true')
+}
+
+const mostrarFormulario = ref<boolean>(true)
+const alert = useEstadoAlerta()
+
+function nuevoProducto():void {
+  producto.nombreProducto = ''
+  producto.categoria = ''
+  producto.descripcion = ''
+  producto.precio = 0
+  producto.disponible = false
+}
+
+const validatePrecio = [ value => {
+  if(value >=0 && value <=15) return true
+
+  return "Valor del producto muy alto"
+}]
+
+const validateProducto = [ value => {
+  if(value.length > 0) return true
+
+  return "Debe ingresar un nombre para el producto"
+}]
+
+function registrarProducto():void {
+  axios.post(import.meta.env.VITE_API_REGISTRAR_PRODUCTO, producto)
+    .then((res:Respuesta)=>{
+      mostrarFormulario.value = false
+      alert.gestionarRespuesta(res)
+      setTimeout(() => {
+        mostrarFormulario.value = true
+      }, 3000)
+    })
+    .catch((err:AxiosError)=>{
+      console.log("error",err,producto)
+      mostrarFormulario.value = false
+      alert.gestionarError(err)
+      setTimeout(() => {
+        mostrarFormulario.value = true
+      }, 3000);
+    })
+}
+
+function actualizarProducto():void {
+  axios.put(import.meta.env.VITE_API_ACTUALIZAR_PRODUCTO+route.query.id, producto)
+    .then((res:Respuesta)=>{
+      mostrarFormulario.value = false
+      alert.gestionarRespuesta(res)
+      setTimeout(() => {
+        mostrarFormulario.value = true
+      }, 3000)
+    })
+    .catch((err:AxiosError)=>{
+      console.log("error",err,producto)
+      mostrarFormulario.value = false
+      alert.gestionarError(err)
+      setTimeout(() => {
+        mostrarFormulario.value = true
+      }, 3000);
+    })
+}
+
+
+
+</script>
+
+<style scoped>
+</style>

@@ -42,6 +42,7 @@
             </v-row>
 
             <Aviso
+              unaAccion
               @activar-aviso="()=>propsAviso.activarAviso = false"
               :mensaje="propsAviso.mensaje"
               :dialog="propsAviso.activarAviso"/>

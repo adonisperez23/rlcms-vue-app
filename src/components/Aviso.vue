@@ -8,8 +8,12 @@
         <v-card-text class="text-h5">
           {{mensaje}}
         </v-card-text>
-        <v-card-actions>
+        <v-card-actions v-if="unaAccion">
           <v-btn color="primary" block @click="emit('activar-aviso')">Ok</v-btn>
+        </v-card-actions>
+        <v-card-actions v-else-if="dosAcciones">
+          <v-btn color="primary"  @click="emit('accion-si')">Si</v-btn>
+          <v-btn color="primary"  @click="emit('accion-no')">No</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -22,11 +26,16 @@ import {ref} from "vue"
 const props = defineProps<{
   dialog:boolean,
   mensaje:string,
+  unaAccion?:boolean,
+  dosAcciones?:boolean,
   color?:string
 }>()
 
 const emit = defineEmits<{
-  (e:'activar-aviso'):void
+  (e:'activar-aviso'):void,
+  (e:'accion-si'):void,
+  (e:'accion-no'):void,
+
 }>()
 
 

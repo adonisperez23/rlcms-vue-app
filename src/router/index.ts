@@ -48,6 +48,16 @@ const router = createRouter({
           path: '/cambiar-clave/:email/:token',
           name: 'Cambiar clave',
           component: ()=>import('../pages/CambiarClave.vue'),
+        },
+        {
+          path:'/operaciones-productos',
+          name:'Operaciones con productos',
+          component:()=>import('../pages/panel-control/AgregarProductos.vue')
+        },
+        {
+          path:'/lista-productos',
+          name:'Lista de productos',
+          component:()=>import('../pages/panel-control/ListaProductos.vue')
         }
       ]
     },
