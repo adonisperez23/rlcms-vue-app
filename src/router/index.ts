@@ -58,6 +58,11 @@ const router = createRouter({
           path:'/lista-productos',
           name:'Lista de productos',
           component:()=>import('../pages/panel-control/ListaProductos.vue')
+        },
+        {
+          path:'/lista-Facturas',
+          name:'Lista de Facturas',
+          component:()=>import('../pages/panel-control/ListaFacturas.vue')
         }
       ]
     },

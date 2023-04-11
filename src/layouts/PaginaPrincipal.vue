@@ -15,7 +15,10 @@
           operaciones con productos
         </v-btn>
         <v-btn :to="{name:'Lista de productos'}" variant="text" >
-          lista productos
+          lista de productos
+        </v-btn>
+        <v-btn :to="{name:'Lista de Facturas'}" variant="text" >
+          lista de facturas
         </v-btn>
 
       </template>
