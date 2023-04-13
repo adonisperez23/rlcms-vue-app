@@ -52,6 +52,13 @@
                 Eliminar
             </v-chip>
           </td>
+          <td>
+            <v-chip
+              :to="{name:'Subir Foto', query:{id:producto.id, nombreProducto:producto.nombreProducto}}"
+              icon="mdi-blinds">
+                Agregar Foto
+            </v-chip>
+          </td>
         </tr>
       </tbody>
 

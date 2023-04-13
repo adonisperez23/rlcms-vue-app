@@ -63,6 +63,11 @@ const router = createRouter({
           path:'/lista-Facturas',
           name:'Lista de Facturas',
           component:()=>import('../pages/panel-control/ListaFacturas.vue')
+        },
+        {
+          path:'/subir-foto',
+          name:'Subir Foto',
+          component:()=>import('../pages/panel-control/SubirFoto.vue')
         }
       ]
     },

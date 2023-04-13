@@ -50,4 +50,10 @@ interface Factura {
   pedido: Pedido[]
 }
 
-export type {Producto,Respuesta,Usuario,Pedido,Aviso,NuevaClave, Factura};
+interface Foto {
+  nombreFoto:string,
+  direccionUrl:string,
+  producto:number
+}
+
+export type {Producto,Respuesta,Usuario,Pedido,Aviso,NuevaClave, Factura, Foto};
