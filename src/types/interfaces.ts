@@ -43,4 +43,11 @@ interface NuevaClave {
   passwordDos:string
 }
 
-export type {Producto,Respuesta,Usuario,Pedido,Aviso,NuevaClave};
+interface Factura {
+  idFactura: number,
+  fechaHora: string,
+  usuario: Usuario,
+  pedido: Pedido[]
+}
+
+export type {Producto,Respuesta,Usuario,Pedido,Aviso,NuevaClave, Factura};

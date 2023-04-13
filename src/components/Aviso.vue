@@ -8,6 +8,14 @@
         <v-card-text class="text-h5">
           {{mensaje}}
         </v-card-text>
+
+
+        <v-card-text>
+          <slot name="lista"></slot>
+        </v-card-text>
+
+
+
         <v-card-actions v-if="unaAccion">
           <v-btn color="primary" block @click="emit('activar-aviso')">Ok</v-btn>
         </v-card-actions>
@@ -28,7 +36,7 @@ const props = defineProps<{
   mensaje:string,
   unaAccion?:boolean,
   dosAcciones?:boolean,
-  color?:string
+  color?:string,
 }>()
 
 const emit = defineEmits<{
