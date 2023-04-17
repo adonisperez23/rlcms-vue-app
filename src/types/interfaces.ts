@@ -51,6 +51,7 @@ interface Factura {
 }
 
 interface Foto {
+  id?:number,
   nombreFoto:string,
   direccionUrl:string,
   producto:number

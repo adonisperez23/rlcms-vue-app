@@ -10,9 +10,10 @@
         :text="alert.mensaje"
         ></v-alert>
         <div v-show="mostrarFormulario" class="text-h5">
-        Cargar Imagen adjunta
+          Cargar Imagen adjunta
           <v-text-field readonly label="Nombre del producto" v-model="route.query.nombreProducto"></v-text-field>
           <v-file-input v-model="imagen" label="Cargar Imagen"></v-file-input>
+          <v-btn :disabled=" typeof imagen === 'undefined'" @click="subirFoto">Subir foto</v-btn>
         </div>
         <div v-show="mostrarInfoFoto" class="">
           <v-text-field readonly label="Nombre del producto" v-model="route.query.nombreProducto"></v-text-field>
@@ -34,6 +35,7 @@ import axios,{AxiosError} from 'axios'
 
 const alert = useEstadoAlerta()
 const route = useRoute()
+const router = useRouter()
 
 const imagen = ref<undefined>()
 const infoFoto = reactive<Foto>({
@@ -53,8 +55,8 @@ function subirFoto():void {
       console.log('res',res)
       mostrarFormulario.value = false
       alert.gestionarRespuesta(res)
-      infoFoto.nombreFoto = res.data.nombreFoto
-      infoFoto.direccionUrl = res.data.direccionUrl
+      infoFoto.nombreFoto = res.data.nombreArchivo
+      infoFoto.direccionUrl = res.data.path
       setTimeout(() => {
         mostrarInfoFoto.value = true
       }, 3000);
@@ -77,7 +79,7 @@ function guardarInfoFoto() {
       mostrarInfoFoto.value = false
       alert.gestionarRespuesta(res)
       setTimeout(() => {
-        router.push({name:'Subir Foto'})
+        router.push({name:'Lista de fotos'})
       }, 3000);
     })
     .catch((err:AxiosError)=>{

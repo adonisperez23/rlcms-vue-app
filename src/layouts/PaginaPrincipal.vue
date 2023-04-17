@@ -20,6 +20,9 @@
         <v-btn :to="{name:'Lista de Facturas'}" variant="text" >
           lista de facturas
         </v-btn>
+        <v-btn :to="{name:'Lista de fotos'}" variant="text" >
+          lista de fotos
+        </v-btn>
 
       </template>
 

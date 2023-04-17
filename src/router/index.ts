@@ -68,6 +68,11 @@ const router = createRouter({
           path:'/subir-foto',
           name:'Subir Foto',
           component:()=>import('../pages/panel-control/SubirFoto.vue')
+        },
+        {
+          path:'/lista-fotos',
+          name:'Lista de fotos',
+          component:()=>import('../pages/panel-control/ListaFotos.vue')
         }
       ]
     },
