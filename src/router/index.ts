@@ -5,6 +5,7 @@ import Menu from '../pages/Menu.vue'
 import PaginaPrincipal from '../layouts/PaginaPrincipal.vue'
 import Pedidos from '../pages/ListaPedidos.vue'
 import InfoUsuario from '../pages/InfoUsuario.vue'
+import Home from '../pages/Home.vue'
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
@@ -14,6 +15,10 @@ const router = createRouter({
       name: 'Pagina principal',
       component: PaginaPrincipal,
       children:[
+        {
+          path: '/home',
+          component:Home
+        },
         {
           path: '/signin',
           name: 'Registro usuario',

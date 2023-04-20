@@ -5,6 +5,9 @@
    <v-app-bar>
       <template v-slot:prepend>
 
+        <v-btn to="/home" variant="text">
+          Home
+        </v-btn>
         <v-btn to="/menu" variant="text">
           Menu
         </v-btn>
