@@ -106,7 +106,7 @@ const montoTotal = computed<number>(()=>{
 function enviarPedido():void {
   axios.post(import.meta.env.VITE_API_GENERAR_FACTURA,{usuario:lista.informacionUsuario.id,listaPedidos:lista.listaPedidos})
     .then((res:Respuesta)=>{
-
+      console.log("pedido",res)
       mostrarLista.value = false
       alert.gestionarRespuesta(res)
 
@@ -115,7 +115,7 @@ function enviarPedido():void {
       }, 3000);
     })
     .catch((err:AxiosError)=>{
-
+      console.log("error al enviar pedido", err)
       mostrarLista.value = false
       alert.gestionarError(err)
 

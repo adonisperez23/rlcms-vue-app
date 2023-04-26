@@ -2,7 +2,8 @@
   <v-card>
     <v-card-item>
       <v-img
-        :width="300"
+        width="300"
+        height="200"
         aspect-ratio="16/9"
         cover
         :src="srcFoto"

@@ -8,26 +8,34 @@
             <p class="text-h6 text--primary">
                {{precio}} $
             </p>
-            <p>Descripcion</p>
-            <div class="text--primary">
-              {{descripcion}} .<br>
-            </div>
           </v-card-text>
-          <v-card-actions v-show="sesion.estadoSesion">
-            <Pedido
-            :idProducto="id"
-            :precio="precio"
-            :menuOpcion="nombreProducto"/>
+          <v-card-actions >
+            <v-btn @click="propsAviso.activarAviso=true">Detalles del plato</v-btn>
+            <div v-show="sesion.estadoSesion">
+              <Pedido
+              :idProducto="id"
+              :precio="precio"
+              :menuOpcion="nombreProducto"/>
+            </div>
          </v-card-actions>
       </v-card>
+      <Aviso
+       :dialog="propsAviso.activarAviso"
+       unaAccion
+       @activar-aviso="propsAviso.activarAviso=false"
+       :mensaje="propsAviso.mensaje"
+      />
     </v-col>
 
 </template>
 
 <script setup lang="ts">
+import {reactive} from "vue"
 import FotoMenu from "./FotoMenu.vue"
 import Pedido from "../Pedido.vue"
 import {useSesionUsuario} from "../../stores/sesionUsuario"
+import Aviso from "../Aviso.vue"
+import {Modal} from "../../types/interfaces"
 
 const props = defineProps<{
 
@@ -39,6 +47,11 @@ const props = defineProps<{
     disponible:boolean,
 
 }>()
+
+const propsAviso =reactive<Modal>({
+  activarAviso:false,
+  mensaje:props.descripcion
+})
 
 const sesion = useSesionUsuario()
 

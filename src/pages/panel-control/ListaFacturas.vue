@@ -1,36 +1,47 @@
 <template>
   <v-container >
-    <div v-if="errorServidor" class="text-h3">
-      Ha ocurrido un error al cargar lista de facturas
-    </div>
-    <div v-else-if="listaFacturas.length === 0" class="text-h3">
-      No hay facturas generadas por los momentos...
-    </div>
-    <v-table v-else>
-      <thead>
-        <tr>
-          <th class="text-center">
-            ID Factura
-          </th>
-          <th class="text-center">
-            Fecha y Hora
-          </th>
-          <th class="text-center">
-            Usuario
-          </th>
-          <th class="text-center">
-            Coreo Electronico
-          </th>
-          <th class="text-center">
-            Telefono
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr
+    <v-row v-if="cargandoLista" justify="center" class="">
+      <v-col cols="2" class="">
+        <v-progress-circular
+        size="128"
+        indeterminate
+        color="primary"
+        ></v-progress-circular>
+        <h3>Cargando lista de facturas...</h3>
+      </v-col>
+    </v-row>
+    <v-row v-else>
+      <div v-if="listaVacia" class="text-h3">
+        No hay facturas generadas por los momentos...
+      </div>
+      <div v-if="errorServidor" class="text-h3">
+        Ha ocurrido un error al cargar lista de facturas
+      </div>
+      <v-table v-else-if="listaFacturas.length > 0">
+        <thead>
+          <tr>
+            <th class="text-center">
+              ID Factura
+            </th>
+            <th class="text-center">
+              Fecha y Hora
+            </th>
+            <th class="text-center">
+              Usuario
+            </th>
+            <th class="text-center">
+              Coreo Electronico
+            </th>
+            <th class="text-center">
+              Telefono
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
           v-for="(factura, index) in listaFacturas"
           :key="index"
-        >
+          >
           <td class="text-center">{{ factura.id }}</td>
           <td class="text-center">{{ $filters.dateFormat(factura.fechaHora) }}</td>
           <td class="text-center">{{ factura.usuario.nombre }}</td>
@@ -44,6 +55,8 @@
         </tr>
       </tbody>
     </v-table>
+
+    </v-row>
         <Aviso
         unaAccion
         :mensaje="propsAviso.mensaje"
@@ -107,8 +120,10 @@ import {Respuesta,Factura,Modal,Pedido} from '../../types/interfaces'
 import Aviso from '../../components/Aviso.vue'
 
 const listaFacturas = ref<Factura[]>([])
-const errorServidor = ref<boolean>(false)
 const listaPedidos = ref<Pedido[]>([])
+const cargandoLista = ref<boolean>(false)
+const listaVacia = ref<boolean>(false)
+const errorServidor = ref<boolean>(false)
 
 const propsAviso = reactive<Modal>({
   activarAviso:false,
@@ -117,7 +132,12 @@ const propsAviso = reactive<Modal>({
 
 axios.get(import.meta.env.VITE_API_LISTA_FACTURA)
   .then((res:Respuesta)=>{
-    listaFacturas.value = res.data
+    cargandoLista.value = true
+    setTimeout(() => {
+      listaFacturas.value = res.data
+      cargandoLista.value = false
+      estaListaVacia(listaFacturas.value)
+    }, 2000);
   })
   .catch((err:AxiosError)=>{
     errorServidor.value = true
@@ -128,6 +148,11 @@ function mostrarPedido(lista:Pedido[]):void {
   propsAviso.activarAviso = true
   listaPedidos.value = lista
   console.log("pedidos",lista)
+}
+
+function estaListaVacia(lista:Factura[]) {
+  if(lista.length > 0) return listaVacia.value=false
+  return listaVacia.value=true
 }
 
 </script>

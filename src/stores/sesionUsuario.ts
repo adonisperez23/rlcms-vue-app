@@ -11,7 +11,8 @@ export const useSesionUsuario = defineStore('lista-pedidos', () => {
     nombre:'',
     telefono:'',
     email:'',
-    claveUno:''
+    claveUno:'',
+    esAdmin:false
   })
 
   const listaPedidos = reactive<Pedido[]>([])
@@ -27,19 +28,21 @@ export const useSesionUsuario = defineStore('lista-pedidos', () => {
   function obtenerInformacionUsuario(usuario:Usuario):void {
     informacionUsuario.id = usuario.id
     informacionUsuario.nombre = usuario.nombre
-    informacionUsuario.telefono= usuario.telefono
+    informacionUsuario.telefono = usuario.telefono
     informacionUsuario.email = usuario.email
-    informacionUsuario.claveUno= usuario.claveUno
+    informacionUsuario.claveUno = usuario.claveUno
+    informacionUsuario.esAdmin = usuario.esAdmin
   }
 
   function resetSesion():void {
-    informacionUsuario = {
-      id:0,
-      nombre:'',
-      telefono:'',
-      email:'',
-      claveUno:''
-    }
+
+    informacionUsuario.id = 0
+    informacionUsuario.nombre = ''
+    informacionUsuario.telefono = ''
+    informacionUsuario.email = ''
+    informacionUsuario.claveUno = ''
+    informacionUsuario.esAdmin = false
+
     estadoSesion.value = false
   }
 

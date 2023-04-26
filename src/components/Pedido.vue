@@ -46,7 +46,6 @@
               @activar-aviso="()=>propsAviso.activarAviso = false"
               :mensaje="propsAviso.mensaje"
               :dialog="propsAviso.activarAviso"/>
-
           </v-container>
         </v-card-text>
         <v-card-actions>
@@ -74,7 +73,7 @@ const props = defineProps<{
 const pedido:Pedido = reactive({
   producto:props.idProducto,
   nombreProducto:props.menuOpcion,
-  precio:props.precio,
+  precio:Number(props.precio),
   cantidad:1,
   descripcion:''
 })
@@ -110,9 +109,9 @@ const desactivar = computed<boolean>(()=>{
 
 const descripcion = ref<string[]>([]) // aqui se guardan los contornos que el cliente selecciona
 
-const listaProductos = inject('listaProductos') // productos.json, mocks para pruebas
+const listaProductos = inject('listaProductos') // productos.json, mocks para pruebas y cuando se llama a la api la lista de productos
 
-const listaContornos = listaProductos.filter(producto => producto.categoria === 'Contorno') // filtro para obtener de la lista solo los productos con categoria contorno
+const listaContornos = listaProductos.value.filter(producto => producto.categoria === 'Contorno') // filtro para obtener de la lista solo los productos con categoria contorno
 
 const contornos = listaContornos.map(contorno => contorno.nombreProducto) // devuelve arreglo con solo los contornos disponibles
 

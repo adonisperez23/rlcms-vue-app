@@ -62,11 +62,13 @@ const autenticarUsuario = ():void=> {
             sesion.abrirSesion()
             sesion.obtenerInformacionUsuario(res.data.usuario)
 
+            localStorage.setItem('esAdmin',res.data.usuario.esAdmin)
+
             setTimeout(() => {
               router.push('/menu')
             }, 4000);
 
-            console.log("token", localStorage.getItem('token'))
+            console.log("token", localStorage.getItem('token'),localStorage.getItem('esAdmin'))
           })
           .catch((err:AxiosError)=>{
             console.log("error",err)

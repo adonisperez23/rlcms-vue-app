@@ -7,6 +7,12 @@ import Pedidos from '../pages/ListaPedidos.vue'
 import InfoUsuario from '../pages/InfoUsuario.vue'
 import Home from '../pages/Home.vue'
 
+function esAdminAuthenticado(to) {
+  if(to.meta.requiereAuthAdmin && localStorage.getItem('esAdmin')) return true
+
+  return {path:"/menu"}
+}
+
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
   routes: [
@@ -43,6 +49,8 @@ const router = createRouter({
           path: '/informacion-usuario',
           name: 'Informacion de Usuario',
           component: InfoUsuario,
+          meta:{requiereAuth:true},
+
         },
         {
           path: '/enviar-correo',
@@ -57,27 +65,37 @@ const router = createRouter({
         {
           path:'/operaciones-productos',
           name:'Operaciones con productos',
-          component:()=>import('../pages/panel-control/AgregarProductos.vue')
+          component:()=>import('../pages/panel-control/AgregarProductos.vue'),
+          meta:{requiereAuthAdmin:true},
+          beforeEnter:[esAdminAuthenticado]
         },
         {
           path:'/lista-productos',
           name:'Lista de productos',
-          component:()=>import('../pages/panel-control/ListaProductos.vue')
+          component:()=>import('../pages/panel-control/ListaProductos.vue'),
+          meta:{requiereAuthAdmin:true},
+          beforeEnter:[esAdminAuthenticado]
         },
         {
           path:'/lista-Facturas',
           name:'Lista de Facturas',
-          component:()=>import('../pages/panel-control/ListaFacturas.vue')
+          component:()=>import('../pages/panel-control/ListaFacturas.vue'),
+          meta:{requiereAuthAdmin:true},
+          beforeEnter:[esAdminAuthenticado]
         },
         {
           path:'/subir-foto',
           name:'Subir Foto',
-          component:()=>import('../pages/panel-control/SubirFoto.vue')
+          component:()=>import('../pages/panel-control/SubirFoto.vue'),
+          meta:{requiereAuthAdmin:true},
+          beforeEnter:[esAdminAuthenticado]
         },
         {
           path:'/lista-fotos',
           name:'Lista de fotos',
-          component:()=>import('../pages/panel-control/ListaFotos.vue')
+          component:()=>import('../pages/panel-control/ListaFotos.vue'),
+          meta:{requiereAuthAdmin:true},
+          beforeEnter:[esAdminAuthenticado]
         }
       ]
     },
