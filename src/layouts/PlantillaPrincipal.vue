@@ -11,6 +11,9 @@
         <v-btn to="/menu" variant="text">
           Menu
         </v-btn>
+        <v-btn to="/about-us" variant="text">
+          quienes somos
+        </v-btn>
         <v-btn to="/lista-pedidos" v-show="sesion.estadoSesion" variant="text" >
           Pedidos ({{cantidadProductos}})
         </v-btn>

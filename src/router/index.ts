@@ -2,10 +2,11 @@ import { createRouter, createWebHistory,createWebHashHistory } from 'vue-router'
 import AutenticarUsuario from '../pages/AutenticarUsuario.vue'
 import RegistroUsuario from '../pages/RegistroUsuario.vue'
 import Menu from '../pages/Menu.vue'
-import PaginaPrincipal from '../layouts/PaginaPrincipal.vue'
+import PlantillaPrincipal from '../layouts/PlantillaPrincipal.vue'
 import Pedidos from '../pages/ListaPedidos.vue'
 import InfoUsuario from '../pages/InfoUsuario.vue'
 import Home from '../pages/Home.vue'
+import QuienesSomos from '../pages/QuienesSomos.vue'
 
 function esAdminAuthenticado(to) {
   if(to.meta.requiereAuthAdmin && localStorage.getItem('esAdmin')) return true
@@ -18,12 +19,17 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'Pagina principal',
-      component: PaginaPrincipal,
+      name: 'Plantilla principal',
+      component: PlantillaPrincipal,
+      redirect: '/home',
       children:[
         {
           path: '/home',
           component:Home
+        },
+        {
+          path: '/about-us',
+          component:QuienesSomos
         },
         {
           path: '/signin',

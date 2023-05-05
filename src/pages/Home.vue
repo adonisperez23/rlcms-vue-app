@@ -1,7 +1,7 @@
 <template>
   <v-container class="my-16 py-16">
     <v-row>
-      <v-col class="mt-15">
+      <v-col class="my-16 py-16">
           <div class="text-center">
 
             <h2 >BIENVENIDOS A LA APP WEB DEL RESTAURANT lOS CINCO MEJORES SABORES!</h2>
@@ -15,6 +15,7 @@
     </v-row>
   </v-container>
   <ResumenApp/>
+  <Ubicacion/>
   <Contacto/>
 </template>
 <!-- <></> -->
@@ -22,6 +23,7 @@
 <script setup lang="ts">
 import ResumenApp from "../components/home/ResumenApp.vue";
 import Contacto from "../components/home/Contacto.vue";
+import Ubicacion from "../components/home/Ubicacion.vue";
 
 
 function scroll() {
