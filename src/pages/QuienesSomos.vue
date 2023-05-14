@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container class="font-poppins">
     <v-row>
       <h2>Quienes Somos</h2>
     </v-row>
@@ -18,7 +18,7 @@
           </article>
           <v-divider thickness="20"></v-divider>
           <section>
-            <h3 class="text-decoration-underline">Fundacion</h3>
+            <h3 >Fundacion</h3>
             <article class="">
               Cesar Pérez e Ysvelia Farias con afán de buscar un sustento económico,
               observaron la oportunidad de abrir un negocio de venta de comida por
@@ -51,7 +51,7 @@
           </section>
           <v-divider thickness="20"></v-divider>
           <section>
-            <h3 class="text-decoration-underline">Mision</h3>
+            <h3>Mision</h3>
             <article class="">
               Es un restaurante comprometido con la innovación y la creatividad,
               superando las expectativas de nuestros clientes con una amplia gama
@@ -60,7 +60,7 @@
           </section>
           <v-divider thickness="20"></v-divider>
           <section>
-            <h3 class="text-decoration-underline">Vision</h3>
+            <h3>Vision</h3>
             <article class="">
               Ser reconocidos como un restaurante original, solido, profesional,
               con calidad humana y principios éticos, que ofrece comida típica
@@ -72,7 +72,7 @@
           </section>
           <v-divider thickness="20"></v-divider>
           <section>
-            <h3 class="text-decoration-underline">Valores</h3>
+            <h3 >Valores</h3>
             <article class="">
               Que el cliente disfrute de su estancia con sus familiares y amigos
               sin perder el espíritu que nos representa como venezolanos. Así
@@ -83,7 +83,7 @@
           </section>
           <v-divider thickness="20"></v-divider>
           <section>
-            <h3 class="text-decoration-underline">Eslogan</h3>
+            <h3 >Eslogan</h3>
             <article class="">
               Sabor y Corazón, tu mejor opción.
             </article>
@@ -99,4 +99,9 @@
 </script>
 
 <style lang="css" scoped>
+h2,h3{
+  background-color: #f88905;
+  display: inline;
+  font-family: Steinfeld-demo;
+}
 </style>

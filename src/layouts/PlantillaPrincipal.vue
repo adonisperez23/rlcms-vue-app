@@ -1,33 +1,38 @@
-<template>
+<template >
 
   <v-layout>
    <PerfilUsuario v-if="sesion.estadoSesion"/>
-   <v-app-bar>
+   <v-app-bar color="#f88905">
       <template v-slot:prepend>
-
-        <v-btn to="/home" variant="text">
+        <v-img
+        width="80"
+        height="80"
+        src="/logo-rest.png"
+        >
+        </v-img>
+        <v-btn to="/home" variant="text" color="black">
           Home
         </v-btn>
-        <v-btn to="/menu" variant="text">
+        <v-btn to="/menu" variant="text" color="black">
           Menu
         </v-btn>
-        <v-btn to="/about-us" variant="text">
+        <v-btn to="/about-us" variant="text" color="black">
           quienes somos
         </v-btn>
-        <v-btn to="/lista-pedidos" v-show="sesion.estadoSesion" variant="text" >
+        <v-btn to="/lista-pedidos" v-show="sesion.estadoSesion" variant="text" color="black">
           Pedidos ({{cantidadProductos}})
         </v-btn>
         <div v-if="sesion.informacionUsuario.esAdmin">
-          <v-btn :to="{name:'Operaciones con productos'}" variant="text" >
+          <v-btn :to="{name:'Operaciones con productos'}" variant="text" color="black">
             operaciones con productos
           </v-btn>
-          <v-btn :to="{name:'Lista de productos'}" variant="text" >
+          <v-btn :to="{name:'Lista de productos'}" variant="text" color="black">
             lista de productos
           </v-btn>
-          <v-btn :to="{name:'Lista de Facturas'}" variant="text" >
+          <v-btn :to="{name:'Lista de Facturas'}" variant="text" color="black">
             lista de facturas
           </v-btn>
-          <v-btn :to="{name:'Lista de fotos'}" variant="text" >
+          <v-btn :to="{name:'Lista de fotos'}" variant="text" color="black">
             lista de fotos
           </v-btn>
         </div>
@@ -35,10 +40,10 @@
       </template>
 
       <template #append>
-        <v-btn to="/signin" v-show="!sesion.estadoSesion" variant="text">
+        <v-btn to="/signin" v-show="!sesion.estadoSesion" variant="text" color="black">
           Registrarse
         </v-btn>
-        <v-btn to="/login" v-show="!sesion.estadoSesion" variant="text" >
+        <v-btn to="/login" v-show="!sesion.estadoSesion" variant="text" color="black">
           Login
         </v-btn>
       </template>

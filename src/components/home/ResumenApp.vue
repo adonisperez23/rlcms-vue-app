@@ -1,10 +1,12 @@
 <template>
-  <v-container class="my-16 py-16">
-    <v-row>
+  <v-container class="my-16 py-16 font-poppins">
+    <v-row class="my-16 py-16">
       <v-col>
         <h3>En nuestra app-web podras:</h3>
-        <v-expansion-panels >
+        <v-expansion-panels color="#f88905" >
+
           <v-expansion-panel
+          bg-color="#fcecd2"
           variant="Popout"
           title="Ver nuestra seccion de el menu del dia"
           text="Podras visualizar todo nuestro menu disponible del dia, en el menu se
@@ -13,6 +15,7 @@
           "
           ></v-expansion-panel>
           <v-expansion-panel
+          bg-color="#fcecd2"
           variant="Popout"
           title="Registrarse en nuestra app-web"
           text="De manera facil y rapida podra registrarse en nuestra app-web ingresando, su nombre, correo electronico y
@@ -21,6 +24,7 @@
           "
           ></v-expansion-panel>
           <v-expansion-panel
+          bg-color="#fcecd2"
           variant="Popout"
           title="Seleccionar plato y contornos"
           text="Una vez registrado y autenticado en nuestra app observara un boton en cada plato con la palabra 'Pedir'.
@@ -30,6 +34,7 @@
           "
           ></v-expansion-panel>
           <v-expansion-panel
+          bg-color="#fcecd2"
           variant="Popout"
           title="Ver lista de platos seleccionados"
           text="En la barra navegadora de la app, podra observar una pestaña que dice 'Lista de pedidos(0)' que indica la cantidad
@@ -39,6 +44,7 @@
           "
           ></v-expansion-panel>
           <v-expansion-panel
+          bg-color="#fcecd2"
           variant="Popout"
           title="Enviar lista de platos seleccionados"
           text="De una manera detallada, el boton 'Enviar pedido' enviara en unos pocos minutos un mensaje de texto por whatsApp al

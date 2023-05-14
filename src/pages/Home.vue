@@ -1,14 +1,14 @@
 <template>
-  <v-container class="my-16 py-16">
+  <v-container class="my-16 py-16 font-poppins">
     <v-row>
       <v-col class="my-16 py-16">
           <div class="text-center">
 
-            <h2 >BIENVENIDOS A LA APP WEB DEL RESTAURANT lOS CINCO MEJORES SABORES!</h2>
-            <h4 >Ven y observa todos nuestros platos del dia y arma tus platos con los contornos que mas desees!</h4>
+            <h1 >¡BIENVENIDOS A LA APP WEB DEL RESTAURANT lOS CINCO MEJORES SABORES!</h1>
+            <h4 >VEN Y OBSERVA TODOS NUESTROS PLATOS DEL DIA Y ARMA TUS PLATOS CON LOS CONTORNOS QUE MAS DESEES!</h4>
             <div>
-              <v-btn>Quienes somos?</v-btn>
-              <v-btn @click="scroll">Lo que encontraras en la App</v-btn>
+              <v-btn variant="text" color="black">¿Quienes somos?</v-btn>
+              <v-btn @click="scroll" variant="text" color="black">Lo que encontraras en la App</v-btn>
             </div>
           </div>
       </v-col>
@@ -17,6 +17,7 @@
   <ResumenApp/>
   <Ubicacion/>
   <Contacto/>
+  <TheFooter/>
 </template>
 <!-- <></> -->
 
@@ -24,6 +25,7 @@
 import ResumenApp from "../components/home/ResumenApp.vue";
 import Contacto from "../components/home/Contacto.vue";
 import Ubicacion from "../components/home/Ubicacion.vue";
+import TheFooter from "../components/home/TheFooter.vue";
 
 
 function scroll() {

@@ -1,6 +1,5 @@
 <template>
-  <footer class="mt-16 pt-16">
-    <v-container>
+    <v-container  class="mt-16 pt-16 font-poppins">
       <h4>Contactos:</h4>
       <v-row>
         <v-col>
@@ -16,7 +15,6 @@
         </v-col>
       </v-row>
     </v-container>
-  </footer>
 </template>
 
 <script setup lang="ts">
@@ -24,4 +22,8 @@
 </script>
 
 <style scoped>
+  h4{
+    background-color: #f88905;
+    display: inline;
+  }
 </style>
