@@ -1,6 +1,6 @@
 <template >
-  <v-card>
-    <v-card-item>
+  <v-card color="#f88905" max-height="500">
+    <v-card-item class="pb-0 pt-1 px-1">
       <v-img
         width="300"
         height="200"
@@ -9,11 +9,11 @@
         :src="srcFoto"
       ></v-img>
     </v-card-item>
-    <v-card-text>
+    <v-card-text class="pb-0 px-1 text-center">
       {{nombreFoto}}
     </v-card-text>
-    <v-card-actions>
-      <v-btn @click="propsAvisoEliminar.activarAviso = true">Borrar Imagen</v-btn>
+    <v-card-actions  class="pb-0 pt-0 px-1">
+      <v-btn append-icon="mdi-eraser" @click="propsAvisoEliminar.activarAviso = true">Borrar Imagen</v-btn>
     </v-card-actions>
 
   </v-card>

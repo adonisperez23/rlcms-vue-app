@@ -1,12 +1,11 @@
 <template>
   <v-container>
-    <v-progress-circular class="ml-16 mb-2 " v-show="!mostrarLista" indeterminate :size="117">Cargando...</v-progress-circular>
-    <v-alert
-    v-show="alert.mostrarAlert"
-    :color="alert.color"
-    :icon="alert.icon"
-    :text="alert.mensaje"
-    ></v-alert>
+    <BarraProgresoAviso
+      v-if="!mostrarLista"
+      mensajeBarra="Cargando . . ."
+      mensaje="Mostrando Lista de pedidos ..."
+      noMostrarAlert
+    />
     <v-row justify="end">
       <v-col v-if="lista.listaPedidos.length === 0">
         <div class="text-h3">
@@ -81,6 +80,7 @@ import axios, {AxiosError} from 'axios'
 import {Respuesta} from '../types/interfaces'
 import {useSesionUsuario} from "../stores/sesionUsuario"
 import {useEstadoAlerta} from "../stores/estadoAlerta"
+import BarraProgresoAviso from '../components/BarraProgresoAviso.vue'
 
 const lista = useSesionUsuario()
 const alert = useEstadoAlerta()

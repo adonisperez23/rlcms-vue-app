@@ -33,12 +33,12 @@ const router = createRouter({
         },
         {
           path: '/signin',
-          name: 'Registro usuario',
+          name: 'Registrar usuario',
           component: RegistroUsuario
         },
         {
           path: '/login',
-          name: 'Autenticar usuario',
+          name: 'Iniciar sesion',
           component: AutenticarUsuario
         },
         {

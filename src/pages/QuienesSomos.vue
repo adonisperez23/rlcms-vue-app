@@ -103,5 +103,6 @@ h2,h3{
   background-color: #f88905;
   display: inline;
   font-family: Steinfeld-demo;
+  text-transform: uppercase;
 }
 </style>

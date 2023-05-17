@@ -1,15 +1,11 @@
 <template>
   <v-container>
-    <v-row v-if="cargandoLista" justify="center" class="">
-      <v-col cols="2" class="">
-        <v-progress-circular
-        size="128"
-        indeterminate
-        color="primary"
-        ></v-progress-circular>
-        <h3>Cargando Menu...</h3>
-      </v-col>
-    </v-row>
+    <BarraProgresoAviso
+      v-if="cargandoLista"
+      mensajeBarra="Cargando . . ."
+      mensaje="Mostrando Menu ..."
+      noMostrarAlert
+    />
     <v-row justify="start" >
 
       <div v-if="listaVacia" class="text-h2">
@@ -37,6 +33,7 @@ import InfoMenu from "../components/menu/InfoMenu.vue"
 import { ref , reactive , onMounted, provide } from 'vue'
 import axios,{AxiosError} from 'axios'
 import {Respuesta,Producto} from "../types/interfaces"
+import BarraProgresoAviso from '../components/BarraProgresoAviso.vue'
 // import listaProductos from '../assets/productos.json'
 
 // const listaMenu = listaProductos.filter(producto => producto.categoria === "Almuerzo" || producto.categoria === "Raciones")

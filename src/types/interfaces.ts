@@ -19,7 +19,8 @@ interface Usuario {
   nombre:string,
   telefono:string
   email:string,
-  claveUno:string
+  claveUno:string,
+  esAdmin:boolean,
 }
 
 interface Pedido {

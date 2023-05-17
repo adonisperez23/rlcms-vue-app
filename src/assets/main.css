@@ -1,11 +1,11 @@
 html {
   background-color: #fcecd2;
-  font-family: Steinfeld-demo;
-  text-transform: uppercase;
-}
-.font-poppins{
   font-family: poppins-bold;
+  /* text-transform: uppercase; */
 }
+/* .font-poppins{
+  font-family: poppins-bold;
+} */
 @font-face {
   font-family: 'Steinfeld-demo';
   src: url("./fonts/SteinfeldDEMO.ttf") format("truetype");

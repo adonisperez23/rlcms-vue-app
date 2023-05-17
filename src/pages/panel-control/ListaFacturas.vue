@@ -1,15 +1,11 @@
 <template>
   <v-container >
-    <v-row v-if="cargandoLista" justify="center" class="">
-      <v-col cols="2" class="">
-        <v-progress-circular
-        size="128"
-        indeterminate
-        color="primary"
-        ></v-progress-circular>
-        <h3>Cargando lista de facturas...</h3>
-      </v-col>
-    </v-row>
+    <BarraProgresoAviso
+      v-if="cargandoLista"
+      mensajeBarra="Cargando . . ."
+      mensaje="Mostrando Lista de facturas ..."
+      noMostrarAlert
+    />
     <v-row v-else>
       <div v-if="listaVacia" class="text-h3">
         No hay facturas generadas por los momentos...
@@ -118,6 +114,7 @@ import {ref,reactive} from 'vue'
 import axios, {AxiosError} from 'axios'
 import {Respuesta,Factura,Modal,Pedido} from '../../types/interfaces'
 import Aviso from '../../components/Aviso.vue'
+import BarraProgresoAviso from '../../components/BarraProgresoAviso.vue'
 
 const listaFacturas = ref<Factura[]>([])
 const listaPedidos = ref<Pedido[]>([])

@@ -1,9 +1,9 @@
 <template>
-    <v-container  class="mt-16 pt-16 font-poppins">
+    <v-container  class="mt-16 pt-16 text-left">
       <h4>Contactos:</h4>
       <v-row>
         <v-col>
-          <div class="text">
+          <div>
             Correo Electronico: Adonisdavid20@gmail.com
             <br>
             Numeros de telefono:

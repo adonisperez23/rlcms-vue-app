@@ -10,13 +10,6 @@
     </figure>
   </footer>
 </template>
-<!-- <v-container>
-<v-row>
-<v-col>
-
-</v-col>
-</v-row>
-</v-container> -->
 
 <script setup lang="ts">
 

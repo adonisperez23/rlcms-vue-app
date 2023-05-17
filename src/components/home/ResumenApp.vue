@@ -1,8 +1,8 @@
 <template>
-  <v-container class="my-16 py-16 font-poppins">
+  <v-container class="my-16 py-16">
     <v-row class="my-16 py-16">
       <v-col>
-        <h3>En nuestra app-web podras:</h3>
+        <h3 class="text-left">En nuestra app-web podras:</h3>
         <v-expansion-panels color="#f88905" >
 
           <v-expansion-panel

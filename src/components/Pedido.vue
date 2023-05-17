@@ -1,9 +1,9 @@
 <template>
-  <div class="text-center">
+  <div class="text-left">
     <v-btn
-      color="primary"
-      @click="dialog = true"
-    >
+     prepend-icon="mdi-pencil-plus"
+     @click="dialog = true"
+     >
       Pedir
     </v-btn>
 

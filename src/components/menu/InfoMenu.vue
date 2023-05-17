@@ -1,8 +1,9 @@
 <template>
     <v-col cols="3">
         <v-card
+          color="#f88905"
           >
-          <v-card-text>
+          <v-card-text class="pb-0 px-1 pt-1">
             <FotoMenu :nombreProducto="nombreProducto"/>
             <h2>{{nombreProducto}}</h2>
             <p class="text-h6 text--primary">
@@ -10,12 +11,14 @@
             </p>
           </v-card-text>
           <v-card-actions >
-            <v-btn @click="propsAviso.activarAviso=true">Detalles del plato</v-btn>
-            <div v-show="sesion.estadoSesion">
-              <Pedido
-              :idProducto="id"
-              :precio="precio"
-              :menuOpcion="nombreProducto"/>
+            <div class="d-flex flex-column">
+              <v-btn prepend-icon="mdi-form-select" @click="propsAviso.activarAviso=true">Detalles del plato</v-btn>
+              <div v-show="sesion.estadoSesion">
+                <Pedido
+                :idProducto="id"
+                :precio="precio"
+                :menuOpcion="nombreProducto"/>
+              </div>
             </div>
          </v-card-actions>
       </v-card>
@@ -58,4 +61,7 @@ const sesion = useSesionUsuario()
 </script>
 
 <style scoped>
+h2,p{
+  font-family: poppins-bold;
+}
 </style>

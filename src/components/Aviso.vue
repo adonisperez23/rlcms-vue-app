@@ -4,13 +4,13 @@
       :model-value="dialog"
       width="auto"
     >
-      <v-card  class="mx-auto">
+      <v-card  class="mx-auto text-center">
         <v-card-text class="text-h5">
           {{mensaje}}
         </v-card-text>
 
 
-        <v-card-item >
+        <v-card-item class="text-center">
           <slot name="imagen"></slot>
         </v-card-item>
 

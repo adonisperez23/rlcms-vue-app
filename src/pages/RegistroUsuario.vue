@@ -1,6 +1,6 @@
 <template>
  <v-container>
-   <v-sheet width="300" class="mx-auto">
+   <v-sheet width="300" class="mx-auto" color="#fcecd2">
      <v-form v-show="mostrarFormulario" fast-fail @submit.prevent="registrarUsuario">
        <v-text-field
        v-model="nombre"
@@ -36,16 +36,17 @@
        label="Repita la contraseña"
        ></v-text-field>
 
-       <v-btn :disabled="activarBoton" type="submit" block class="mt-2 mb-2">Registrarme</v-btn>
+       <v-btn append-icon="mdi-draw-pen" :disabled="activarBoton" type="submit" block class="mt-2 mb-2" color="#f88905">Registrarme</v-btn>
      </v-form>
-    <v-progress-circular class="ml-16 mb-2 " v-show="!mostrarFormulario" indeterminate :size="117">Cargando...</v-progress-circular>
-    <v-alert
-    v-show="alert.mostrarAlert"
-    :color="alert.color"
-    :icon="alert.icon"
-    :text="alert.mensaje"
-    ></v-alert>
    </v-sheet>
+   <BarraProgresoAviso
+   v-show="!mostrarFormulario"
+   mensajeBarra="Cargando . . ."
+   :mostrarAlert="alert.mostrarAlert"
+   :colorAlert="alert.color"
+   :iconoAlert="alert.icon"
+   :mensajeAlert="alert.mensaje"
+   />
  </v-container>
 
 </template>
@@ -57,6 +58,7 @@ import axios , {AxiosError} from 'axios'
 import {Usuario,Respuesta} from "../types/interfaces"
 import {useValidarEmail,useValidarNombre,useValidarTelefono,useValidarClaveUno} from "../composables/validadores"
 import {useEstadoAlerta} from '../stores/estadoAlerta'
+import BarraProgresoAviso from '../components/BarraProgresoAviso.vue'
 
 const router = useRouter()
 

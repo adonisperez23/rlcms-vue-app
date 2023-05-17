@@ -1,15 +1,11 @@
 <template>
   <v-container>
-    <v-row v-if="cargandoLista" justify="center" class="">
-      <v-col cols="2" class="">
-        <v-progress-circular
-        size="128"
-        indeterminate
-        color="primary"
-        ></v-progress-circular>
-        <h3>Cargando galeria de fotos de productos...</h3>
-      </v-col>
-    </v-row>
+    <BarraProgresoAviso
+      v-if="cargandoLista"
+      mensajeBarra="Cargando . . ."
+      mensaje="Mostrando galeria de fotos de productos ..."
+      noMostrarAlert
+    />
     <v-row v-else>
       <v-col v-if="listaVacia" cols="12">
         <h3>No hay fotos agregadas por los momentos...</h3>
@@ -35,6 +31,7 @@ import FotoProducto from '../../components/FotoProducto.vue'
 import {ref} from 'vue'
 import axios,{AxiosError} from 'axios'
 import {Respesta,Foto} from '../../types/interfaces'
+import BarraProgresoAviso from '../../components/BarraProgresoAviso.vue'
 
 const listaFotos = ref<Foto[]>([])
 const cargandoLista =ref<boolean>(false)

@@ -1,5 +1,5 @@
 <template>
-  <v-container class="font-poppins">
+  <v-container>
     <h3>¿Donde se encuentra nuestro local fisico?</h3>
     <v-row>
       <v-col>

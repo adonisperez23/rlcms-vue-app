@@ -51,9 +51,9 @@
    </v-app-bar>
 
    <v-main>
-     <div class="text-h4">
+     <!-- <h1 class="fondo">
        {{tituloPagina}}
-     </div>
+     </h1> -->
      <router-view></router-view>
    </v-main>
 
@@ -89,4 +89,8 @@ const cantidadProductos = computed<number>(()=>{
 </script>
 
 <style scoped>
+.fondo{
+  background-color: #f88905;
+  display: inline;
+}
 </style>

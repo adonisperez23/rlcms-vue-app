@@ -1,16 +1,11 @@
 <template>
   <v-container>
-    <v-row v-if="cargandoLista" justify="center" class="">
-      <v-col cols="2" class="">
-        <v-progress-circular
-        size="128"
-        indeterminate
-        color="primary"
-        ></v-progress-circular>
-        <h3>Cargando lista de productos...</h3>
-      </v-col>
-    </v-row>
-
+    <BarraProgresoAviso
+      v-if="cargandoLista"
+      mensajeBarra="Cargando . . ."
+      mensaje="Mostrando lista de productos ..."
+      noMostrarAlert
+    />
     <v-row v-else>
 
       <v-sheet v-if="listaVacia" rounded :height="250" :width="250">
@@ -100,6 +95,7 @@ import {ref,reactive} from 'vue'
 import axios,{AxiosError} from 'axios'
 import {Respuesta,Producto,Modal} from '../../types/interfaces'
 import Aviso from '../../components/Aviso.vue'
+import BarraProgresoAviso from '../../components/BarraProgresoAviso.vue'
 
 const listaProductos = ref<Producto[]>([])
 const errorServidor = ref<boolean>(false)

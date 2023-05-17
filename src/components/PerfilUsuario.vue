@@ -3,11 +3,11 @@
         expand-on-hover
         rail
         location="right"
+        color="#f88905"
       >
         <template v-slot:prepend>
           <v-list-item
             lines="two"
-            prepend-avatar="https://randomuser.me/api/portraits/women/81.jpg"
             :title="sesion.informacionUsuario.nombre"
             :subtitle="sesion.informacionUsuario.email"
           ></v-list-item>
@@ -18,7 +18,7 @@
         <v-list density="compact" nav>
           <v-list-item prepend-icon="mdi-home-city" title="Home" value="home"></v-list-item>
           <v-list-item to="/informacion-usuario" prepend-icon="mdi-account" title="Mi cuenta" value="account"></v-list-item>
-          <v-list-item @click="salir" prepend-icon="mdi-account-group-outline" title="Salir" value="Salir"></v-list-item>
+          <v-list-item @click="salir" prepend-icon="mdi-account-arrow-down" title="Salir" value="Salir"></v-list-item>
         </v-list>
       </v-navigation-drawer>
 </template>

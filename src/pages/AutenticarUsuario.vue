@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-sheet width="300" class="mx-auto">
+    <v-sheet width="300" class="mx-auto" color="#fcecd2">
       <v-form v-show="mostrarFormulario" fast-fail @submit.prevent="autenticarUsuario">
         <v-text-field
         v-model="correo"
@@ -14,28 +14,31 @@
         label="Contraseña"
         ></v-text-field>
 
-        <v-btn type="submit" block class="mt-2">Login</v-btn>
-        <v-btn  :to="{name:'Enviar correo'}" block class="mt-2">Olvido su contraseña?</v-btn>
+        <v-btn append-icon="mdi-button-pointer" :disabled="activarBoton" color="#f88905" type="submit" block class="mt-2">Login</v-btn>
+        <v-btn append-icon="mdi-account-edit-outline" color="#f88905" :to="{name:'Enviar correo'}" block class="mt-2">¿Olvido su contraseña?</v-btn>
       </v-form>
-      <v-progress-circular class="ml-16 mb-2 " v-show="!mostrarFormulario" indeterminate :size="117">Cargando...</v-progress-circular>
-      <v-alert
-      v-show="alert.mostrarAlert"
-      :color="alert.color"
-      :icon="alert.icon"
-      :text="alert.mensaje"
-      ></v-alert>
     </v-sheet>
+    <BarraProgresoAviso
+      v-show="!mostrarFormulario"
+      mensajeBarra="Cargando . . ."
+      :mostrarAlert="alert.mostrarAlert"
+      :colorAlert="alert.color"
+      :iconoAlert="alert.icon"
+      :mensajeAlert="alert.mensaje"
+    />
+
   </v-container>
 </template>
 
 <script setup lang="ts">
-import {ref} from 'vue';
+import {ref, computed} from 'vue';
 import { useRouter } from 'vue-router'
 import {useValidarEmail} from '../composables/validadores';
 import {useEstadoAlerta} from '../stores/estadoAlerta';
 import {useSesionUsuario} from '../stores/sesionUsuario'
-import {Respuesta} from '../types/interfaces.ts'
+import {Respuesta,Usuario} from '../types/interfaces.ts'
 import axios, {AxiosError} from 'axios'
+import BarraProgresoAviso from '../components/BarraProgresoAviso.vue'
 
 // router
 const router = useRouter()
@@ -47,7 +50,11 @@ const clave = ref<string>('');
 const alert = useEstadoAlerta(); //maneja los estados de alert con componente registro y autenticacion de usuario
 const sesion = useSesionUsuario()
 
-const mostrarFormulario = ref<boolean>(true)
+const activarBoton = computed<boolean>(()=>{
+  if(correo.value.length > 0 && clave.value.length >0) return false
+  return true
+})
+const mostrarFormulario = ref<boolean>(true) //Variable que controla el momento en que el formulario se debe mostrar
 
 const autenticarUsuario = ():void=> {
     axios.post(import.meta.env.VITE_API_AUTENTICAR_USUARIO, datosLogin(correo.value,clave.value))
@@ -62,7 +69,7 @@ const autenticarUsuario = ():void=> {
             sesion.abrirSesion()
             sesion.obtenerInformacionUsuario(res.data.usuario)
 
-            localStorage.setItem('esAdmin',res.data.usuario.esAdmin)
+            setDataInLocalStorage(res.data.usuario)
 
             setTimeout(() => {
               router.push('/menu')
@@ -85,6 +92,14 @@ function datosLogin(correo:string,clave:string){
     "email":correo,
      "clave":clave
   }
+}
+function setDataInLocalStorage(usuario:Usuario):void {
+  localStorage.setItem('id',usuario.id)
+  localStorage.setItem('nombre',usuario.nombre)
+  localStorage.setItem('telefono',usuario.telefono)
+  localStorage.setItem('email',usuario.email)
+  localStorage.setItem('claveUno',usuario.claveUno)
+  localStorage.setItem('esAdmin',usuario.esAdmin)
 }
 
 </script>

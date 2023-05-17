@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-sheet width="300" class="mx-auto">
+    <v-sheet width="300" class="mx-auto" color="#fcecd2">
 
       <v-progress-circular class="ml-16 mb-2 " v-show="!mostrarFormulario" indeterminate :size="117">Cargando...</v-progress-circular>
       <v-alert
