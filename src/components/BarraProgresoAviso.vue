@@ -1,6 +1,6 @@
 <template>
   <v-row justify="center">
-    <v-col cols="2" class="text-center">
+    <v-col cols="4" class="text-center">
       <v-progress-circular color="green" indeterminate :size="128">{{mensajeBarra}}</v-progress-circular>
       <v-alert
       v-if="!noMostrarAlert"

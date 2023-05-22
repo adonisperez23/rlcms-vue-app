@@ -1,18 +1,18 @@
 <template>
     <v-col cols="3">
         <v-card
-          color="#f88905"
+          color="orange-lighten-3"
           >
           <v-card-text class="pb-0 px-1 pt-1">
             <FotoMenu :nombreProducto="nombreProducto"/>
             <h2>{{nombreProducto}}</h2>
-            <p class="text-h6 text--primary">
-               {{precio}} $
-            </p>
+            <h3>
+              Precio {{precio}} $
+            </h3>
           </v-card-text>
           <v-card-actions >
             <div class="d-flex flex-column">
-              <v-btn prepend-icon="mdi-form-select" @click="propsAviso.activarAviso=true">Detalles del plato</v-btn>
+              <v-btn class="mb-1" variant="flat" color="yellow-darken-2" prepend-icon="mdi-form-select" @click="propsAviso.activarAviso=true">Detalles del plato</v-btn>
               <div v-show="sesion.estadoSesion">
                 <Pedido
                 :idProducto="id"

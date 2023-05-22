@@ -23,6 +23,7 @@ const router = createRouter({
       component: PlantillaPrincipal,
       redirect: '/home',
       children:[
+        // Rutas para todos los usuarios
         {
           path: '/home',
           component:Home
@@ -46,18 +47,28 @@ const router = createRouter({
           name: 'Menu',
           component: Menu
         },
+        //----------------------------------------------------------------------
+        // Rutas Para usuarios registrados y autenticados
         {
           path: '/lista-pedidos',
           name: 'Lista Pedidos',
-          component: Pedidos
+          component: Pedidos,
+          meta:{requiereAuth:true},
         },
         {
           path: '/informacion-usuario',
           name: 'Informacion de Usuario',
           component: InfoUsuario,
           meta:{requiereAuth:true},
-
         },
+        {
+          path: '/mispedidos',
+          name: 'Pedidos de usuario',
+          component: ()=>import('../pages/FacturasUsuario.vue'),
+          meta:{requiereAuth:true},
+        },
+        //----------------------------------------------------------------------
+        //Rutas para recuperacion de clave de usaurio
         {
           path: '/enviar-correo',
           name: 'Enviar correo',
@@ -68,6 +79,8 @@ const router = createRouter({
           name: 'Cambiar clave',
           component: ()=>import('../pages/CambiarClave.vue'),
         },
+        //------------------------------------------------------------
+        //Rutas accesibles solo para usuario con permiso de Administrador
         {
           path:'/operaciones-productos',
           name:'Operaciones con productos',

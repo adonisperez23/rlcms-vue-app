@@ -13,7 +13,7 @@
       {{nombreFoto}}
     </v-card-text>
     <v-card-actions  class="pb-0 pt-0 px-1">
-      <v-btn append-icon="mdi-eraser" @click="propsAvisoEliminar.activarAviso = true">Borrar Imagen</v-btn>
+      <v-btn  variant="outlined" color="red" append-icon="mdi-eraser" @click="propsAvisoEliminar.activarAviso = true">Borrar Imagen</v-btn>
     </v-card-actions>
 
   </v-card>

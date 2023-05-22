@@ -14,7 +14,7 @@
       <v-sheet v-if="errorServidor" rounded :height="250" :width="250">
         <h3>Ha ocurrido un error al cargar lista de productos</h3>
       </v-sheet>
-      <v-table v-else-if="listaProductos.length > 0">
+      <v-table class="color-fondo" v-else-if="listaProductos.length > 0">
         <thead>
           <tr>
             <th class="text-center">
@@ -50,22 +50,25 @@
           <td class="text-center">{{ producto.disponible ? 'Si' : 'No'}}</td>
           <td>
             <v-chip
+            color="green"
             :to="{name:'Operaciones con productos', query:producto}"
-            icon="mdi-blinds">
+            prepend-icon="mdi-file-edit-outline">
             Editar
           </v-chip>
         </td>
         <td>
           <v-chip
+          color="red"
           @click="mostrarAviso(producto.id)"
-          icon="mdi-blinds">
+          prepend-icon="mdi-delete-outline">
           Eliminar
         </v-chip>
       </td>
       <td>
         <v-chip
+        color="blue"
         :to="{name:'Subir Foto', query:{id:producto.id, nombreProducto:producto.nombreProducto}}"
-        icon="mdi-blinds">
+        prepend-icon="mdi-plus-box-multiple">
         Agregar Foto
       </v-chip>
     </td>

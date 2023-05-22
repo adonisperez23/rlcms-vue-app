@@ -19,7 +19,7 @@
 
         <InfoMenu
         v-else
-        v-for="(producto,index) in listaMenu"
+        v-for="(producto,index) in listaMenuFiltrada"
         :key="producto.id"
         v-bind="producto"/>
 
@@ -36,12 +36,13 @@ import {Respuesta,Producto} from "../types/interfaces"
 import BarraProgresoAviso from '../components/BarraProgresoAviso.vue'
 // import listaProductos from '../assets/productos.json'
 
-// const listaMenu = listaProductos.filter(producto => producto.categoria === "Almuerzo" || producto.categoria === "Raciones")
 
-const listaMenu = ref<Producto[]>([])
+const listaMenu = ref<Producto[]>([]) // Variable que almacena todos los productos de la base de datos
 const cargandoLista =ref<boolean>(false)
 const listaVacia = ref<boolean>(false)
 const errorDeCarga = ref<boolean>(false)
+const listaMenuFiltrada = ref<Producto[]>([])  //Variable que almacena solo los productos con categoria Almuerzo y Raciones
+// const listaFiltrada = listaMenu.value.filter(producto => producto.categoria === "Almuerzo" || producto.categoria === "Raciones")
 
 ObtenerMenu()
 
@@ -53,6 +54,7 @@ function ObtenerMenu():void {
     cargandoLista.value = true
     setTimeout(() => {
       listaMenu.value = res.data
+      listaMenuFiltrada.value = listaMenu.value.filter(producto => producto.categoria === "Almuerzo" || producto.categoria === "Raciones")
       estaListaVacia(listaMenu.value)
       cargandoLista.value = false
     }, 2000);

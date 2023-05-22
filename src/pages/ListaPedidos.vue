@@ -1,18 +1,26 @@
 <template>
   <v-container>
     <BarraProgresoAviso
-      v-if="!mostrarLista"
+      v-show="!mostrarLista"
       mensajeBarra="Cargando . . ."
       mensaje="Mostrando Lista de pedidos ..."
       noMostrarAlert
     />
-    <v-row justify="end">
+    <BarraProgresoAviso
+      v-show="alert.mostrarAlert"
+      mostrarAlert
+      mensajeBarra="Enviando . . ."
+      :mensajeAlert="alert.mensaje"
+      :colorAlert="alert.color"
+      :iconoAlert="alert.icon"
+    />
+    <v-row v-if="mostrarLista && !alert.mostrarAlert" justify="end">
       <v-col v-if="lista.listaPedidos.length === 0">
-        <div class="text-h3">
+        <h3>
           No hay pedidos realizados en la lista!
-        </div>
+        </h3>
       </v-col>
-      <v-col v-else-if="mostrarLista" cols="12">
+      <v-col v-else cols="12">
 
         <v-table>
 
@@ -38,14 +46,15 @@
             v-for="(producto,index) in lista.listaPedidos"
             :key="index"
             >
-            <td>{{ producto.nombreProducto }} <br> {{producto.contornosSeleccionados}} </td>
+            <td>{{ producto.nombreProducto }} <br> {{producto.descripcion}} </td>
             <td class="text-center">{{ producto.cantidad }}</td>
-            <td class="text-center">{{ producto.precio }}</td>
+            <td class="text-center">$ {{ producto.precio }}</td>
             <td class="text-center">{{ producto.precio * producto.cantidad}}</td>
             <td class="text-center">
               <v-chip
+                color="red"
                 @click="lista.eliminarPedido(index)"
-                icon="mdi-blinds">
+                prepend-icon="mdi-eraser">
                   Eliminar
               </v-chip>
             </td>
@@ -57,12 +66,12 @@
       </v-col>
 
       <v-col v-if="lista.listaPedidos.length > 0" cols="4">
-        <v-card title="Monto Total:">
+        <v-card color="yellow-lighten-4" title="Monto Total:">
           <v-card-text class="text-h4">
             $ {{montoTotal}}
           </v-card-text>
           <v-card-actions>
-            <v-btn variant="outlined" @click="enviarPedido" rounded="pill" color="primary">
+            <v-btn append-icon="mdi-send-circle-outline" variant="outlined" @click="enviarPedido" rounded="pill" color="blue">
               Enviar Pedido
             </v-btn>
           </v-card-actions>
@@ -85,11 +94,14 @@ import BarraProgresoAviso from '../components/BarraProgresoAviso.vue'
 const lista = useSesionUsuario()
 const alert = useEstadoAlerta()
 
-const mostrarLista = ref<boolean>(true)
+const mostrarLista = ref<boolean>(false)
 
 onMounted(()=>{
   console.log(lista.listaPedidos)
 })
+setTimeout(() => {
+  mostrarLista.value = true
+}, 3000);
 
 
 const montoTotal = computed<number>(()=>{
@@ -107,21 +119,11 @@ function enviarPedido():void {
   axios.post(import.meta.env.VITE_API_GENERAR_FACTURA,{usuario:lista.informacionUsuario.id,listaPedidos:lista.listaPedidos})
     .then((res:Respuesta)=>{
       console.log("pedido",res)
-      mostrarLista.value = false
       alert.gestionarRespuesta(res)
-
-      setTimeout(() => {
-        mostrarLista.value = true
-      }, 3000);
     })
     .catch((err:AxiosError)=>{
       console.log("error al enviar pedido", err)
-      mostrarLista.value = false
       alert.gestionarError(err)
-
-      setTimeout(() => {
-        mostrarLista.value = true
-      }, 3000);
     })
 
 }

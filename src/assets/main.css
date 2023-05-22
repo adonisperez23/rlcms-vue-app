@@ -1,11 +1,14 @@
 html {
-  background-color: #fcecd2;
+  background-color: #fcecd2 !important;
   font-family: poppins-bold;
   /* text-transform: uppercase; */
 }
-/* .font-poppins{
+.color-fondo{
+  background-color: #fcecd2;
+}
+.font-poppins{
   font-family: poppins-bold;
-} */
+}
 @font-face {
   font-family: 'Steinfeld-demo';
   src: url("./fonts/SteinfeldDEMO.ttf") format("truetype");
@@ -14,4 +17,9 @@ html {
 @font-face{
   font-family: 'poppins-bold';
   src: url("./fonts/Poppins-Bold.ttf") format("truetype")
+}
+
+.custom-class {
+  background: rgb(var(--v-theme-surface));
+  color: rgba(var(--v-theme-on-surface), 0.9);
 }

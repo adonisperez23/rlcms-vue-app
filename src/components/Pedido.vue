@@ -1,6 +1,8 @@
 <template>
   <div class="text-left">
     <v-btn
+     variant="flat"
+     color="green-accent-3"
      prepend-icon="mdi-pencil-plus"
      @click="dialog = true"
      >
@@ -11,18 +13,23 @@
       v-model="dialog"
       width="auto"
     >
-      <v-card>
+      <v-card width="600">
         <v-card-title>{{menuOpcion}} {{precio}}$</v-card-title>
         <v-card-subtitle>Contornos disponibles a elegir: <strong>{{contornosDisponibles}}</strong></v-card-subtitle>
-        <v-card-text>
+        <v-card-text class="py-0">
           <v-container>
-            <v-select
-            label="Indique la cantidad a pedir"
-            :items="[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]"
-            v-model="pedido.cantidad"
-            density="compact"
-            class="w-25"
-            ></v-select>
+            <v-row>
+              <v-col cols="6" class="pa-0">
+                <h6>Indique la cantidad</h6>
+                <v-select
+                :items="[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]"
+                v-model="pedido.cantidad"
+                density="compact"
+                class="w-25"
+                ></v-select>
+              </v-col>
+            </v-row>
+            <v-divider></v-divider>
             <v-row>
               <v-col v-for="(contorno, index) in contornos" :key="index" cols="4">
                 <v-switch
@@ -35,10 +42,13 @@
                 ></v-switch>
               </v-col>
             </v-row>
-            <v-row>
-              <div class="text-h5">
-                {{pedido.cantidad}} {{menuOpcion}} {{concatenarContornosSeleccionados}}
-              </div>
+            <v-divider></v-divider>
+            <v-row >
+              <v-col class="pb-0">
+                <h3>
+                  {{pedido.cantidad}} {{menuOpcion}} {{concatenarContornosSeleccionados}}
+                </h3>
+              </v-col>
             </v-row>
 
             <Aviso
@@ -49,9 +59,9 @@
           </v-container>
         </v-card-text>
         <v-card-actions>
-          <v-btn color="primary"  @click="dialog = false">Atras</v-btn>
-          <v-btn color="primary"  @click="resetearSeleccion">Resetear seleccion</v-btn>
-          <v-btn color="primary"  @click="guardarEnListaPedidos(pedido)">Guardar pedido</v-btn>
+          <v-btn color="red"  @click="dialog = false">Atras</v-btn>
+          <v-btn color="blue"  @click="resetearSeleccion">Resetear seleccion</v-btn>
+          <v-btn color="green"  @click="guardarEnListaPedidos(pedido)">Guardar pedido</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -131,8 +141,13 @@ const concatenarContornosSeleccionados = computed<string>(()=>{ // cadena de car
 })
 
 const guardarEnListaPedidos = (pedido:Pedido):void =>{
+  let cantidadProductos:number = lista.listaPedidos.reduce((acum,producto)=>{ return acum+producto.cantidad},0) // suma las cantidades de cada producto de la lista
+  let totalCantidadProductos:number = cantidadProductos + pedido.cantidad // suma la cantidad de productos en lista mas la cantidad de productos que ha seleccionado el usuario
 
-  if(lista.listaPedidos.some(ped => (ped.nombreProducto === pedido.nombreProducto) && (ped.descripcion === pedido.descripcion))){ //verifica si existe dentro de la lista un pedido igual al seleccionado
+  if(totalCantidadProductos > 10){ // Verifica si la lista tiene menos de 10 productos, si sobrepasa el limite mostrara al usuario que ha cubierto el limite de productos a pedir
+    propsAviso.activarAviso = true
+    propsAviso.mensaje = "Usted supera el limite de 10 productos en su lista de pedidos..."
+  } else if(lista.listaPedidos.some(ped => (ped.nombreProducto === pedido.nombreProducto) && (ped.descripcion === pedido.descripcion))){ //verifica si existe dentro de la lista un pedido igual al seleccionado
 
     let pedidoEncontrado = lista.listaPedidos.find(ped => (ped.nombreProducto === pedido.nombreProducto) && (ped.descripcion === pedido.descripcion)) //obtiene el producto dentro de la lista igual al seleccionado por el usuario
     let index = lista.listaPedidos.indexOf(pedidoEncontrado) // obtiene el indice del producto dentro de la lista de pedidos
@@ -142,11 +157,10 @@ const guardarEnListaPedidos = (pedido:Pedido):void =>{
 
   } else {
     lista.listaPedidos.push(pedido) // si no hay coicidencia de productos dentro de la lista, se agrega un nuevo producto
+    propsAviso.activarAviso = true
+    propsAviso.mensaje = "El pedido ha sido enviado a la lista de pedidos"
   }
 
-
-  propsAviso.activarAviso = true
-  propsAviso.mensaje = "El pedido ha sido enviado a la lista de pedidos"
 
 }
 

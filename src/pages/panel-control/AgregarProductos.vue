@@ -1,14 +1,14 @@
 <template>
   <v-container>
-
-    <v-sheet width="300"  class="mx-auto">
-      <v-progress-circular class="ml-16 mb-2 " v-show="!mostrarFormulario" indeterminate :size="117">Cargando...</v-progress-circular>
-      <v-alert
-      v-show="alert.mostrarAlert"
-      :color="alert.color"
-      :icon="alert.icon"
-      :text="alert.mensaje"
-      ></v-alert>
+    <BarraProgresoAviso
+    v-show="!mostrarFormulario"
+    mensajeBarra="Cargando..."
+    mostrarAlert
+    :colorAlert="alert.color"
+    :iconoAlert="alert.icon"
+    :mensajeAlert="alert.mensaje"
+    />
+    <v-sheet width="300" color="#fcecd2"  class="mx-auto">
     <v-form v-show="mostrarFormulario" fast-fail @submit.prevent="registrarProducto">
       <v-text-field
         v-model="producto.nombreProducto"
@@ -32,10 +32,10 @@
         :rules="validatePrecio"
       ></v-text-field>
       <v-checkbox v-model="producto.disponible" label="Producto disponible?"></v-checkbox>
-      <v-btn v-if="route.query.id" @click="actualizarProducto" block class="mt-2">Editar Producto</v-btn>
-      <v-btn v-else-if="producto.nombreProducto.length > 0" type="submit" block class="mt-2">Guardar Producto</v-btn>
-      <v-btn v-show="producto.nombreProducto.length > 0" @click="nuevoProducto" block class="mt-2">Nuevo Producto</v-btn>
-      <v-btn class="mt-2" :to="{name:'Lista de productos'}" block >Ver lista de productos</v-btn>
+      <v-btn color="yellow" prepend-icon="mdi-file-document-edit-outline" v-if="route.query.id" @click="actualizarProducto" block class="mt-2">Editar Producto</v-btn>
+      <v-btn color="green" prepend-icon="mdi-content-save-move" v-else-if="producto.nombreProducto.length > 0" type="submit" block class="mt-2">Guardar Producto</v-btn>
+      <v-btn color="red" prepend-icon="mdi-eraser" v-show="producto.nombreProducto.length > 0" @click="nuevoProducto" block class="mt-2">Nuevo Producto</v-btn>
+      <v-btn color="blue" prepend-icon="mdi-view-list" class="mt-2" :to="{name:'Lista de productos'}" block >Ver lista de productos</v-btn>
     </v-form>
   </v-sheet>
   </v-container>
@@ -47,6 +47,7 @@ import {useRoute} from 'vue-router'
 import {Producto,Respuesta} from '../../types/interfaces'
 import axios,{AxiosError} from 'axios'
 import {useEstadoAlerta} from '../../stores/estadoAlerta'
+import BarraProgresoAviso from "../../components/BarraProgresoAviso.vue"
 
 const route = useRoute()
 
@@ -81,9 +82,14 @@ function nuevoProducto():void {
 }
 
 const validatePrecio = [ value => {
-  if(value >=0 && value <=15) return true
+  if(value <=15) return true
 
   return "Valor del producto muy alto"
+},
+value => {
+  if(value >=0) return true
+
+  return "Valor del producto no puede ser negativo"
 }]
 
 const validateProducto = [ value => {

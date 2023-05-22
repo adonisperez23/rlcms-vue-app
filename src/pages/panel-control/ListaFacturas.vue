@@ -1,19 +1,19 @@
 <template>
-  <v-container >
+  <v-container>
     <BarraProgresoAviso
       v-if="cargandoLista"
       mensajeBarra="Cargando . . ."
       mensaje="Mostrando Lista de facturas ..."
       noMostrarAlert
     />
-    <v-row v-else>
-      <div v-if="listaVacia" class="text-h3">
+    <v-row  v-else>
+      <h1 v-if="listaVacia">
         No hay facturas generadas por los momentos...
-      </div>
-      <div v-if="errorServidor" class="text-h3">
+      </h1>
+      <h1 v-if="errorServidor">
         Ha ocurrido un error al cargar lista de facturas
-      </div>
-      <v-table v-else-if="listaFacturas.length > 0">
+      </h1>
+      <v-table class="color-fondo" v-else-if="listaFacturas.length > 0">
         <thead>
           <tr>
             <th class="text-center">
@@ -44,7 +44,7 @@
           <td class="text-center">{{ factura.usuario.email}}</td>
           <td class="text-center">{{ factura.usuario.telefono}}</td>
           <td class="text-center">
-            <v-chip @click="mostrarPedido(factura.pedido)">
+            <v-chip color="blue" prepend-icon="mdi-list-box-outline" @click="mostrarPedido(factura.pedido)">
               Ver Pedidos
             </v-chip>
           </td>
@@ -60,7 +60,7 @@
         :dialog="propsAviso.activarAviso">
         <template v-slot:lista>
 
-            <v-table>
+            <v-table class="color-fondo">
               <thead>
                 <tr>
                   <th class="text-center">
@@ -103,14 +103,15 @@
               </tr>
             </tbody>
           </v-table>
-
+          <v-divider></v-divider>
+          <h3 class="text-left mt-1">Monto Total: $ {{montoTotal}}</h3>
       </template>
     </Aviso>
   </v-container>
 </template>
 
 <script setup lang="ts">
-import {ref,reactive} from 'vue'
+import {ref,reactive,computed} from 'vue'
 import axios, {AxiosError} from 'axios'
 import {Respuesta,Factura,Modal,Pedido} from '../../types/interfaces'
 import Aviso from '../../components/Aviso.vue'
@@ -151,6 +152,16 @@ function estaListaVacia(lista:Factura[]) {
   if(lista.length > 0) return listaVacia.value=false
   return listaVacia.value=true
 }
+const montoTotal = computed<number>(()=>{
+
+  let total:number = 0
+
+  listaPedidos.value.forEach(producto => {
+    total += producto.cantidad * producto.precio
+  });
+
+  return total
+})
 
 </script>
 

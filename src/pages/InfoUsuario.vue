@@ -1,12 +1,14 @@
 <template>
 <v-container>
-  <v-sheet width="300" class="mx-auto">
-    <v-alert
-    v-show="alert.mostrarAlert"
-    :color="alert.color"
-    :icon="alert.icon"
-    :text="alert.mensaje"
-    ></v-alert>
+  <BarraProgresoAviso
+  v-if="alert.mostrarAlert"
+  mostrarAlert
+  mensajeBarra="Cargando..."
+  :colorAlert="alert.color"
+  :iconoAlert="alert.icon"
+  :mensajeAlert="alert.mensaje"
+  />
+  <v-sheet color="#fcecd2" width="300" class="mx-auto text-center">
     <v-form v-show="mostrarFormulario" fast-fail @submit.prevent="actualizarDatos">
 
         <v-text-field
@@ -31,9 +33,10 @@
         :rules="useValidarTelefono"
         label="Numero de telefono"
         ></v-text-field>
-        <v-btn type="submit">Actualizar Datos</v-btn>
+        <v-btn prepend-icon="mdi-update" color="green" type="submit">Actualizar Datos</v-btn>
     </v-form>
   </v-sheet>
+
 </v-container>
 </template>
 
@@ -44,6 +47,7 @@ import {useValidarEmail,useValidarNombre,useValidarTelefono,useValidarClaveUno} 
 import {useSesionUsuario} from "../stores/sesionUsuario"
 import {Usuario,Respuesta,NuevaClave} from "../types/interfaces"
 import {useEstadoAlerta} from "../stores/estadoAlerta"
+import BarraProgresoAviso from "../components/BarraProgresoAviso.vue"
 
 onMounted(()=>{
   console.log("datos actualizar", datosActualizar)

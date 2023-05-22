@@ -7,8 +7,8 @@
             <h1 >¡BIENVENIDOS A LA APP WEB DEL RESTAURANT lOS CINCO MEJORES SABORES!</h1>
             <h4 >VEN Y OBSERVA TODOS NUESTROS PLATOS DEL DIA Y ARMA TUS PLATOS CON LOS CONTORNOS QUE MAS DESEES!</h4>
             <div>
-              <v-btn to="/about-us" variant="text" color="black">¿Quienes somos?</v-btn>
-              <v-btn @click="scroll" variant="text" color="black">Lo que encontraras en la App</v-btn>
+              <v-btn to="/about-us" variant="tonal" color="#f88905">¿Quienes somos?</v-btn>
+              <v-btn @click="scroll" variant="tonal" color="#f88905">Lo que encontraras en la App</v-btn>
             </div>
           </div>
       </v-col>

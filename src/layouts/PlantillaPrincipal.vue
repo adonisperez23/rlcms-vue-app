@@ -22,20 +22,6 @@
         <v-btn to="/lista-pedidos" v-show="sesion.estadoSesion" variant="text" color="black">
           Pedidos ({{cantidadProductos}})
         </v-btn>
-        <div v-if="sesion.informacionUsuario.esAdmin">
-          <v-btn :to="{name:'Operaciones con productos'}" variant="text" color="black">
-            operaciones con productos
-          </v-btn>
-          <v-btn :to="{name:'Lista de productos'}" variant="text" color="black">
-            lista de productos
-          </v-btn>
-          <v-btn :to="{name:'Lista de Facturas'}" variant="text" color="black">
-            lista de facturas
-          </v-btn>
-          <v-btn :to="{name:'Lista de fotos'}" variant="text" color="black">
-            lista de fotos
-          </v-btn>
-        </div>
 
       </template>
 
