@@ -2,7 +2,7 @@
 
   <v-layout>
    <PerfilUsuario v-if="sesion.estadoSesion"/>
-   <v-app-bar color="#f88905">
+   <v-app-bar color="#f9cf57">
       <template v-slot:prepend>
         <v-img
         width="80"

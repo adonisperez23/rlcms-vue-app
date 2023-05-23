@@ -3,7 +3,7 @@
         expand-on-hover
         rail
         location="right"
-        color="#f88905"
+        color="#f9cf57"
       >
         <template v-slot:prepend>
           <v-list-item

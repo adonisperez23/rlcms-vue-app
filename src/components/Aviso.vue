@@ -9,6 +9,9 @@
          <h4>{{mensaje}}</h4>
         </v-card-text>
 
+        <v-card-item class="text-center">
+          <slot name="icon"></slot>
+        </v-card-item>
 
         <v-card-item class="text-center">
           <slot name="imagen"></slot>
@@ -41,6 +44,7 @@ const props = defineProps<{
   unaAccion?:boolean,
   dosAcciones?:boolean,
   color?:string,
+  mostrarIcon?:boolean,
 }>()
 
 const emit = defineEmits<{

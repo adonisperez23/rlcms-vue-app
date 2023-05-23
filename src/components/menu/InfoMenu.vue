@@ -1,7 +1,7 @@
 <template>
     <v-col cols="3">
         <v-card
-          color="orange-lighten-3"
+          color="#f3d595"
           >
           <v-card-text class="pb-0 px-1 pt-1">
             <FotoMenu :nombreProducto="nombreProducto"/>

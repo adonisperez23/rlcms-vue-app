@@ -1,5 +1,5 @@
 <template >
-  <v-card color="#f88905" max-height="500">
+  <v-card color="#f3d595" max-height="500">
     <v-card-item class="pb-0 pt-1 px-1">
       <v-img
         width="300"

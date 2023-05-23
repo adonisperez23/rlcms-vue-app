@@ -22,11 +22,15 @@
               <v-col cols="6" class="pa-0">
                 <h6>Indique la cantidad</h6>
                 <v-select
-                :items="[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]"
+                :items="[1,2,3,4,5,6,7,8,9,10]"
                 v-model="pedido.cantidad"
                 density="compact"
                 class="w-25"
                 ></v-select>
+              </v-col>
+              <v-col>
+                <h5>Nota:</h5>
+                <h6>Producto que no indique sus contornos, seran servidos con arroz, ensalada cocida y tajadas</h6>
               </v-col>
             </v-row>
             <v-divider></v-divider>
@@ -53,9 +57,19 @@
 
             <Aviso
               unaAccion
-              @activar-aviso="()=>propsAviso.activarAviso = false"
+              @activar-aviso="cerrarAvisoPedido()"
               :mensaje="propsAviso.mensaje"
-              :dialog="propsAviso.activarAviso"/>
+              :dialog="propsAviso.activarAviso">
+              <template v-slot:icon>
+                <v-icon
+                color="blue"
+                size="x-large"
+                class="me-2"
+                >
+                mdi-playlist-edit
+               </v-icon>
+              </template>
+            </Aviso>
           </v-container>
         </v-card-text>
         <v-card-actions>
@@ -69,7 +83,7 @@
 </template>
 
 <script setup lang="ts">
-import {ref,reactive, computed, inject} from "vue"
+import {ref,reactive, computed, inject, toRaw} from "vue"
 import {useSesionUsuario} from '../stores/sesionUsuario'
 import {Pedido,Modal} from '../types/interfaces.ts'
 import Aviso from "./Aviso.vue"
@@ -141,27 +155,31 @@ const concatenarContornosSeleccionados = computed<string>(()=>{ // cadena de car
 })
 
 const guardarEnListaPedidos = (pedido:Pedido):void =>{
+
+
   let cantidadProductos:number = lista.listaPedidos.reduce((acum,producto)=>{ return acum+producto.cantidad},0) // suma las cantidades de cada producto de la lista
   let totalCantidadProductos:number = cantidadProductos + pedido.cantidad // suma la cantidad de productos en lista mas la cantidad de productos que ha seleccionado el usuario
 
   if(totalCantidadProductos > 10){ // Verifica si la lista tiene menos de 10 productos, si sobrepasa el limite mostrara al usuario que ha cubierto el limite de productos a pedir
     propsAviso.activarAviso = true
     propsAviso.mensaje = "Usted supera el limite de 10 productos en su lista de pedidos..."
-  } else if(lista.listaPedidos.some(ped => (ped.nombreProducto === pedido.nombreProducto) && (ped.descripcion === pedido.descripcion))){ //verifica si existe dentro de la lista un pedido igual al seleccionado
-
-    let pedidoEncontrado = lista.listaPedidos.find(ped => (ped.nombreProducto === pedido.nombreProducto) && (ped.descripcion === pedido.descripcion)) //obtiene el producto dentro de la lista igual al seleccionado por el usuario
-    let index = lista.listaPedidos.indexOf(pedidoEncontrado) // obtiene el indice del producto dentro de la lista de pedidos
-    pedido.cantidad += pedidoEncontrado.cantidad // Se suman las cantidades del producto dentro de la lista y el producto que ha sido igual al producto seleccionado por el cliente
-    lista.listaPedidos.splice(index,1) // elimina el producto dentro de la lista
-    lista.listaPedidos.push(pedido)// agrega el producto con las cantidades sumadas anteriormente
-
   } else {
-    lista.listaPedidos.push(pedido) // si no hay coicidencia de productos dentro de la lista, se agrega un nuevo producto
-    propsAviso.activarAviso = true
-    propsAviso.mensaje = "El pedido ha sido enviado a la lista de pedidos"
-  }
+     let pedidoOriginal:Pedido = {                  //Elimina la reactividad del pedido
+       producto:pedido.producto,                    // y se agrega a la lista un pedido independiente de cambios que se hagan
+       nombreProducto:pedido.nombreProducto,
+       precio:pedido.precio,
+       cantidad:pedido.cantidad,
+       descripcion:pedido.descripcion
+     }
+     lista.agregarPedido(pedidoOriginal)
+     propsAviso.activarAviso = true
+     propsAviso.mensaje = "Su pedido ha sido agregado a la lista!"
+    }
+}
 
-
+const cerrarAvisoPedido = ():void=>{
+  propsAviso.activarAviso = false
+  dialog.value = false
 }
 
 </script>
