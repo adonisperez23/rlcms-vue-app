@@ -8,14 +8,14 @@
     />
     <v-row justify="start" >
 
-      <div v-if="listaVacia" class="text-h2">
+      <h1 v-if="listaVacia">
         No hay menu publicado por los momentos...
-      </div>
-      <div v-if="errorDeCarga" class="text-h2">
+      </h1>
+      <h1 v-if="errorDeCarga">
         Ha ocurrido un error al cargar lista de menu...
         <br>
         Posibles problemas con el servidor!
-      </div>
+      </h1>
 
         <InfoMenu
         v-else
@@ -38,15 +38,15 @@ import BarraProgresoAviso from '../components/BarraProgresoAviso.vue'
 
 
 const listaMenu = ref<Producto[]>([]) // Variable que almacena todos los productos de la base de datos
-const cargandoLista =ref<boolean>(false)
-const listaVacia = ref<boolean>(false)
+const cargandoLista =ref<boolean>(false) //Variable que activa la BarraProgresoAviso cuando se hace la llamada a la api
+const listaVacia = ref<boolean>(false) // Controla el escrito cuando la lista de productos esta vacia o hay algun error en la llamada
 const errorDeCarga = ref<boolean>(false)
 const listaMenuFiltrada = ref<Producto[]>([])  //Variable que almacena solo los productos con categoria Almuerzo y Raciones
 // const listaFiltrada = listaMenu.value.filter(producto => producto.categoria === "Almuerzo" || producto.categoria === "Raciones")
 
 ObtenerMenu()
 
-provide('listaProductos', listaMenu)
+provide('listaProductos', listaMenu) // provee a todos los componentes hijos de la lista de productos luego de realizar la llamada a la api
 
 function ObtenerMenu():void {
   axios.get(import.meta.env.VITE_API_LISTA_DE_PRODUCTOS)

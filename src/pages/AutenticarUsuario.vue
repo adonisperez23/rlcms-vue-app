@@ -1,6 +1,14 @@
 <template>
   <v-container>
-    <v-sheet width="300" class="mx-auto" color="#fcecd2">
+    <BarraProgresoAviso
+      v-show="!mostrarFormulario"
+      mensajeBarra="Cargando . . ."
+      :mostrarAlert="alert.mostrarAlert"
+      :colorAlert="alert.color"
+      :iconoAlert="alert.icon"
+      :mensajeAlert="alert.mensaje"
+    />
+    <v-sheet width="300" class="mx-auto">
       <v-form v-show="mostrarFormulario" fast-fail @submit.prevent="autenticarUsuario">
         <v-text-field
         v-model="correo"
@@ -18,14 +26,7 @@
         <v-btn append-icon="mdi-account-edit-outline" color="#f88905" :to="{name:'Enviar correo'}" block class="mt-2">¿Olvido su contraseña?</v-btn>
       </v-form>
     </v-sheet>
-    <BarraProgresoAviso
-      v-show="!mostrarFormulario"
-      mensajeBarra="Cargando . . ."
-      :mostrarAlert="alert.mostrarAlert"
-      :colorAlert="alert.color"
-      :iconoAlert="alert.icon"
-      :mensajeAlert="alert.mensaje"
-    />
+
 
   </v-container>
 </template>

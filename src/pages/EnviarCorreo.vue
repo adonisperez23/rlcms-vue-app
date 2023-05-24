@@ -1,23 +1,22 @@
 <template>
   <v-container>
-    <v-sheet width="300" class="mx-auto" color="#fcecd2">
-
-      <v-progress-circular class="ml-16 mb-2 " v-show="!mostrarFormulario" indeterminate :size="117">Cargando...</v-progress-circular>
-      <v-alert
-      v-show="alert.mostrarAlert"
-      :color="alert.color"
-      :icon="alert.icon"
-      :text="alert.mensaje"
-      ></v-alert>
-      <v-form v-show="mostrarFormulario" fast-fail @submit.prevent>
+    <BarraProgresoAviso
+    v-show="!mostrarFormulario"
+    mostrarAlert
+    mensajeBarra="Cargando..."
+    :colorAlert="alert.color"
+    :iconoAlert="alert.icon"
+    :mensajeAlert="alert.mensaje"
+    />
+    <v-sheet v-show="mostrarFormulario" width="300" class="mx-auto">
+      <v-form  fast-fail @submit.prevent>
         <v-text-field
         v-model="correo"
         label="Email"
         :rules="useValidarEmail"
         ></v-text-field>
-        <v-btn :disabled="correo.length < 1 " @click="enviarCorreo" block class="mt-2">Enviar correo</v-btn>
+        <v-btn prepend-icon="mdi-email-fast-outline" color="green" :disabled="correo.length < 1 " @click="enviarCorreo" block class="mt-2">Enviar correo</v-btn>
       </v-form>
-
     </v-sheet>
   </v-container>
 </template>
@@ -29,6 +28,7 @@ import {useSesionUsuario} from "../stores/sesionUsuario"
 import {useValidarEmail} from "../composables/validadores"
 import axios,{AxiosError} from "axios"
 import {Respuesta} from "../types/interfaces"
+import BarraProgresoAviso from "../components/BarraProgresoAviso.vue"
 
 const mostrarFormulario=ref<boolean>(true)
 

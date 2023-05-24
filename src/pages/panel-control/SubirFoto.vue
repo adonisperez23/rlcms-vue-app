@@ -1,28 +1,34 @@
 <template>
   <v-container>
-    <v-row justify="center">
+    <BarraProgresoAviso
+    v-if="alert.mostrarAlert"
+    mostrarAlert
+    mensajeBarra="Cargando..."
+    :colorAlert="alert.color"
+    :iconoAlert="alert.icon"
+    :mensajeAlert="alert.mensaje"
+    />
+    <v-row v-else justify="center">
       <v-col cols="4">
-        <v-progress-circular class="ml-16 mb-2 " v-show="alert.mostrarAlert" indeterminate :size="117">Cargando...</v-progress-circular>
-        <v-alert
-        v-show="alert.mostrarAlert"
-        :color="alert.color"
-        :icon="alert.icon"
-        :text="alert.mensaje"
-        ></v-alert>
-        <div v-show="mostrarFormulario" class="text-h5">
+        <div v-show="mostrarFormulario" class="text-center">
           Cargar Imagen adjunta
           <v-text-field readonly label="Nombre del producto" v-model="route.query.nombreProducto"></v-text-field>
           <v-file-input v-model="imagen" label="Cargar Imagen"></v-file-input>
-          <v-btn :disabled=" typeof imagen === 'undefined'" @click="subirFoto">Subir foto</v-btn>
+          <v-btn prepend-icon="mdi-upload" color="green" :disabled=" typeof imagen === 'undefined'" @click="subirFoto">Subir foto</v-btn>
         </div>
-        <div v-show="mostrarInfoFoto" class="">
+        <div v-show="mostrarInfoFoto" class="text-center">
           <v-text-field readonly label="Nombre del producto" v-model="route.query.nombreProducto"></v-text-field>
           <v-text-field readonly label="Nombre del archivo imagen" v-model="infoFoto.nombreFoto"></v-text-field>
           <v-text-field readonly label="Ruta del archivo imagen" v-model="infoFoto.direccionUrl"></v-text-field>
-          <v-btn @click="guardarInfoFoto">Guardar informacion de imagen</v-btn>
+          <v-btn prepend-icon="mdi-upload" color="green" @click="guardarInfoFoto">Guardar informacion de imagen</v-btn>
+          <v-btn prepend-icon="mdi-image-album" color="blue" @click="nuevaFoto">Buscar nueva foto</v-btn>
         </div>
       </v-col>
     </v-row>
+    <h3>Nota:</h3>
+    <p>Antes de cargar una imagen, verifique primero que el nombre del archivo solo contenga caracteres.
+     La carga de la imagen no permite emoticones en su nombre.
+   </p>
   </v-container>
 </template>
 
@@ -32,6 +38,7 @@ import {useRoute,useRouter} from 'vue-router'
 import {useEstadoAlerta} from '../../stores/estadoAlerta'
 import {Respuesta,Foto} from '../../types/interfaces'
 import axios,{AxiosError} from 'axios'
+import BarraProgresoAviso from '../../components/BarraProgresoAviso.vue'
 
 const alert = useEstadoAlerta()
 const route = useRoute()
@@ -72,7 +79,7 @@ function subirFoto():void {
     })
 
 }
-function guardarInfoFoto() {
+function guardarInfoFoto():void {
   axios.post(import.meta.env.VITE_API_GUARDAR_INFO_FOTO,infoFoto)
     .then((res:Respuesta)=>{
       console.log('res',res)
@@ -90,6 +97,13 @@ function guardarInfoFoto() {
         mostrarInfoFoto.value = true
       }, 3000);
     })
+}
+
+function nuevaFoto():void {
+  mostrarFormulario.value = true
+  mostrarInfoFoto.value = false
+  infoFoto.nombreFoto = ''
+  infoFoto.direccionUrl = ''
 }
 </script>
 

@@ -27,7 +27,16 @@
        unaAccion
        @activar-aviso="propsAviso.activarAviso=false"
        :mensaje="propsAviso.mensaje"
-      />
+      >
+        <template v-slot:icon>
+          <v-icon
+          color="green"
+          size="100"
+          >
+          mdi-text-box
+         </v-icon>
+        </template>
+      </Aviso>
     </v-col>
 
 </template>

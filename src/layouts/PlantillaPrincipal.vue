@@ -10,27 +10,27 @@
         src="/logo-rest.png"
         >
         </v-img>
-        <v-btn to="/home" variant="text" color="black">
+        <v-btn prepend-icon="mdi-home" to="/home" variant="text" >
           Home
         </v-btn>
-        <v-btn to="/menu" variant="text" color="black">
+        <v-btn prepend-icon="mdi-menu" to="/menu" variant="text">
           Menu
         </v-btn>
-        <v-btn to="/about-us" variant="text" color="black">
-          quienes somos
-        </v-btn>
-        <v-btn to="/lista-pedidos" v-show="sesion.estadoSesion" variant="text" color="black">
+        <v-btn prepend-icon="mdi-cart-outline" to="/lista-pedidos" v-show="sesion.estadoSesion" variant="text" >
           Pedidos ({{cantidadProductos}})
+        </v-btn>
+        <v-btn prepend-icon="mdi-domain" to="/about-us" variant="text" >
+          quienes somos
         </v-btn>
 
       </template>
 
       <template #append>
-        <v-btn to="/signin" v-show="!sesion.estadoSesion" variant="text" color="black">
+        <v-btn prepend-icon="mdi-account-group" to="/signin" v-show="!sesion.estadoSesion" variant="text" >
           Registrarse
         </v-btn>
-        <v-btn to="/login" v-show="!sesion.estadoSesion" variant="text" color="black">
-          Login
+        <v-btn prepend-icon="mdi-login-variant" to="/login" v-show="!sesion.estadoSesion" variant="text" >
+          Iniciar sesion
         </v-btn>
       </template>
 

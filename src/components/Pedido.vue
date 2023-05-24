@@ -62,20 +62,34 @@
               :dialog="propsAviso.activarAviso">
               <template v-slot:icon>
                 <v-icon
-                color="blue"
-                size="x-large"
-                class="me-2"
+                color="green"
+                size="100"
                 >
                 mdi-playlist-edit
+               </v-icon>
+              </template>
+            </Aviso>
+
+            <Aviso
+              unaAccion
+              @activar-aviso="()=>propsAvisoMaxProductos.activarAviso=false"
+              :mensaje="propsAvisoMaxProductos.mensaje"
+              :dialog="propsAvisoMaxProductos.activarAviso">
+              <template v-slot:icon>
+                <v-icon
+                color="red"
+                size="100"
+                >
+                mdi-cart-remove
                </v-icon>
               </template>
             </Aviso>
           </v-container>
         </v-card-text>
         <v-card-actions>
-          <v-btn color="red"  @click="dialog = false">Atras</v-btn>
-          <v-btn color="blue"  @click="resetearSeleccion">Resetear seleccion</v-btn>
-          <v-btn color="green"  @click="guardarEnListaPedidos(pedido)">Guardar pedido</v-btn>
+          <v-btn prepend-icon="mdi-arrow-left" color="red"  @click="dialog = false">Atras</v-btn>
+          <v-btn prepend-icon="mdi-cart-arrow-down" color="green"  @click="guardarEnListaPedidos(pedido)">Guardar pedido</v-btn>
+          <v-btn v-show="descripcion.length > 0" prepend-icon="mdi-undo" color="blue"  @click="resetearSeleccion">Resetear seleccion</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -107,6 +121,13 @@ const propsAviso:Modal = reactive({
   mensaje:"",
   color:""
 })
+
+const propsAvisoMaxProductos:Modal = reactive({
+  activarAviso: false,
+  mensaje:"",
+  color:""
+})
+
 
 const lista = useSesionUsuario()
 
@@ -161,8 +182,8 @@ const guardarEnListaPedidos = (pedido:Pedido):void =>{
   let totalCantidadProductos:number = cantidadProductos + pedido.cantidad // suma la cantidad de productos en lista mas la cantidad de productos que ha seleccionado el usuario
 
   if(totalCantidadProductos > 10){ // Verifica si la lista tiene menos de 10 productos, si sobrepasa el limite mostrara al usuario que ha cubierto el limite de productos a pedir
-    propsAviso.activarAviso = true
-    propsAviso.mensaje = "Usted supera el limite de 10 productos en su lista de pedidos..."
+    propsAvisoMaxProductos.activarAviso = true
+    propsAvisoMaxProductos.mensaje = "Usted supera el limite de 10 productos en su lista de pedidos..."
   } else {
      let pedidoOriginal:Pedido = {                  //Elimina la reactividad del pedido
        producto:pedido.producto,                    // y se agrega a la lista un pedido independiente de cambios que se hagan

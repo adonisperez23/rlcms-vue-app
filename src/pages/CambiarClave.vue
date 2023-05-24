@@ -1,15 +1,15 @@
 <template>
   <v-container>
-    <v-sheet width="300" class="mx-auto">
-      <v-progress-circular class="ml-16 mb-2 " v-show="!mostrarFormulario" indeterminate :size="117">Cargando...</v-progress-circular>
-      <v-alert
-      v-show="alert.mostrarAlert"
-      :color="alert.color"
-      :icon="alert.icon"
-      :text="alert.mensaje"
-      ></v-alert>
-      <v-form v-show="mostrarFormulario" fast-fail @submit.prevent>
-
+    <BarraProgresoAviso
+    v-show="!mostrarFormulario"
+    mostrarAlert
+    mensajeBarra="Cargando..."
+    :colorAlert="alert.color"
+    :iconoAlert="alert.icon"
+    :mensajeAlert="alert.mensaje"
+    />
+    <v-sheet v-show="mostrarFormulario" width="300" class="mx-auto">
+      <v-form  fast-fail @submit.prevent>
         <v-text-field
         type="password"
         v-model="nuevaClave.passwordUno"
@@ -22,10 +22,8 @@
         :rules="validarClave"
         label="Repita la contraseña"
         ></v-text-field>
-
-        <v-btn :disabled="activarCambiarClave" @click="cambiarClave">Cambiar contraseña</v-btn>
+        <v-btn prepend-icon="mdi-swap-horizontal" color="green" :disabled="activarCambiarClave" @click="cambiarClave">Cambiar contraseña</v-btn>
       </v-form>
-
     </v-sheet>
   </v-container>
 </template>
@@ -38,6 +36,7 @@ import {useSesionUsuario} from "../stores/sesionUsuario"
 import {useValidarClaveUno} from "../composables/validadores"
 import axios,{AxiosError} from "axios"
 import {Respuesta,NuevaClave} from "../types/interfaces"
+import BarraProgresoAviso from "../components/BarraProgresoAviso.vue"
 
 const mostrarFormulario=ref<boolean>(true)
 const route = useRoute()

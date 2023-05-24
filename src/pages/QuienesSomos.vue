@@ -1,7 +1,7 @@
 <template>
   <v-container class="font-poppins">
-    <v-row>
-      <h2>Quienes Somos</h2>
+    <v-row justify="center">
+      <h1>Quienes Somos</h1>
     </v-row>
     <v-row>
       <v-col>
@@ -18,7 +18,7 @@
           </article>
           <v-divider thickness="20"></v-divider>
           <section>
-            <h3 >Fundacion</h3>
+            <h3>Fundacion</h3>
             <article class="">
               Cesar Pérez e Ysvelia Farias con afán de buscar un sustento económico,
               observaron la oportunidad de abrir un negocio de venta de comida por
@@ -99,10 +99,13 @@
 </script>
 
 <style lang="css" scoped>
-h2,h3{
+h1,h3{
   background-color: #f3d595;
   display: inline;
   font-family: Steinfeld-demo;
   text-transform: uppercase;
+}
+section{
+  margin-top: 5px;
 }
 </style>

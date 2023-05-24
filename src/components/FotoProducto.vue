@@ -40,6 +40,15 @@
     :mensaje="propsAviso.mensaje"
     @activar-aviso="propsAviso.activarAviso = false; emit('foto-eliminada')"
   />
+    <template v-slot:icon>
+      <v-icon
+      color="red"
+      size="100"
+      >
+      mdi-file-undo
+     </v-icon>
+    </template>
+  </Aviso>
 </template>
 
 <script setup lang="ts">
