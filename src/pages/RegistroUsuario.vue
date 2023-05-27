@@ -36,7 +36,7 @@
        label="Repita la contraseña"
        ></v-text-field>
 
-       <v-btn append-icon="mdi-draw-pen" :disabled="activarBoton" type="submit" block class="mt-2 mb-2" color="#f88905">Registrarme</v-btn>
+       <v-btn append-icon="mdi-draw-pen" :disabled="activarBoton" type="submit" block class="mt-2 mb-2" color="green">Registrarme</v-btn>
      </v-form>
    </v-sheet>
    <BarraProgresoAviso

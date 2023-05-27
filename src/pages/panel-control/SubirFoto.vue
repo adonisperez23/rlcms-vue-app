@@ -20,8 +20,8 @@
           <v-text-field readonly label="Nombre del producto" v-model="route.query.nombreProducto"></v-text-field>
           <v-text-field readonly label="Nombre del archivo imagen" v-model="infoFoto.nombreFoto"></v-text-field>
           <v-text-field readonly label="Ruta del archivo imagen" v-model="infoFoto.direccionUrl"></v-text-field>
-          <v-btn prepend-icon="mdi-upload" color="green" @click="guardarInfoFoto">Guardar informacion de imagen</v-btn>
-          <v-btn prepend-icon="mdi-image-album" color="blue" @click="nuevaFoto">Buscar nueva foto</v-btn>
+          <v-btn prepend-icon="mdi-upload" color="green" block  @click="guardarInfoFoto">Guardar informacion de imagen</v-btn>
+          <v-btn prepend-icon="mdi-image-album" color="blue" block  @click="nuevaFoto">Buscar nueva foto</v-btn>
         </div>
       </v-col>
     </v-row>

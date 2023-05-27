@@ -7,11 +7,23 @@
       noMostrarAlert
     />
     <v-row v-else>
-      <v-col v-if="listaVacia" cols="12">
-        <h3>No hay fotos agregadas por los momentos...</h3>
+      <v-col align="center" v-if="listaVacia" cols="12">
+        <h1>No hay fotos agregadas por los momentos...</h1>
+        <v-icon
+        color="red"
+        size="100"
+        >
+        mdi-server-image-album
+        </v-icon>
       </v-col>
-      <v-col v-else-if="errorDeCarga" cols="12">
-        <h3>Ha ocurrido un error al cargar fotos desde el servidor!</h3>
+      <v-col align="center" v-else-if="errorDeCarga" cols="12">
+        <h1>¡Ha ocurrido un error al cargar fotos desde servidor!</h1>
+        <v-icon
+        color="red"
+        size="100"
+        >
+        mdi-server-network-off
+        </v-icon>
       </v-col>
       <v-col v-else v-for="foto in listaFotos" :key="foto.id" cols="3">
         <FotoProducto

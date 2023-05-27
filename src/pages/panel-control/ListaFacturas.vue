@@ -6,13 +6,30 @@
       mensaje="Mostrando Lista de facturas ..."
       noMostrarAlert
     />
-    <v-row  v-else>
-      <h1 v-if="listaVacia">
-        No hay facturas generadas por los momentos...
-      </h1>
-      <h1 v-if="errorServidor">
-        Ha ocurrido un error al cargar lista de facturas
-      </h1>
+    <v-row justify="center" v-else>
+      <div v-if="listaVacia" class="text-center">
+        <h1 >
+          No hay facturas generadas por los momentos...
+        </h1>
+        <v-icon
+        color="red"
+        size="100"
+        >
+        mdi-script-text-outline
+        </v-icon>
+      </div>
+      <div v-if="errorServidor" class="text-center">
+        <h1 >
+          ¡Ha ocurrido un error al cargar lista de facturas!
+        </h1>
+        <v-icon
+        color="red"
+        size="100"
+        >
+        mdi-server-network-off
+        </v-icon>
+      </div>
+
       <v-table class="color-fondo" v-else-if="listaFacturas.length > 0">
         <thead>
           <tr>

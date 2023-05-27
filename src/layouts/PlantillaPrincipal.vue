@@ -51,7 +51,7 @@
 import {useRoute } from 'vue-router'
 import {computed} from 'vue'
 import {useSesionUsuario} from '../stores/sesionUsuario'
-import PerfilUsuario from "../components/PerfilUsuario.vue"
+import PerfilUsuario from "./PerfilUsuario.vue"
 
 const route = useRoute()
 

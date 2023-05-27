@@ -115,6 +115,13 @@ const router = createRouter({
           component:()=>import('../pages/panel-control/ListaFotos.vue'),
           meta:{requiereAuthAdmin:true},
           beforeEnter:[esAdminAuthenticado]
+        },
+        {
+          path:'/sesion-whatsapp',
+          name:'Configuracion de sesion de mensajeria de whatsapp',
+          component:()=>import('../pages/panel-control/SesionWhatsapp.vue'),
+          meta:{requiereAuthAdmin:true},
+          beforeEnter:[esAdminAuthenticado]
         }
       ]
     },

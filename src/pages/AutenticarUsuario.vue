@@ -22,8 +22,8 @@
         label="Contraseña"
         ></v-text-field>
 
-        <v-btn append-icon="mdi-button-pointer" :disabled="activarBoton" color="#f88905" type="submit" block class="mt-2">Login</v-btn>
-        <v-btn append-icon="mdi-account-edit-outline" color="#f88905" :to="{name:'Enviar correo'}" block class="mt-2">¿Olvido su contraseña?</v-btn>
+        <v-btn append-icon="mdi-button-pointer" :disabled="activarBoton" color="green" type="submit" block class="mt-2">Login</v-btn>
+        <v-btn append-icon="mdi-account-edit-outline" color="blue" :to="{name:'Enviar correo'}" block class="mt-2">¿Olvido su contraseña?</v-btn>
       </v-form>
     </v-sheet>
 

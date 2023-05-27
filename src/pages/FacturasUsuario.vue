@@ -11,7 +11,7 @@
         Usted todavia no ha generado pedidos por los momentos...
       </h1>
       <h1 v-if="errorServidor">
-        Ha ocurrido un error al cargar lista de facturas
+        ¡Ha ocurrido un error al cargar lista de facturas!
       </h1>
       <v-col v-else cols="8">
             <v-data-table

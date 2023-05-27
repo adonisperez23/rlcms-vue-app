@@ -6,23 +6,42 @@
       mensaje="Mostrando Menu ..."
       noMostrarAlert
     />
-    <v-row justify="start" >
-
-      <h1 v-if="listaVacia">
+    <v-row  v-if="listaVacia" justify="center" >
+      <h1 >
         No hay menu publicado por los momentos...
       </h1>
-      <h1 v-if="errorDeCarga">
+      <v-col align="center" cols="6">
+        <v-icon
+        color="red"
+        size="100"
+        >
+        mdi-server-food-variant-off
+        </v-icon>
+      </v-col>
+    </v-row>
+    <v-row v-if="errorDeCarga" justify="center">
+      <h1 >
         Ha ocurrido un error al cargar lista de menu...
         <br>
-        Posibles problemas con el servidor!
+        ¡Posibles problemas con el servidor!
+        <br>
+        Lo sentimos...
+        <br>
       </h1>
-
-        <InfoMenu
-        v-else
-        v-for="(producto,index) in listaMenuFiltrada"
-        :key="producto.id"
-        v-bind="producto"/>
-
+      <v-col align="center" cols="6">
+        <v-icon
+        color="red"
+        size="100"
+        >
+        mdi-server-network-off
+        </v-icon>
+      </v-col>
+    </v-row>
+    <v-row v-else justify="start">
+      <InfoMenu
+      v-for="(producto,index) in listaMenuFiltrada"
+      :key="producto.id"
+      v-bind="producto"/>
     </v-row>
 
   </v-container>
@@ -54,7 +73,7 @@ function ObtenerMenu():void {
     cargandoLista.value = true
     setTimeout(() => {
       listaMenu.value = res.data
-      listaMenuFiltrada.value = listaMenu.value.filter(producto => producto.categoria === "Almuerzo" || producto.categoria === "Raciones")
+      listaMenuFiltrada.value = listaMenu.value.filter(producto => (producto.categoria === "Almuerzo" || producto.categoria === "Raciones") && producto.disponible === true)
       estaListaVacia(listaMenu.value)
       cargandoLista.value = false
     }, 2000);

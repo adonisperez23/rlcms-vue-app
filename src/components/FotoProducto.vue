@@ -25,13 +25,20 @@
     @accion-no="propsAvisoEliminar.activarAviso = false"
   >
     <template v-slot:imagen>
-      <v-img
-      :width="300"
-      aspect-ratio="16/9"
-      cover
-      :src="srcFoto"
-      ></v-img>
-      {{nombreFoto}}
+      <v-container>
+        <v-row justify="center">
+          <v-col cols="9">
+            <v-img
+            width="350"
+            aspect-ratio="16/9"
+            cover
+            :src="srcFoto"
+            ></v-img>
+          </v-col>
+        </v-row>
+        {{nombreFoto}}
+      </v-container>
+
     </template>
   </Aviso>
   <Aviso
@@ -39,13 +46,13 @@
     :dialog="propsAviso.activarAviso"
     :mensaje="propsAviso.mensaje"
     @activar-aviso="propsAviso.activarAviso = false; emit('foto-eliminada')"
-  />
+  >
     <template v-slot:icon>
       <v-icon
-      color="red"
+      color="green"
       size="100"
       >
-      mdi-file-undo
+      mdi-book-check
      </v-icon>
     </template>
   </Aviso>
@@ -69,7 +76,7 @@ const props = defineProps<{
 
 const propsAvisoEliminar = reactive<Modal>({
   activarAviso:false,
-  mensaje:'Estas seguro que quieres eliminar esta Foto de la galeria?'
+  mensaje:'Estas seguro que quieres eliminar esta foto de la galeria?'
 })
 
 const propsAviso = reactive<Modal>({

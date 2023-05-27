@@ -27,6 +27,7 @@
           <v-list-item to="/lista-productos" prepend-icon="mdi-list-box" title="Lista de productos"></v-list-item>
           <v-list-item to="/lista-Facturas" prepend-icon="mdi-clipboard-list-outline" title="Lista de pedidos"></v-list-item>
           <v-list-item to="/lista-fotos" prepend-icon="mdi-image-multiple" title="Lista de fotos"></v-list-item>
+          <v-list-item to="/sesion-whatsapp" prepend-icon="mdi-message-cog" title="Sesion de whatsapp"></v-list-item>
         </v-list>
       </v-navigation-drawer>
 </template>

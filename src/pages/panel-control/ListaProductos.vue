@@ -8,12 +8,24 @@
     />
     <v-row v-else>
 
-      <v-sheet v-if="listaVacia" rounded :height="250" :width="250">
-        <h3>No hay productos registrados</h3>
-      </v-sheet>
-      <v-sheet v-if="errorServidor" rounded :height="250" :width="250">
-        <h3>Ha ocurrido un error al cargar lista de productos</h3>
-      </v-sheet>
+      <v-col align="center" v-if="listaVacia">
+        <h1>No hay productos registrados</h1>
+        <v-icon
+        color="red"
+        size="100"
+        >
+        mdi-server-food-variant-off
+        </v-icon>
+      </v-col>
+      <v-col align="center" v-if="errorServidor">
+        <h1>¡Ha ocurrido un error al cargar lista de productos!</h1>
+        <v-icon
+        color="red"
+        size="100"
+        >
+        mdi-server-network-off
+        </v-icon>
+      </v-col>
       <v-table class="color-fondo" v-else-if="listaProductos.length > 0">
         <thead>
           <tr>
@@ -59,7 +71,7 @@
         <td>
           <v-chip
           color="red"
-          @click="mostrarAviso(producto.id)"
+          @click="verificarProductoMostrarAviso(producto.id)"
           prepend-icon="mdi-delete-outline">
           Eliminar
         </v-chip>
@@ -78,18 +90,38 @@
 </v-table>
     </v-row>
     <Aviso
-      dosAcciones
+      :unaAccion="estaProductoRelacionado"
+      :dosAcciones="!estaProductoRelacionado"
       :mensaje="propsAvisoEliminar.mensaje"
       :dialog="propsAvisoEliminar.activarAviso"
       @accion-si="eliminarProductoId(propsAvisoEliminar.idInfo)"
       @accion-no="propsAvisoEliminar.activarAviso = false"
-    />
+      @activar-aviso="propsAvisoEliminar.activarAviso = false"
+    >
+      <template v-slot:icon>
+        <v-icon
+        color="red"
+        size="100"
+        >
+        mdi-alert-remove
+       </v-icon>
+      </template>
+    </Aviso>
     <Aviso
       unaAccion
       :mensaje="propsAviso.mensaje"
       :dialog="propsAviso.activarAviso"
       @activar-aviso="propsAviso.activarAviso = false"
-    />
+    >
+      <template v-slot:icon>
+        <v-icon
+        color="green"
+        size="100"
+        >
+        mdi-check-circle
+       </v-icon>
+      </template>
+    </Aviso>
   </v-container>
 </template>
 
@@ -105,6 +137,7 @@ const errorServidor = ref<boolean>(false)
 const cantidadProductos = listaProductos.length
 const cargandoLista =ref<boolean>(false)
 const listaVacia = ref<boolean>(false)
+const estaProductoRelacionado = ref<boolean>(false)
 
 
 obtenerProductos()
@@ -125,12 +158,6 @@ const propsAviso:Modal = reactive({
 
 
 
-function mostrarAviso(idInfo:true):void {
-  propsAvisoEliminar.activarAviso = true
-  propsAvisoEliminar.idInfo = idInfo
-  propsAvisoEliminar.mensaje = 'Estas seguro que quieres eliminar este producto?'
-}
-
 function obtenerProductos():void {
   axios.get(import.meta.env.VITE_API_LISTA_DE_PRODUCTOS)
   .then((res:Respuesta)=>{
@@ -148,6 +175,7 @@ function obtenerProductos():void {
   })
 }
 
+
 function eliminarProductoId(idProducto:number):void {
   axios.delete(import.meta.env.VITE_API_ELIMINAR_PRODUCTO+idProducto)
     .then((res:Respuesta)=>{
@@ -160,6 +188,30 @@ function eliminarProductoId(idProducto:number):void {
       propsAviso.activarAviso = true
       propsAviso.mensaje = err.response.data.error
     })
+}
+
+function verificarProductoMostrarAviso(productoId:number):void {
+  axios.get(import.meta.env.VITE_API_VERIFICAR_PRODUCTO+productoId)
+  .then((res:Respuesta)=>{
+    console.log("Verificando producto..",res)
+    estaProductoRelacionado.value = res.data.mensaje
+
+    if(estaProductoRelacionado.value){
+      console.log("mensaje",estaProductoRelacionado.value)
+      propsAvisoEliminar.mensaje = 'No puede eliminar este producto. Este producto esta asociado con otra informacion del sistema'
+    } else {
+      propsAvisoEliminar.mensaje = '¿Estas seguro que quieres eliminar este producto?'
+    }
+
+    propsAvisoEliminar.activarAviso = true
+    propsAvisoEliminar.idInfo = productoId
+  })
+  .catch((err:AxiosError) => {
+    console.log("Error al verificar producto", err)
+  })
+
+
+
 }
 
 function estaListaVacia(lista:Producto[]) {

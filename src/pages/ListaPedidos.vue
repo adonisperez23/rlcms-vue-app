@@ -14,11 +14,17 @@
       :colorAlert="alert.color"
       :iconoAlert="alert.icon"
     />
-    <v-row v-if="mostrarLista && !alert.mostrarAlert" justify="end">
-      <v-col v-if="lista.listaPedidos.length === 0">
-        <h3>
-          No hay pedidos realizados en la lista!
-        </h3>
+    <v-row v-if="mostrarLista && !alert.mostrarAlert" justify="center">
+      <v-col cols="8" align="center" v-if="lista.listaPedidos.length === 0">
+        <h1>
+          ¡No hay pedidos realizados por los momentos!
+        </h1>
+        <v-icon
+        color="red"
+        size="100"
+        >
+        mdi-basket-remove-outline
+        </v-icon>
       </v-col>
       <v-col v-else cols="12">
 
