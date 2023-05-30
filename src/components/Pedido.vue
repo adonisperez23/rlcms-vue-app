@@ -13,7 +13,7 @@
       v-model="dialog"
       width="auto"
     >
-      <v-card width="600">
+      <v-card :width="widthDisplay">
         <v-card-title>{{menuOpcion}} {{precio}}$</v-card-title>
         <v-card-subtitle>Contornos disponibles a elegir: <strong>{{contornosDisponibles}}</strong></v-card-subtitle>
         <v-card-text class="py-0">
@@ -25,7 +25,7 @@
                 :items="[1,2,3,4,5,6,7,8,9,10]"
                 v-model="pedido.cantidad"
                 density="compact"
-                class="w-25"
+                class="w-50"
                 ></v-select>
               </v-col>
               <v-col>
@@ -35,7 +35,7 @@
             </v-row>
             <v-divider></v-divider>
             <v-row>
-              <v-col v-for="(contorno, index) in contornos" :key="index" cols="4">
+              <v-col v-for="(contorno, index) in contornos" :key="index" :cols="colsContornos">
                 <v-switch
                 v-model="descripcion"
                 :label="contorno"
@@ -97,7 +97,7 @@
 </template>
 
 <script setup lang="ts">
-import {ref,reactive, computed, inject, toRaw} from "vue"
+import {ref,reactive, computed, inject} from "vue"
 import {useSesionUsuario} from '../stores/sesionUsuario'
 import {Pedido,Modal} from '../types/interfaces.ts'
 import Aviso from "./Aviso.vue"
@@ -151,6 +151,24 @@ const desactivar = computed<boolean>(()=>{
     return false
   }
 })
+
+
+const isMobile = inject("isMobile")
+const widthDisplay = computed<string>(()=>{  //controla el ancho del component card dependiendo del dispositivo
+  if(isMobile.value){
+    return "450"
+  } else{
+    return "600"
+  }
+})
+const colsContornos = computed<number>(()=>{ //establece las columnas del componente switch de loss contornos dependiendo del dispositivo
+  if(isMobile.value){
+    return 6
+  } else{
+    return 4
+  }
+})
+
 
 const descripcion = ref<string[]>([]) // aqui se guardan los contornos que el cliente selecciona
 

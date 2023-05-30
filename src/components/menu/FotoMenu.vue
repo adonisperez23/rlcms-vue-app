@@ -20,7 +20,7 @@
     height="200"
     aspect-ratio="16/9"
     cover
-    :src="foto.direccionUrl"
+    :src="listaFotosFiltradas[0].direccionUrl"
     ></v-img>
   </div>
   <v-img

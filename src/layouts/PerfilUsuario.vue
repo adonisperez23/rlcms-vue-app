@@ -7,6 +7,7 @@
       >
         <template v-slot:prepend>
           <v-list-item
+             prepend-icon="mdi-account"
             lines="two"
             :title="sesion.informacionUsuario.nombre"
             :subtitle="sesion.informacionUsuario.email"
@@ -17,7 +18,7 @@
 
         <v-list density="compact" nav>
           <v-list-item to="/mispedidos" prepend-icon="mdi-format-list-checkbox" title="Mis Pedidos"></v-list-item>
-          <v-list-item to="/informacion-usuario" prepend-icon="mdi-account" title="Mi cuenta" value="account"></v-list-item>
+          <v-list-item to="/informacion-usuario" prepend-icon="mdi-account-cog" title="Mi cuenta" value="account"></v-list-item>
           <v-list-item @click="salir" prepend-icon="mdi-account-arrow-down" title="Salir" value="Salir"></v-list-item>
         </v-list>
         <v-divider></v-divider>

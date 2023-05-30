@@ -5,41 +5,100 @@
    <v-app-bar color="#f9cf57">
       <template v-slot:prepend>
         <v-img
+        v-if="!isMobile"
         width="80"
         height="80"
         src="/logo-rest.png"
         >
         </v-img>
-        <v-btn prepend-icon="mdi-home" to="/home" variant="text" >
-          Home
-        </v-btn>
-        <v-btn prepend-icon="mdi-menu" to="/menu" variant="text">
-          Menu
-        </v-btn>
-        <v-btn prepend-icon="mdi-cart-outline" to="/lista-pedidos" v-show="sesion.estadoSesion" variant="text" >
-          Pedidos ({{cantidadProductos}})
-        </v-btn>
-        <v-btn prepend-icon="mdi-domain" to="/about-us" variant="text" >
-          quienes somos
-        </v-btn>
+        <v-app-bar-nav-icon icon="mdi-menu" v-if="isMobile" variant="text" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+        <div v-if="!isMobile">
+          <v-btn prepend-icon="mdi-home" to="/home" variant="text" >
+            Home
+          </v-btn>
+          <v-btn prepend-icon="mdi-menu" to="/menu" variant="text">
+            Menu
+          </v-btn>
+          <v-btn prepend-icon="mdi-cart-outline" to="/lista-pedidos" v-show="sesion.estadoSesion" variant="text" >
+            Pedidos ({{cantidadProductos}})
+          </v-btn>
+          <v-btn prepend-icon="mdi-domain" to="/about-us" variant="text" >
+            quienes somos
+          </v-btn>
+        </div>
 
+      </template>
+      <template v-if="isMobile" #title>
+        <div class="ml-16 pl-16">
+          <v-img
+          width="80"
+          height="80"
+          src="/logo-rest.png"
+          >
+        </v-img>
+        </div>
       </template>
 
       <template #append>
-        <v-btn prepend-icon="mdi-account-group" to="/signin" v-show="!sesion.estadoSesion" variant="text" >
-          Registrarse
-        </v-btn>
-        <v-btn prepend-icon="mdi-login-variant" to="/login" v-show="!sesion.estadoSesion" variant="text" >
-          Iniciar sesion
-        </v-btn>
+        <v-app-bar-nav-icon v-if="isMobile" icon="mdi-account-multiple-outline" variant="text" @click.stop="drawerSesion = !drawerSesion"></v-app-bar-nav-icon>
+        <div v-if="!isMobile">
+          <v-btn prepend-icon="mdi-account-group" to="/signin" v-show="!sesion.estadoSesion" variant="text" >
+            Registrarse
+          </v-btn>
+          <v-btn prepend-icon="mdi-login-variant" to="/login" v-show="!sesion.estadoSesion" variant="text" >
+            Iniciar sesion
+          </v-btn>
+        </div>
       </template>
 
    </v-app-bar>
+   <v-navigation-drawer
+        v-model="drawer"
+        location="top"
+        temporary
+      >
+    <v-list class="text-center" density="compact">
+      <v-list-item  to="/home" prepend-icon="mdi-home" title="Home"></v-list-item>
+      <v-list-item  to="/menu" prepend-icon="mdi-list-box" title="Menu"></v-list-item>
+      <v-list-item  v-if="sesion.estadoSesion" to="/lista-pedidos" prepend-icon="mdi-cart-outline" title="Lista de pedidos">({{cantidadProductos}})</v-list-item>
+      <v-list-item  to="/about-us" prepend-icon="mdi-domain" title="Quienes somos"></v-list-item>
+    </v-list>
+    </v-navigation-drawer>
 
+   <v-navigation-drawer
+        v-model="drawerSesion"
+        location="top"
+        temporary
+      >
+      <v-list class="text-center" v-if="!sesion.estadoSesion" density="compact">
+        <v-list-item to="/signin" prepend-icon="mdi-account-group" title="Registrarse"></v-list-item>
+        <v-list-item to="/login" prepend-icon="mdi--login-variant" title="Iniciar sesion"></v-list-item>
+      </v-list>
+      <v-list-item
+        prepend-icon="mdi-account"
+        class="text-center"
+        v-if="sesion.estadoSesion"
+        lines="two"
+        :title="sesion.informacionUsuario.nombre"
+        :subtitle="sesion.informacionUsuario.email"
+      ></v-list-item>
+      <v-divider></v-divider>
+      <v-list  class="text-center" v-if="sesion.estadoSesion" density="compact" nav>
+        <v-list-item to="/mispedidos" prepend-icon="mdi-format-list-checkbox" title="Mis Pedidos"></v-list-item>
+        <v-list-item to="/informacion-usuario" prepend-icon="mdi-account-cog" title="Mi cuenta" value="account"></v-list-item>
+        <v-list-item @click="salir" prepend-icon="mdi-account-arrow-down" title="Salir" value="Salir"></v-list-item>
+      </v-list>
+      <v-divider></v-divider>
+      <v-list class="text-center" v-if="sesion.informacionUsuario.esAdmin" density="compact" nav>
+        <h3 class="ml-9">Administrador</h3>
+        <v-list-item to="/operaciones-productos" prepend-icon="mdi-food-fork-drink" title="Crear productos"></v-list-item>
+        <v-list-item to="/lista-productos" prepend-icon="mdi-list-box" title="Lista de productos"></v-list-item>
+        <v-list-item to="/lista-Facturas" prepend-icon="mdi-clipboard-list-outline" title="Lista de pedidos"></v-list-item>
+        <v-list-item to="/lista-fotos" prepend-icon="mdi-image-multiple" title="Lista de fotos"></v-list-item>
+        <v-list-item to="/sesion-whatsapp" prepend-icon="mdi-message-cog" title="Sesion de whatsapp"></v-list-item>
+      </v-list>
+    </v-navigation-drawer>
    <v-main>
-     <!-- <h1 class="fondo">
-       {{tituloPagina}}
-     </h1> -->
      <router-view></router-view>
    </v-main>
 
@@ -49,17 +108,17 @@
 
 <script setup lang="ts">
 import {useRoute } from 'vue-router'
-import {computed} from 'vue'
+import {computed,ref, inject} from 'vue'
 import {useSesionUsuario} from '../stores/sesionUsuario'
 import PerfilUsuario from "./PerfilUsuario.vue"
 
 const route = useRoute()
 
-const sesion = useSesionUsuario()
+const isMobile = inject("isMobile")
+const drawer = ref<boolean>(false)
+const drawerSesion = ref<boolean>(false)
 
-const tituloPagina = computed(()=>{
-  return route.name
-})
+const sesion = useSesionUsuario()
 
 const cantidadProductos = computed<number>(()=>{
   let totalProductos:number = 0

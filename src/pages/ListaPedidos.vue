@@ -14,7 +14,7 @@
       :colorAlert="alert.color"
       :iconoAlert="alert.icon"
     />
-    <v-row v-if="mostrarLista && !alert.mostrarAlert" justify="center">
+    <v-row v-if="mostrarLista && !alert.mostrarAlert" justify="end">
       <v-col cols="8" align="center" v-if="lista.listaPedidos.length === 0">
         <h1>
           ¡No hay pedidos realizados por los momentos!
@@ -71,8 +71,8 @@
 
       </v-col>
 
-      <v-col v-if="lista.listaPedidos.length > 0" cols="4">
-        <v-card color="yellow-lighten-4" title="Monto Total:">
+      <v-col v-if="lista.listaPedidos.length > 0" :cols="colsMonto">
+        <v-card width="200" color="yellow-lighten-4" title="Monto Total:">
           <v-card-text class="text-h4">
             $ {{montoTotal}}
           </v-card-text>
@@ -90,7 +90,7 @@
 </template>
 
 <script setup lang="ts">
-import {onMounted,computed,ref} from 'vue'
+import {onMounted,computed,ref,inject} from 'vue'
 import axios, {AxiosError} from 'axios'
 import {Respuesta} from '../types/interfaces'
 import {useSesionUsuario} from "../stores/sesionUsuario"
@@ -101,6 +101,15 @@ const lista = useSesionUsuario()
 const alert = useEstadoAlerta()
 
 const mostrarLista = ref<boolean>(false)
+
+const isMobile = inject('isMobile')
+const colsMonto = computed<number>(()=>{
+  if(isMobile.value){
+    return 6
+  } else {
+    return 4
+  }
+})
 
 onMounted(()=>{
   console.log(lista.listaPedidos)

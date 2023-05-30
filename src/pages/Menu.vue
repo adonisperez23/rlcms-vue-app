@@ -67,6 +67,7 @@ ObtenerMenu()
 
 provide('listaProductos', listaMenu) // provee a todos los componentes hijos de la lista de productos luego de realizar la llamada a la api
 
+
 function ObtenerMenu():void {
   axios.get(import.meta.env.VITE_API_LISTA_DE_PRODUCTOS)
   .then((res:Respuesta)=>{

@@ -64,8 +64,6 @@ export const useSesionUsuario = defineStore('lista-pedidos', () => {
 
 
 
-
-
   return {
     listaPedidos,
     eliminarPedido,

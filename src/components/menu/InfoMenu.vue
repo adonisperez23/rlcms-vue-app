@@ -1,15 +1,16 @@
 <template>
-    <v-col cols="3">
+    <v-col :cols="deviceDisplay">
         <v-card
           color="#f3d595"
           >
           <v-card-text class="pb-0 px-1 pt-1">
             <FotoMenu :nombreProducto="nombreProducto"/>
             <h2>{{nombreProducto}}</h2>
-            <h3>
-              Precio {{precio}} $
+            <h3 class="money">
+              Precio: {{precio}} $
             </h3>
           </v-card-text>
+          <v-divider></v-divider>
           <v-card-actions >
             <div class="d-flex flex-column">
               <v-btn class="mb-1" variant="flat" color="yellow-darken-2" prepend-icon="mdi-form-select" @click="propsAviso.activarAviso=true">Detalles del plato</v-btn>
@@ -42,12 +43,22 @@
 </template>
 
 <script setup lang="ts">
-import {reactive} from "vue"
+import {reactive,inject,computed,ref} from "vue"
 import FotoMenu from "./FotoMenu.vue"
 import Pedido from "../Pedido.vue"
 import {useSesionUsuario} from "../../stores/sesionUsuario"
 import Aviso from "../Aviso.vue"
 import {Modal} from "../../types/interfaces"
+
+const cols = ref<string[]>(["3","6"])
+const isMobile:boolean = inject('isMobile')
+const deviceDisplay = computed<string>(()=>{
+  if(isMobile.value){
+    return cols.value[1]
+  } else {
+    return cols.value[0]
+  }
+})
 
 const props = defineProps<{
 
@@ -72,5 +83,8 @@ const sesion = useSesionUsuario()
 <style scoped>
 h2,p{
   font-family: poppins-bold;
+}
+.money{
+  color: green;
 }
 </style>
