@@ -31,6 +31,7 @@ import {ref} from 'vue'
 
 const errorAlCargarImagen = ref<boolean>(false)
 
+
 </script>
 
 <style scoped>

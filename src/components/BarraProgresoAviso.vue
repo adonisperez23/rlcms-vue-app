@@ -4,7 +4,7 @@
       <v-progress-circular color="green" indeterminate :size="128">{{mensajeBarra}}</v-progress-circular>
       <v-alert
       v-if="!noMostrarAlert"
-      class="text-left"
+      class="text-center"
       v-show="mostrarAlert"
       :color="colorAlert"
       :icon="iconoAlert"

@@ -72,7 +72,7 @@
       >
       <v-list class="text-center" v-if="!sesion.estadoSesion" density="compact">
         <v-list-item to="/signin" prepend-icon="mdi-account-group" title="Registrarse"></v-list-item>
-        <v-list-item to="/login" prepend-icon="mdi--login-variant" title="Iniciar sesion"></v-list-item>
+        <v-list-item to="/login" prepend-icon="mdi-login-variant" title="Iniciar sesion"></v-list-item>
       </v-list>
       <v-list-item
         prepend-icon="mdi-account"
@@ -107,12 +107,13 @@
 </template>
 
 <script setup lang="ts">
-import {useRoute } from 'vue-router'
+import {useRoute,useRouter } from 'vue-router'
 import {computed,ref, inject} from 'vue'
 import {useSesionUsuario} from '../stores/sesionUsuario'
 import PerfilUsuario from "./PerfilUsuario.vue"
 
 const route = useRoute()
+const router = useRouter()
 
 const isMobile = inject("isMobile")
 const drawer = ref<boolean>(false)
@@ -129,6 +130,13 @@ const cantidadProductos = computed<number>(()=>{
 
   return totalProductos
 })
+
+const salir = ()=>{
+  drawerSesion.value = false
+  sesion.resetSesion()
+  router.push('/menu')
+  localStorage.clear()
+}
 
 
 </script>

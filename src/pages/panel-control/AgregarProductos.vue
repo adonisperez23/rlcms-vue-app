@@ -90,6 +90,13 @@ value => {
   if(value >=0) return true
 
   return "Valor del producto no puede ser negativo"
+},
+value => {
+  let decimal = (value + "").split(".")[1];
+  console.log(decimal.length); // Output: 4
+  if(decimal.length <=2) return true
+
+  return "Valor del producto no puede tener mas de dos decimales"
 }]
 
 const validateProducto = [ value => {

@@ -14,16 +14,16 @@
       :colorAlert="alert.color"
       :iconoAlert="alert.icon"
     />
-    <v-row v-if="mostrarLista && !alert.mostrarAlert" justify="end">
+    <v-row v-if="mostrarLista && !alert.mostrarAlert" justify="center">
       <v-col cols="8" align="center" v-if="lista.listaPedidos.length === 0">
         <h1>
           ¡No hay pedidos realizados por los momentos!
         </h1>
         <v-icon
         color="red"
-        size="100"
+        size="200"
         >
-        mdi-basket-remove-outline
+        mdi-cart-off
         </v-icon>
       </v-col>
       <v-col v-else cols="12">
@@ -71,19 +71,20 @@
 
       </v-col>
 
-      <v-col v-if="lista.listaPedidos.length > 0" :cols="colsMonto">
-        <v-card width="200" color="yellow-lighten-4" title="Monto Total:">
-          <v-card-text class="text-h4">
-            $ {{montoTotal}}
-          </v-card-text>
-          <v-card-actions>
-            <v-btn append-icon="mdi-send-circle-outline" variant="outlined" @click="enviarPedido" rounded="pill" color="blue">
-              Enviar Pedido
-            </v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-col>
-
+      <v-row  v-if="lista.listaPedidos.length > 0" justify="end">
+        <v-col  :cols="colsMonto">
+          <v-card width="200" color="yellow-lighten-4" title="Monto Total:">
+            <v-card-text class="text-h4">
+              $ {{montoTotal}}
+            </v-card-text>
+            <v-card-actions>
+              <v-btn append-icon="mdi-send-circle-outline" variant="outlined" @click="enviarPedido" rounded="pill" color="blue">
+                Enviar Pedido
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-col>
+      </v-row>
     </v-row>
 
   </v-container>

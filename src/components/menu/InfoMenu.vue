@@ -50,13 +50,12 @@ import {useSesionUsuario} from "../../stores/sesionUsuario"
 import Aviso from "../Aviso.vue"
 import {Modal} from "../../types/interfaces"
 
-const cols = ref<string[]>(["3","6"])
 const isMobile:boolean = inject('isMobile')
-const deviceDisplay = computed<string>(()=>{
+const deviceDisplay = computed<number>(()=>{
   if(isMobile.value){
-    return cols.value[1]
+    return 6
   } else {
-    return cols.value[0]
+    return 3
   }
 })
 

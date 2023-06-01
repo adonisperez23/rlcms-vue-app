@@ -24,11 +24,11 @@
           <v-btn prepend-icon="mdi-image-album" color="blue" block  @click="nuevaFoto">Buscar nueva foto</v-btn>
         </div>
       </v-col>
+      <h3>Nota:</h3>
+      <p>Antes de cargar una imagen, verifique primero que el nombre del archivo solo contenga caracteres.
+        La carga de la imagen no permite emoticones en su nombre.
+      </p>
     </v-row>
-    <h3>Nota:</h3>
-    <p>Antes de cargar una imagen, verifique primero que el nombre del archivo solo contenga caracteres.
-     La carga de la imagen no permite emoticones en su nombre.
-   </p>
   </v-container>
 </template>
 
