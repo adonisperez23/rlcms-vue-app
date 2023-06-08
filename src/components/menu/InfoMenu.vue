@@ -2,6 +2,8 @@
     <v-col :cols="deviceDisplay">
         <v-card
           color="#f3d595"
+          height="325"
+          max-height="350"
           >
           <v-card-text class="pb-0 px-1 pt-1">
             <FotoMenu :nombreProducto="nombreProducto"/>
@@ -13,7 +15,7 @@
           <v-divider></v-divider>
           <v-card-actions >
             <div class="d-flex flex-column">
-              <v-btn class="mb-1" variant="flat" color="yellow-darken-2" prepend-icon="mdi-form-select" @click="propsAviso.activarAviso=true">Detalles del plato</v-btn>
+              <v-btn class="mb-1" size="x-small" variant="flat" color="yellow-darken-2" prepend-icon="mdi-form-select" @click="propsAviso.activarAviso=true">Detalles del plato</v-btn>
               <div v-show="sesion.estadoSesion">
                 <Pedido
                 :idProducto="id"

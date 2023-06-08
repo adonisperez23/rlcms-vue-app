@@ -6,7 +6,7 @@
         <p><strong>Direccion:</strong><br>
           Avenida orinoco, en frente de Agencias Unidas de Automoviles C.A
         </p>
-        <v-btn variant="tonal" color="#f88905" href="https://www.google.com/maps/place/Rest.+Los+Cinco+Sabores,+C.A/@9.7380618,-63.1977622,16.67z/data=!4m6!3m5!1s0x8c334756c1aceb53:0x8658c5187bac443e!8m2!3d9.7376674!4d-63.198623!16s%2Fg%2F11c2r43k51?authuser=0">
+        <v-btn variant="tonal" color="#f88905" @click="abrirGoogleMaps">
           ir a google maps
         </v-btn>
       </v-col>
@@ -16,7 +16,9 @@
 </template>
 
 <script setup lang="ts">
-
+function abrirGoogleMaps() {
+  window.open("https://www.google.com/maps/place/Rest.+Los+Cinco+Sabores,+C.A/@9.7380618,-63.1977622,16.67z/data=!4m6!3m5!1s0x8c334756c1aceb53:0x8658c5187bac443e!8m2!3d9.7376674!4d-63.198623!16s%2Fg%2F11c2r43k51?authuser=0")
+}
 </script>
 
 <style lang="css" scoped>

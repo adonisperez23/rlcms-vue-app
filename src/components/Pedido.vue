@@ -1,6 +1,7 @@
 <template>
   <div class="text-left">
     <v-btn
+     size="x-small"
      variant="flat"
      color="green-accent-3"
      prepend-icon="mdi-pencil-plus"
@@ -87,9 +88,9 @@
           </v-container>
         </v-card-text>
         <v-card-actions>
-          <v-btn prepend-icon="mdi-arrow-left" color="red"  @click="dialog = false">Atras</v-btn>
-          <v-btn prepend-icon="mdi-cart-arrow-down" color="green"  @click="guardarEnListaPedidos(pedido)">Guardar pedido</v-btn>
-          <v-btn v-show="descripcion.length > 0" prepend-icon="mdi-undo" color="blue"  @click="resetearSeleccion">Resetear seleccion</v-btn>
+          <v-btn size="x-small" prepend-icon="mdi-arrow-left" color="red"  @click="dialog = false">Atras</v-btn>
+          <v-btn size="x-small" prepend-icon="mdi-cart-arrow-down" color="green"  @click="guardarEnListaPedidos(pedido)">Guardar pedido</v-btn>
+          <v-btn size="x-small" v-show="descripcion.length > 0" prepend-icon="mdi-undo" color="blue"  @click="resetearSeleccion">Resetear</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -156,7 +157,7 @@ const desactivar = computed<boolean>(()=>{
 const isMobile = inject("isMobile")
 const widthDisplay = computed<string>(()=>{  //controla el ancho del component card dependiendo del dispositivo
   if(isMobile.value){
-    return "450"
+    return "350"
   } else{
     return "600"
   }

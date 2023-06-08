@@ -11,7 +11,21 @@
         src="/logo-rest.png"
         >
         </v-img>
-        <v-app-bar-nav-icon icon="mdi-menu" v-if="isMobile" variant="text" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+        <v-menu
+             v-if="isMobile"
+             location="bottom"
+           >
+           <template v-slot:activator="{props}" >
+             <v-btn v-bind="props" icon="mdi-menu" variant="text" >
+             </v-btn>
+           </template>
+         <v-list class="text-start" density="compact">
+           <v-list-item  to="/home" prepend-icon="mdi-home" title="Home"></v-list-item>
+           <v-list-item  to="/menu" prepend-icon="mdi-list-box" title="Menu"></v-list-item>
+           <v-list-item  v-if="sesion.estadoSesion" to="/lista-pedidos" prepend-icon="mdi-cart-outline" title="Lista de pedidos">({{cantidadProductos}})</v-list-item>
+           <v-list-item  to="/about-us" prepend-icon="mdi-domain" title="Quienes somos"></v-list-item>
+         </v-list>
+       </v-menu>
         <div v-if="!isMobile">
           <v-btn prepend-icon="mdi-home" to="/home" variant="text" >
             Home
@@ -28,8 +42,8 @@
         </div>
 
       </template>
-      <template v-if="isMobile" #title>
-        <div class="ml-16 pl-16">
+      <template v-if="isMobile">
+        <div class="">
           <v-img
           width="80"
           height="80"
@@ -40,7 +54,45 @@
       </template>
 
       <template #append>
-        <v-app-bar-nav-icon v-if="isMobile" icon="mdi-account-multiple-outline" variant="text" @click.stop="drawerSesion = !drawerSesion"></v-app-bar-nav-icon>
+        <v-menu
+             v-if="isMobile || width <= 1280"
+             location="bottom"
+             temporary
+           >
+           <template v-slot:activator="{props}" >
+             <v-btn v-bind="props" icon="mdi-account-multiple-outline" variant="text" >
+             </v-btn>
+           </template>
+           <v-card class="mx-auto" width="250">
+             <v-list class="text-start" v-if="!sesion.estadoSesion" density="compact">
+               <v-list-item to="/signin" prepend-icon="mdi-account-group" title="Registrarse"></v-list-item>
+               <v-list-item to="/login" prepend-icon="mdi-login-variant" title="Iniciar sesion"></v-list-item>
+             </v-list>
+             <v-list-item
+             prepend-icon="mdi-account"
+             class="text-start"
+             v-if="sesion.estadoSesion"
+             lines="two"
+             :title="sesion.informacionUsuario.nombre"
+             :subtitle="sesion.informacionUsuario.email"
+             ></v-list-item>
+             <v-divider></v-divider>
+             <v-list  class="text-start" v-if="sesion.estadoSesion" density="compact" nav>
+               <v-list-item to="/mispedidos" prepend-icon="mdi-format-list-checkbox" title="Mis Pedidos"></v-list-item>
+               <v-list-item to="/informacion-usuario" prepend-icon="mdi-account-cog" title="Mi cuenta" value="account"></v-list-item>
+               <v-list-item @click="salir" prepend-icon="mdi-account-arrow-down" title="Salir" value="Salir"></v-list-item>
+             </v-list>
+             <v-divider></v-divider>
+             <v-list class="text-start" v-if="sesion.informacionUsuario.esAdmin" density="compact" nav>
+               <h3 class="ml-9">Administrador</h3>
+               <v-list-item to="/operaciones-productos" prepend-icon="mdi-food-fork-drink" title="Crear productos"></v-list-item>
+               <v-list-item to="/lista-productos" prepend-icon="mdi-list-box" title="Lista de productos"></v-list-item>
+               <v-list-item to="/lista-Facturas" prepend-icon="mdi-clipboard-list-outline" title="Lista de pedidos"></v-list-item>
+               <v-list-item to="/lista-fotos" prepend-icon="mdi-image-multiple" title="Lista de fotos"></v-list-item>
+               <!-- <v-list-item to="/sesion-whatsapp" prepend-icon="mdi-message-cog" title="Sesion de whatsapp"></v-list-item> -->
+             </v-list>
+           </v-card>
+       </v-menu>
         <div v-if="!isMobile">
           <v-btn prepend-icon="mdi-account-group" to="/signin" v-show="!sesion.estadoSesion" variant="text" >
             Registrarse
@@ -52,52 +104,7 @@
       </template>
 
    </v-app-bar>
-   <v-navigation-drawer
-        v-model="drawer"
-        location="top"
-        temporary
-      >
-    <v-list class="text-center" density="compact">
-      <v-list-item  to="/home" prepend-icon="mdi-home" title="Home"></v-list-item>
-      <v-list-item  to="/menu" prepend-icon="mdi-list-box" title="Menu"></v-list-item>
-      <v-list-item  v-if="sesion.estadoSesion" to="/lista-pedidos" prepend-icon="mdi-cart-outline" title="Lista de pedidos">({{cantidadProductos}})</v-list-item>
-      <v-list-item  to="/about-us" prepend-icon="mdi-domain" title="Quienes somos"></v-list-item>
-    </v-list>
-    </v-navigation-drawer>
 
-   <v-navigation-drawer
-        v-model="drawerSesion"
-        location="top"
-        temporary
-      >
-      <v-list class="text-center" v-if="!sesion.estadoSesion" density="compact">
-        <v-list-item to="/signin" prepend-icon="mdi-account-group" title="Registrarse"></v-list-item>
-        <v-list-item to="/login" prepend-icon="mdi-login-variant" title="Iniciar sesion"></v-list-item>
-      </v-list>
-      <v-list-item
-        prepend-icon="mdi-account"
-        class="text-center"
-        v-if="sesion.estadoSesion"
-        lines="two"
-        :title="sesion.informacionUsuario.nombre"
-        :subtitle="sesion.informacionUsuario.email"
-      ></v-list-item>
-      <v-divider></v-divider>
-      <v-list  class="text-center" v-if="sesion.estadoSesion" density="compact" nav>
-        <v-list-item to="/mispedidos" prepend-icon="mdi-format-list-checkbox" title="Mis Pedidos"></v-list-item>
-        <v-list-item to="/informacion-usuario" prepend-icon="mdi-account-cog" title="Mi cuenta" value="account"></v-list-item>
-        <v-list-item @click="salir" prepend-icon="mdi-account-arrow-down" title="Salir" value="Salir"></v-list-item>
-      </v-list>
-      <v-divider></v-divider>
-      <v-list class="text-center" v-if="sesion.informacionUsuario.esAdmin" density="compact" nav>
-        <h3 class="ml-9">Administrador</h3>
-        <v-list-item to="/operaciones-productos" prepend-icon="mdi-food-fork-drink" title="Crear productos"></v-list-item>
-        <v-list-item to="/lista-productos" prepend-icon="mdi-list-box" title="Lista de productos"></v-list-item>
-        <v-list-item to="/lista-Facturas" prepend-icon="mdi-clipboard-list-outline" title="Lista de pedidos"></v-list-item>
-        <v-list-item to="/lista-fotos" prepend-icon="mdi-image-multiple" title="Lista de fotos"></v-list-item>
-        <v-list-item to="/sesion-whatsapp" prepend-icon="mdi-message-cog" title="Sesion de whatsapp"></v-list-item>
-      </v-list>
-    </v-navigation-drawer>
    <v-main>
      <router-view></router-view>
    </v-main>
@@ -116,6 +123,7 @@ const route = useRoute()
 const router = useRouter()
 
 const isMobile = inject("isMobile")
+const width = inject("widthWindow")
 const drawer = ref<boolean>(false)
 const drawerSesion = ref<boolean>(false)
 

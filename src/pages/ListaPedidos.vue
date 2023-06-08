@@ -136,12 +136,19 @@ function enviarPedido():void {
     .then((res:Respuesta)=>{
       console.log("pedido",res)
       alert.gestionarRespuesta(res)
+      setTimeout(() => {
+        armarEnlancePedido(res.data.mensajeEncoded)
+      }, 3000);
     })
     .catch((err:AxiosError)=>{
       console.log("error al enviar pedido", err)
       alert.gestionarError(err)
     })
 
+}
+
+function armarEnlancePedido(mensaje:string) {
+  window.open(`https://api.whatsapp.com/send?phone=+584148942782&text=${mensaje}+`)
 }
 
 </script>

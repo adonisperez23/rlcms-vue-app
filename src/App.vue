@@ -11,9 +11,10 @@ import {useSesionUsuario} from './stores/sesionUsuario'
 import {Usuario} from './types/interfaces'
 import { useDisplay } from 'vuetify'
 
-const {mobile} = useDisplay()
+const {xs,width} = useDisplay()
 
-provide('isMobile', mobile)
+provide('isMobile', xs)
+provide('widthWindow', width)
 
 let usuario:Usuario = {
   id:localStorage.getItem('id'),
