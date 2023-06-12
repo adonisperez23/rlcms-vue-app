@@ -9,22 +9,26 @@
     <v-row v-else>
 
       <v-col align="center" v-if="listaVacia">
-        <h1>No hay productos registrados</h1>
-        <v-icon
-        color="red"
-        size="100"
-        >
-        mdi-server-food-variant-off
-        </v-icon>
+        <v-sheet color="#f9cf57" rounded>
+          <h1>No hay productos registrados</h1>
+          <v-icon
+          color="red"
+          size="100"
+          >
+          mdi-server-food-variant-off
+          </v-icon>
+        </v-sheet>
       </v-col>
       <v-col align="center" v-if="errorServidor">
-        <h1>¡Ha ocurrido un error al cargar lista de productos!</h1>
-        <v-icon
-        color="red"
-        size="100"
-        >
-        mdi-server-network-off
-        </v-icon>
+        <v-sheet color="#f9cf57" rounded>
+          <h1>¡Ha ocurrido un error al cargar lista de productos!</h1>
+          <v-icon
+          color="red"
+          size="100"
+          >
+          mdi-server-network-off
+          </v-icon>
+        </v-sheet>
       </v-col>
       <v-table class="color-fondo" v-else-if="listaProductos.length > 0">
         <thead>

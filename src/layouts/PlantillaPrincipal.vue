@@ -55,18 +55,18 @@
 
       <template #append>
         <v-menu
-             v-if="isMobile || width <= 1280"
+             v-if="isMobile || width <= 1280 "
              location="bottom"
              temporary
            >
            <template v-slot:activator="{props}" >
-             <v-btn v-bind="props" icon="mdi-account-multiple-outline" variant="text" >
+             <v-btn :disabled="width > 600 && !sesion.estadoSesion" v-bind="props" icon="mdi-account-multiple-outline" variant="text" >
              </v-btn>
            </template>
            <v-card class="mx-auto" width="250">
              <v-list class="text-start" v-if="!sesion.estadoSesion" density="compact">
-               <v-list-item to="/signin" prepend-icon="mdi-account-group" title="Registrarse"></v-list-item>
-               <v-list-item to="/login" prepend-icon="mdi-login-variant" title="Iniciar sesion"></v-list-item>
+               <v-list-item  to="/signin" prepend-icon="mdi-account-group" title="Registrarse"></v-list-item>
+               <v-list-item  to="/login" prepend-icon="mdi-login-variant" title="Iniciar sesion"></v-list-item>
              </v-list>
              <v-list-item
              prepend-icon="mdi-account"

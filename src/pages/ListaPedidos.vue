@@ -16,15 +16,17 @@
     />
     <v-row v-if="mostrarLista && !alert.mostrarAlert" justify="center">
       <v-col cols="8" align="center" v-if="lista.listaPedidos.length === 0">
-        <h1>
-          ¡No hay pedidos realizados por los momentos!
-        </h1>
-        <v-icon
-        color="red"
-        size="200"
-        >
-        mdi-cart-off
-        </v-icon>
+        <v-sheet color="#f9cf57" rounded>
+          <h1>
+            ¡No hay pedidos realizados por los momentos!
+          </h1>
+          <v-icon
+          color="red"
+          size="200"
+          >
+          mdi-cart-off
+          </v-icon>
+        </v-sheet>
       </v-col>
       <v-col v-else cols="12">
 
@@ -36,10 +38,10 @@
                 Producto
               </th>
               <th class="text-center">
-                Cantidad
+                Precio
               </th>
               <th class="text-center">
-                Precio
+                Cantidad
               </th>
               <th class="text-center">
                 Monto
@@ -53,9 +55,9 @@
             :key="index"
             >
             <td>{{ producto.nombreProducto }} <br> {{producto.descripcion}} </td>
-            <td class="text-center">{{ producto.cantidad }}</td>
             <td class="text-center">$ {{ producto.precio }}</td>
-            <td class="text-center">{{ producto.precio * producto.cantidad}}</td>
+            <td class="text-center">{{ producto.cantidad }}</td>
+            <td class="text-center">$ {{ producto.precio * producto.cantidad}}</td>
             <td class="text-center">
               <v-chip
                 color="red"
@@ -71,17 +73,20 @@
 
       </v-col>
 
-      <v-row  v-if="lista.listaPedidos.length > 0" justify="end">
+      <v-row  v-if="lista.listaPedidos.length > 0" justify="center">
         <v-col  :cols="colsMonto">
           <v-card width="200" color="yellow-lighten-4" title="Monto Total:">
             <v-card-text class="text-h4">
               $ {{montoTotal}}
             </v-card-text>
-            <v-card-actions>
-              <v-btn append-icon="mdi-send-circle-outline" variant="outlined" @click="enviarPedido" rounded="pill" color="blue">
+
+              <v-btn  class="ml-1" size="x-small" append-icon="mdi-send-circle-outline" variant="outlined" @click="enviarPedido" rounded="pill" color="blue">
                 Enviar Pedido
               </v-btn>
-            </v-card-actions>
+              <v-btn  class="ml-1" size="x-small" append-icon="mdi-send-circle-outline" variant="outlined" @click="armarNuevoPedido" rounded="pill" color="green">
+                Armar nuevo pedido
+              </v-btn>
+
           </v-card>
         </v-col>
       </v-row>
@@ -97,9 +102,12 @@ import {Respuesta} from '../types/interfaces'
 import {useSesionUsuario} from "../stores/sesionUsuario"
 import {useEstadoAlerta} from "../stores/estadoAlerta"
 import BarraProgresoAviso from '../components/BarraProgresoAviso.vue'
+import {useRouter} from "vue-router"
 
 const lista = useSesionUsuario()
 const alert = useEstadoAlerta()
+
+const router = useRouter()
 
 const mostrarLista = ref<boolean>(false)
 
@@ -149,6 +157,13 @@ function enviarPedido():void {
 
 function armarEnlancePedido(mensaje:string) {
   window.open(`https://api.whatsapp.com/send?phone=+584148942782&text=${mensaje}+`)
+}
+
+function armarNuevoPedido():void {
+  router.push('/menu')
+  setTimeout(() => {
+    lista.vaciarLista()
+  }, 2000);
 }
 
 </script>

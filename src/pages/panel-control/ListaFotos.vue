@@ -8,24 +8,28 @@
     />
     <v-row v-else>
       <v-col align="center" v-if="listaVacia" cols="12">
-        <h1>No hay fotos agregadas por los momentos...</h1>
-        <v-icon
-        color="red"
-        size="100"
-        >
-        mdi-server-image-album
-        </v-icon>
+        <v-sheet color="#f9cf57" rounded>
+          <h1>No hay fotos agregadas por los momentos...</h1>
+          <v-icon
+          color="red"
+          size="100"
+          >
+          mdi-server-image-album
+         </v-icon>
+        </v-sheet>
       </v-col>
       <v-col align="center" v-else-if="errorDeCarga" cols="12">
-        <h1>¡Ha ocurrido un error al cargar fotos desde servidor!</h1>
-        <v-icon
-        color="red"
-        size="100"
-        >
-        mdi-server-network-off
+        <v-sheet color="#f9cf57" rounded>
+          <h1>¡Ha ocurrido un error al cargar fotos desde servidor!</h1>
+          <v-icon
+          color="red"
+          size="100"
+          >
+          mdi-server-network-off
         </v-icon>
+        </v-sheet>
       </v-col>
-      <v-col v-else v-for="foto in listaFotos" :key="foto.id" cols="3">
+      <v-col v-else v-for="foto in listaFotos" :key="foto.id" :cols="colsFoto">
         <FotoProducto
         :idFoto="foto.id"
         :srcFoto="foto.direccionUrl"
@@ -40,15 +44,24 @@
 
 <script setup lang="ts">
 import FotoProducto from '../../components/FotoProducto.vue'
-import {ref} from 'vue'
+import {ref,inject,computed} from 'vue'
 import axios,{AxiosError} from 'axios'
 import {Respesta,Foto} from '../../types/interfaces'
 import BarraProgresoAviso from '../../components/BarraProgresoAviso.vue'
 
+const isMobile = inject("isMobile")
 const listaFotos = ref<Foto[]>([])
 const cargandoLista =ref<boolean>(false)
 const listaVacia = ref<boolean>(false)
 const errorDeCarga = ref<boolean>(false)
+
+const colsFoto = computed<number>(()=>{
+  if(isMobile.value){
+    return 6
+  } else {
+    return 3
+  }
+})
 
 ObtenerListaFotos()
 

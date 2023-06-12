@@ -6,6 +6,7 @@
      color="green-accent-3"
      prepend-icon="mdi-pencil-plus"
      @click="dialog = true"
+     rounded="pill"
      >
       Pedir
     </v-btn>
@@ -15,7 +16,9 @@
       width="auto"
     >
       <v-card :width="widthDisplay">
-        <v-card-title>{{menuOpcion}} {{precio}}$</v-card-title>
+        <v-sheet rounded color="yellow-darken-2">
+          <v-card-title>{{menuOpcion}} ${{precio}}</v-card-title>
+        </v-sheet>
         <v-card-subtitle>Contornos disponibles a elegir: <strong>{{contornosDisponibles}}</strong></v-card-subtitle>
         <v-card-text class="py-0">
           <v-container>
@@ -23,15 +26,26 @@
               <v-col cols="6" class="pa-0">
                 <h6>Indique la cantidad</h6>
                 <v-select
-                :items="[1,2,3,4,5,6,7,8,9,10]"
+                :items="[1,2,3,4,5]"
                 v-model="pedido.cantidad"
                 density="compact"
                 class="w-50"
                 ></v-select>
+                <v-sheet class="w-100 py-0">
+                  <h6>Especificacion extra</h6>
+                  <v-text-field
+                  density="compact"
+                  class="mb-5"
+                  v-model="especificacionExtra"
+                  hide-details="auto"
+                  ></v-text-field>
+                </v-sheet>
               </v-col>
               <v-col>
-                <h5>Nota:</h5>
-                <h6>Producto que no indique sus contornos, seran servidos con arroz, ensalada cocida y tajadas</h6>
+                <v-sheet rounded color="yellow-darken-2">
+                  <h5>Nota:</h5>
+                  <h6>Producto que no indique sus contornos a excepcion del Pabellon criollo y la Pasta a la bologna, seran servidos con arroz, ensalada cocida y tajadas</h6>
+                </v-sheet>
               </v-col>
             </v-row>
             <v-divider></v-divider>
@@ -50,9 +64,11 @@
             <v-divider></v-divider>
             <v-row >
               <v-col class="pb-0">
-                <h3>
-                  {{pedido.cantidad}} {{menuOpcion}} {{concatenarContornosSeleccionados}}
-                </h3>
+                <v-sheet rounded color="yellow-darken-2">
+                  <h3>
+                    {{pedido.cantidad}} {{menuOpcion}} {{concatenarContornosSeleccionados}}
+                  </h3>
+                </v-sheet>
               </v-col>
             </v-row>
 
@@ -87,7 +103,7 @@
             </Aviso>
           </v-container>
         </v-card-text>
-        <v-card-actions>
+        <v-card-actions color="yellow-darken-2">
           <v-btn size="x-small" prepend-icon="mdi-arrow-left" color="red"  @click="dialog = false">Atras</v-btn>
           <v-btn size="x-small" prepend-icon="mdi-cart-arrow-down" color="green"  @click="guardarEnListaPedidos(pedido)">Guardar pedido</v-btn>
           <v-btn size="x-small" v-show="descripcion.length > 0" prepend-icon="mdi-undo" color="blue"  @click="resetearSeleccion">Resetear</v-btn>
@@ -170,7 +186,7 @@ const colsContornos = computed<number>(()=>{ //establece las columnas del compon
   }
 })
 
-
+const especificacionExtra = ref<string>('')
 const descripcion = ref<string[]>([]) // aqui se guardan los contornos que el cliente selecciona
 
 const listaProductos = inject('listaProductos') // productos.json, mocks para pruebas y cuando se llama a la api la lista de productos
@@ -185,13 +201,20 @@ const resetearSeleccion = ():void =>{  //resetea los valores de los contornos se
   descripcion.value = []
 }
 
-const concatenarContornosSeleccionados = computed<string>(()=>{ // cadena de caracteres de los contornos seleccionados por el cliente
+// cadena de caracteres de los contornos seleccionados por el cliente
+const concatenarContornosSeleccionados = computed<string>(()=>{
   let unionContornos:string = ''
   descripcion.value.forEach(contorno => {
     unionContornos += (contorno + ' ')
   })
-  pedido.descripcion = unionContornos // toma la concatenacion de los productos y los devuelve en el objeto de pedido
-  return unionContornos
+  // toma la concatenacion de los productos y los devuelve en el objeto de pedido
+  if(especificacionExtra.value.length >0){
+    pedido.descripcion = unionContornos + `(${especificacionExtra.value})`
+  } else {
+    pedido.descripcion = unionContornos
+  }
+
+  return pedido.descripcion
 })
 
 const guardarEnListaPedidos = (pedido:Pedido):void =>{

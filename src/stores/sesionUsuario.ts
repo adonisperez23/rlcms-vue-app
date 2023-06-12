@@ -47,6 +47,10 @@ export const useSesionUsuario = defineStore('lista-pedidos', () => {
     listaPedidos.splice(indice,1)
   }
 
+  function vaciarLista():void {
+    listaPedidos.length = 0
+  }
+
   function agregarPedido(pedido:Pedido) {
     if(listaPedidos.some(ped => (ped.nombreProducto === pedido.nombreProducto) && (ped.descripcion === pedido.descripcion))){ //verifica si existe dentro de la lista un pedido igual al seleccionado
 
@@ -66,6 +70,7 @@ export const useSesionUsuario = defineStore('lista-pedidos', () => {
 
   return {
     listaPedidos,
+    vaciarLista,
     eliminarPedido,
     agregarPedido,
     estadoSesion,

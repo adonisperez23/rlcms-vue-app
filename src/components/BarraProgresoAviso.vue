@@ -1,6 +1,6 @@
 <template>
   <v-row justify="center">
-    <v-col cols="4" class="text-center">
+    <v-col :cols="colsAlert" class="text-center">
       <v-progress-circular color="green" indeterminate :size="128">{{mensajeBarra}}</v-progress-circular>
       <v-alert
       v-if="!noMostrarAlert"
@@ -16,6 +16,17 @@
 </template>
 
 <script setup lang="ts">
+import {inject, computed} from "vue"
+
+const isMobile = inject("isMobile")
+
+const colsAlert = computed<number>(()=>{
+  if(isMobile.value){
+    return 8
+  } else {
+    return 4
+  }
+})
 
 
 const props = defineProps<{
@@ -30,6 +41,7 @@ const props = defineProps<{
 }>()
 
 </script>
+
 
 <style scoped>
 </style>

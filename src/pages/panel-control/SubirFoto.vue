@@ -9,25 +9,31 @@
     :mensajeAlert="alert.mensaje"
     />
     <v-row v-else justify="center">
-      <v-col cols="4">
-        <div v-show="mostrarFormulario" class="text-center">
-          Cargar Imagen adjunta
-          <v-text-field readonly label="Nombre del producto" v-model="route.query.nombreProducto"></v-text-field>
-          <v-file-input v-model="imagen" label="Cargar Imagen"></v-file-input>
-          <v-btn prepend-icon="mdi-upload" color="green" :disabled=" typeof imagen === 'undefined'" @click="subirFoto">Subir foto</v-btn>
-        </div>
-        <div v-show="mostrarInfoFoto" class="text-center">
-          <v-text-field readonly label="Nombre del producto" v-model="route.query.nombreProducto"></v-text-field>
-          <v-text-field readonly label="Nombre del archivo imagen" v-model="infoFoto.nombreFoto"></v-text-field>
-          <v-text-field readonly label="Ruta del archivo imagen" v-model="infoFoto.direccionUrl"></v-text-field>
-          <v-btn prepend-icon="mdi-upload" color="green" block  @click="guardarInfoFoto">Guardar informacion de imagen</v-btn>
-          <v-btn prepend-icon="mdi-image-album" color="blue" block  @click="nuevaFoto">Buscar nueva foto</v-btn>
-        </div>
+      <v-col cols="12">
+        <v-sheet width="300" class="mx-auto">
+          <div v-show="mostrarFormulario" class="text-center">
+            Cargar Imagen adjunta
+            <v-text-field readonly label="Nombre del producto" v-model="route.query.nombreProducto"></v-text-field>
+            <v-file-input v-model="imagen" label="Cargar Imagen"></v-file-input>
+            <v-btn prepend-icon="mdi-upload" color="green" :disabled=" typeof imagen === 'undefined'" @click="subirFoto">Subir foto</v-btn>
+          </div>
+          <div v-show="mostrarInfoFoto" class="text-center">
+            <v-text-field readonly label="Nombre del producto" v-model="route.query.nombreProducto"></v-text-field>
+            <v-text-field readonly label="Nombre del archivo imagen" v-model="infoFoto.nombreFoto"></v-text-field>
+            <v-text-field readonly label="Ruta del archivo imagen" v-model="infoFoto.direccionUrl"></v-text-field>
+            <v-btn prepend-icon="mdi-upload" color="green" block  @click="guardarInfoFoto">Guardar informacion de imagen</v-btn>
+            <v-btn prepend-icon="mdi-image-album" color="blue" block  @click="nuevaFoto">Buscar nueva foto</v-btn>
+          </div>
+          <h3 class="text-center">Instrucciones de uso:</h3>
+          <p>1) Adjuntar imagen </p>
+          <p>2) Subir imagen al servidor </p>
+          <p>3) Guardar informacion de la imagen en la base de datos. Si no se guarda la informacion no se podra visualizar la imagen en el sistema. </p>
+          <h3 class="text-center">Nota:</h3>
+          <p>Antes de cargar una imagen, verifique primero que el nombre del archivo solo contenga caracteres.
+            La carga de la imagen no permite emoticones en su nombre.
+          </p>
+        </v-sheet>
       </v-col>
-      <h3>Nota:</h3>
-      <p>Antes de cargar una imagen, verifique primero que el nombre del archivo solo contenga caracteres.
-        La carga de la imagen no permite emoticones en su nombre.
-      </p>
     </v-row>
   </v-container>
 </template>

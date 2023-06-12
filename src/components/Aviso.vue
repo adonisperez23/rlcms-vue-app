@@ -6,7 +6,9 @@
     >
       <v-card color="#fcecd2" class="mx-auto text-center">
         <v-card-text >
-         <h4>{{mensaje}}</h4>
+          <v-sheet rounded color="yellow-darken-2">
+            <h4>{{mensaje}}</h4>
+          </v-sheet>
         </v-card-text>
 
         <v-card-item class="text-center">

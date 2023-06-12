@@ -7,7 +7,7 @@
           >
           <v-card-text class="pb-0 px-1 pt-1">
             <FotoMenu :nombreProducto="nombreProducto"/>
-            <h2>{{nombreProducto}}</h2>
+            <h2 class="pt-1">{{nombreProducto}}</h2>
             <h3 class="money">
               Precio: {{precio}} $
             </h3>
@@ -15,7 +15,7 @@
           <v-divider></v-divider>
           <v-card-actions >
             <div class="d-flex flex-column">
-              <v-btn class="mb-1" size="x-small" variant="flat" color="yellow-darken-2" prepend-icon="mdi-form-select" @click="propsAviso.activarAviso=true">Detalles del plato</v-btn>
+              <v-btn class="mb-1" size="x-small" variant="flat" rounded="pill" color="yellow-darken-2" prepend-icon="mdi-form-select" @click="propsAviso.activarAviso=true">Detalles del plato</v-btn>
               <div v-show="sesion.estadoSesion">
                 <Pedido
                 :idProducto="id"

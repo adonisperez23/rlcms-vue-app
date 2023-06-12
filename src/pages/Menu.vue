@@ -7,35 +7,39 @@
       noMostrarAlert
     />
     <v-row  v-if="listaVacia" justify="center" >
-      <h1 >
-        No hay menu publicado por los momentos...
-      </h1>
-      <v-col align="center" cols="6">
-        <v-icon
-        color="red"
-        size="100"
-        >
-        mdi-server-food-variant-off
-        </v-icon>
-      </v-col>
+      <v-sheet color="#f9cf57" rounded>
+        <h1 >
+          No hay menu publicado por los momentos...
+        </h1>
+        <v-col align="center" cols="6">
+          <v-icon
+          color="red"
+          size="100"
+          >
+          mdi-server-food-variant-off
+          </v-icon>
+        </v-col>
+      </v-sheet>
     </v-row>
     <v-row v-if="errorDeCarga" justify="center">
-      <h1 >
-        Ha ocurrido un error al cargar lista de menu...
-        <br>
-        ¡Posibles problemas con el servidor!
-        <br>
-        Lo sentimos...
-        <br>
-      </h1>
-      <v-col align="center" cols="6">
-        <v-icon
-        color="red"
-        size="100"
-        >
-        mdi-server-network-off
+      <v-sheet color="#f9cf57" rounded>
+        <h1 >
+          Ha ocurrido un error al cargar lista de menu...
+          <br>
+          ¡Posibles problemas con el servidor!
+          <br>
+          Lo sentimos...
+          <br>
+        </h1>
+        <v-col align="center" cols="6">
+          <v-icon
+          color="red"
+          size="100"
+          >
+          mdi-server-network-off
         </v-icon>
-      </v-col>
+        </v-col>
+      </v-sheet>
     </v-row>
     <v-row v-else justify="start">
       <InfoMenu

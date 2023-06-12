@@ -16,7 +16,7 @@
        <v-select
        label="Linea telefonica"
        v-model="linea"
-       :items="['+58414', '+58424', '+58426', '+58416', '+58426']"
+       :items="['+58414', '+58424', '+58426', '+58416', '+58412']"
        ></v-select>
        <v-text-field
        v-model="telefono"

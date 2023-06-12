@@ -8,26 +8,30 @@
     />
     <v-row justify="center" v-else>
       <div v-if="listaVacia" class="text-center">
-        <h1 >
-          No hay facturas generadas por los momentos...
-        </h1>
-        <v-icon
-        color="red"
-        size="100"
-        >
-        mdi-script-text-outline
+        <v-sheet color="#f9cf57" rounded>
+          <h1 >
+            No hay facturas generadas por los momentos...
+          </h1>
+          <v-icon
+          color="red"
+          size="100"
+          >
+          mdi-script-text-outline
         </v-icon>
+        </v-sheet>
       </div>
       <div v-if="errorServidor" class="text-center">
-        <h1 >
-          ¡Ha ocurrido un error al cargar lista de facturas!
-        </h1>
-        <v-icon
-        color="red"
-        size="100"
-        >
-        mdi-server-network-off
-        </v-icon>
+        <v-sheet color="#f9cf57" rounded>
+          <h1 >
+            ¡Ha ocurrido un error al cargar lista de facturas!
+          </h1>
+          <v-icon
+          color="red"
+          size="100"
+          >
+          mdi-server-network-off
+          </v-icon>
+        </v-sheet>
       </div>
 
       <v-table class="color-fondo" v-else-if="listaFacturas.length > 0">

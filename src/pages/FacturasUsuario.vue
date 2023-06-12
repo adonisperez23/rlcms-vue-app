@@ -7,12 +7,14 @@
       noMostrarAlert
     />
     <v-row justify="center" v-else>
-      <h1 v-if="listaVacia" >
-        Usted todavia no ha generado pedidos por los momentos...
-      </h1>
-      <h1 v-if="errorServidor">
-        ¡Ha ocurrido un error al cargar lista de facturas!
-      </h1>
+      <v-sheet color="#f9cf57" rounded>
+        <h1 v-if="listaVacia" >
+          Usted todavia no ha generado pedidos por los momentos...
+        </h1>
+        <h1 v-if="errorServidor">
+          ¡Ha ocurrido un error al cargar lista de facturas!
+        </h1>
+      </v-sheet>
       <v-col v-else cols="8">
             <v-data-table
 

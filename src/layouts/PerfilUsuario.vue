@@ -7,7 +7,7 @@
       >
         <template v-slot:prepend>
           <v-list-item
-             prepend-icon="mdi-account"
+            prepend-icon="mdi-account"
             lines="two"
             :title="sesion.informacionUsuario.nombre"
             :subtitle="sesion.informacionUsuario.email"
