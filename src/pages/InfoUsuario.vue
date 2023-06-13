@@ -68,7 +68,8 @@ const datosActualizar = reactive<Usuario>({
 const mostrarFormulario = ref<boolean>(true)
 
 const actualizarDatos = ():void => {
-  axios.put(import.meta.env.VITE_API_ACTUALIZAR_USUARIO+datosActualizar.id, datosActualizar)
+  axios.put(import.meta.env.VITE_API_ACTUALIZAR_USUARIO+datosActualizar.id, datosActualizar,
+  {headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } })
     .then((res:Resultado) => {
       mostrarFormulario.value = false
       alert.gestionarRespuesta(res)

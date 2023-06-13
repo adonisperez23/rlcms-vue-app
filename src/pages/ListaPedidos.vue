@@ -73,7 +73,7 @@
 
       </v-col>
 
-      <v-row  v-if="lista.listaPedidos.length > 0" justify="center">
+      <v-row  v-if="lista.listaPedidos.length > 0" justify="start">
         <v-col  :cols="colsMonto">
           <v-card width="200" color="yellow-lighten-4" title="Monto Total:">
             <v-card-text class="text-h4">
@@ -140,7 +140,9 @@ const montoTotal = computed<number>(()=>{
 })
 
 function enviarPedido():void {
-  axios.post(import.meta.env.VITE_API_GENERAR_FACTURA,{usuario:lista.informacionUsuario.id,listaPedidos:lista.listaPedidos})
+  axios.post(import.meta.env.VITE_API_GENERAR_FACTURA,
+    {usuario:lista.informacionUsuario.id,listaPedidos:lista.listaPedidos},
+    {headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } })
     .then((res:Respuesta)=>{
       console.log("pedido",res)
       alert.gestionarRespuesta(res)

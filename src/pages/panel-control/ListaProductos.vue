@@ -181,7 +181,7 @@ function obtenerProductos():void {
 
 
 function eliminarProductoId(idProducto:number):void {
-  axios.delete(import.meta.env.VITE_API_ELIMINAR_PRODUCTO+idProducto)
+  axios.delete(import.meta.env.VITE_API_ELIMINAR_PRODUCTO+idProducto,{headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } })
     .then((res:Respuesta)=>{
       propsAvisoEliminar.activarAviso = false
       propsAviso.activarAviso = true

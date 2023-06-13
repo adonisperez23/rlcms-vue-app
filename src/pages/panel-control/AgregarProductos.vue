@@ -106,7 +106,7 @@ const validateProducto = [ value => {
 }]
 
 function registrarProducto():void {
-  axios.post(import.meta.env.VITE_API_REGISTRAR_PRODUCTO, producto)
+  axios.post(import.meta.env.VITE_API_REGISTRAR_PRODUCTO, producto,{headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } })
     .then((res:Respuesta)=>{
       mostrarFormulario.value = false
       alert.gestionarRespuesta(res)
@@ -125,7 +125,7 @@ function registrarProducto():void {
 }
 
 function actualizarProducto():void {
-  axios.put(import.meta.env.VITE_API_ACTUALIZAR_PRODUCTO+route.query.id, producto)
+  axios.put(import.meta.env.VITE_API_ACTUALIZAR_PRODUCTO+route.query.id, producto,{headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } })
     .then((res:Respuesta)=>{
       mostrarFormulario.value = false
       alert.gestionarRespuesta(res)

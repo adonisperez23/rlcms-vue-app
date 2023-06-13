@@ -112,7 +112,8 @@ const listaPedidos = ref<Pedido[]>([])
 pedirFacturasUsuario()
 
 function pedirFacturasUsuario():void {
-  axios.get(import.meta.env.VITE_API_LISTA_FACTURA_POR_USUARIO+localStorage.getItem('id'))
+  axios.get(import.meta.env.VITE_API_LISTA_FACTURA_POR_USUARIO+localStorage.getItem('id'),
+{headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } })
   .then((res:Respuesta)=>{
     setTimeout(() => {
       listaFacturas.value = res.data

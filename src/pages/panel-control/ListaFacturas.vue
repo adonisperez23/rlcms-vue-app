@@ -149,7 +149,7 @@ const propsAviso = reactive<Modal>({
   mensaje:'Pedido',
 })
 
-axios.get(import.meta.env.VITE_API_LISTA_FACTURA)
+axios.get(import.meta.env.VITE_API_LISTA_FACTURA,{headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } })
   .then((res:Respuesta)=>{
     cargandoLista.value = true
     setTimeout(() => {

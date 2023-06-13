@@ -63,7 +63,7 @@ const mostrarInfoFoto = ref<boolean>(false)
 function subirFoto():void {
   let data = new FormData()
   data.append('foto',imagen.value[0])
-  axios.post(import.meta.env.VITE_API_SUBIR_FOTO, data, {headers:{'Content-type':'multipart/form-data'}})
+  axios.post(import.meta.env.VITE_API_SUBIR_FOTO, data, {headers:{'Content-type':'multipart/form-data',Authorization: `Bearer ${localStorage.getItem('token')}`}})
     .then((res:Respuesta)=>{
       console.log('res',res)
       mostrarFormulario.value = false
@@ -86,7 +86,7 @@ function subirFoto():void {
 
 }
 function guardarInfoFoto():void {
-  axios.post(import.meta.env.VITE_API_GUARDAR_INFO_FOTO,infoFoto)
+  axios.post(import.meta.env.VITE_API_GUARDAR_INFO_FOTO,infoFoto,{headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } })
     .then((res:Respuesta)=>{
       console.log('res',res)
       mostrarInfoFoto.value = false
