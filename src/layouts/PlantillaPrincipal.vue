@@ -2,6 +2,7 @@
 
   <v-layout>
    <PerfilUsuario v-if="sesion.estadoSesion"/>
+
    <v-app-bar color="#f9cf57">
       <template v-slot:prepend>
         <v-img
@@ -22,7 +23,7 @@
          <v-list class="text-start" density="compact">
            <v-list-item  to="/home" prepend-icon="mdi-home" title="Home"></v-list-item>
            <v-list-item  to="/menu" prepend-icon="mdi-list-box" title="Menu"></v-list-item>
-           <v-list-item  v-if="sesion.estadoSesion" to="/lista-pedidos" prepend-icon="mdi-cart-outline" title="Lista de pedidos">({{cantidadProductos}})</v-list-item>
+           <v-list-item :disabled="sesion.estadoLocalComercial" v-if="sesion.estadoSesion" to="/lista-pedidos" prepend-icon="mdi-cart-outline" title="Lista de pedidos">({{cantidadProductos}})</v-list-item>
            <v-list-item  to="/about-us" prepend-icon="mdi-domain" title="Quienes somos"></v-list-item>
          </v-list>
        </v-menu>
@@ -33,7 +34,7 @@
           <v-btn prepend-icon="mdi-menu" to="/menu" variant="text">
             Menu
           </v-btn>
-          <v-btn prepend-icon="mdi-cart-outline" to="/lista-pedidos" v-show="sesion.estadoSesion" variant="text" >
+          <v-btn :disabled="sesion.estadoLocalComercial" prepend-icon="mdi-cart-outline" to="/lista-pedidos" v-show="sesion.estadoSesion" variant="text" >
             Pedidos ({{cantidadProductos}})
           </v-btn>
           <v-btn prepend-icon="mdi-domain" to="/about-us" variant="text" >
@@ -105,7 +106,24 @@
 
    </v-app-bar>
 
+
    <v-main>
+     <v-sheet
+     v-if="sesion.estadoLocalComercial"
+     color="yellow-darken-2"
+     max-height="120"
+      >
+
+      <h4 class="text-center pt-1">
+        <v-icon>
+        mdi-alert-outline
+        </v-icon>
+        Lo sentimos, estamos fuera de servicio. Nuestro horario de servicio es de lunes a viernes entre 12 pm a 4 pm y sabado de 12 pm a 3 pm
+        <v-icon>
+        mdi-alert-outline
+        </v-icon>
+      </h4>
+    </v-sheet>
      <router-view></router-view>
    </v-main>
 
@@ -118,6 +136,7 @@ import {useRoute,useRouter } from 'vue-router'
 import {computed,ref, inject} from 'vue'
 import {useSesionUsuario} from '../stores/sesionUsuario'
 import PerfilUsuario from "./PerfilUsuario.vue"
+
 
 const route = useRoute()
 const router = useRouter()
@@ -145,6 +164,27 @@ const salir = ()=>{
   router.push('/menu')
   localStorage.clear()
 }
+
+const servicioHabilitado = ref<boolean>(false)
+
+var controladorHorario = setInterval(()=>{
+  let date = new Date()
+  let horaActual = date.getHours()
+  let diaActual = date.getDay()
+  let horaApertura = 8 //12
+  let horaCierre = 22   //16
+  let diaNolaborable = 0
+
+  if(diaActual === diaNolaborable && !sesion.estadoLocalComercial.value){
+      sesion.cerrarLocalComercial()
+  } else if((horaActual < horaApertura || horaActual >= horaCierre) && (!sesion.estadoLocalComercial.value)) {
+    sesion.cerrarLocalComercial()
+  } else if(horaActual >= horaApertura && horaActual < horaCierre){
+    sesion.abrirLocalComercial()
+  }
+
+  },1000)
+
 
 
 </script>

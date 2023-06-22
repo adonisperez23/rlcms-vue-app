@@ -9,7 +9,8 @@
           aspect-ratio="16/9"
           cover
           :src="foto.direccionUrl"
-          ></v-img>
+          >
+          </v-img>
         </v-carousel-item>
       </div>
     </v-carousel>

@@ -64,11 +64,22 @@ export const useSesionUsuario = defineStore('lista-pedidos', () => {
       listaPedidos.push(pedido) // si no hay coicidencia de productos dentro de la lista, se agrega un nuevo producto
     }
   }
+  const estadoLocalComercial = ref<boolean>(false)
 
+  function abrirLocalComercial():void {
+    estadoLocalComercial.value = false
+  }
+
+  function cerrarLocalComercial():void {
+    estadoLocalComercial.value = true
+  }
 
 
 
   return {
+    estadoLocalComercial,
+    abrirLocalComercial,
+    cerrarLocalComercial,
     listaPedidos,
     vaciarLista,
     eliminarPedido,

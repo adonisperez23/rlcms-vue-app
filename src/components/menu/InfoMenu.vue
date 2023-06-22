@@ -47,7 +47,7 @@
 <script setup lang="ts">
 import {reactive,inject,computed,ref} from "vue"
 import FotoMenu from "./FotoMenu.vue"
-import Pedido from "../Pedido.vue"
+import Pedido from "./Pedido.vue"
 import {useSesionUsuario} from "../../stores/sesionUsuario"
 import Aviso from "../Aviso.vue"
 import {Modal} from "../../types/interfaces"

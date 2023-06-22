@@ -24,6 +24,8 @@ html {
   color: rgba(var(--v-theme-on-surface), 0.9);
 }
 
+.borde-imagen {
+  border: 2px solid #f88905;
+}
 /* #f3d595  color beige claro
    #f9cf57 color beige mas oscuro*/
-   

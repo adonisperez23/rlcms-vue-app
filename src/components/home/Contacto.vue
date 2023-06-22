@@ -1,16 +1,22 @@
 <template>
     <v-container  class="mt-16 pt-16 text-left">
-      <h4>Contactos:</h4>
+      <h2>Contactos:</h2>
       <v-row>
-        <v-col>
+        <v-col >
           <div>
-            Correo Electronico: Adonisdavid20@gmail.com
             <br>
-            Numeros de telefono:
+            <v-icon>mdi-whatsapp</v-icon>
+            <p>
+              Escribenos a nuestro numero de Whatsapp
+              <a href="https://api.whatsapp.com/send?phone=+584129797775">+584129797775</a>
+            </p>
             <br>
-             +584148942782
+            <v-icon>mdi-instagram</v-icon>
+            <p>
+              Visita nuestra cuenta de
+              <a href="https://www.instagram.com/rest_loscincosabores/">Instagram</a>.
+            </p>
             <br>
-             +584249683161
           </div>
         </v-col>
       </v-row>
@@ -22,8 +28,11 @@
 </script>
 
 <style scoped>
-  h4{
+  h2{
     background-color: #f3d595;
+    display: inline;
+  }
+  p{
     display: inline;
   }
 </style>

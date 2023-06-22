@@ -61,7 +61,7 @@ import BarraProgresoAviso from '../components/BarraProgresoAviso.vue'
 
 
 const listaMenu = ref<Producto[]>([]) // Variable que almacena todos los productos de la base de datos
-const cargandoLista =ref<boolean>(false) //Variable que activa la BarraProgresoAviso cuando se hace la llamada a la api
+const cargandoLista =ref<boolean>(true) //Variable que activa la BarraProgresoAviso cuando se hace la llamada a la api
 const listaVacia = ref<boolean>(false) // Controla el escrito cuando la lista de productos esta vacia o hay algun error en la llamada
 const errorDeCarga = ref<boolean>(false)
 const listaMenuFiltrada = ref<Producto[]>([])  //Variable que almacena solo los productos con categoria Almuerzo y Raciones
@@ -75,7 +75,6 @@ provide('listaProductos', listaMenu) // provee a todos los componentes hijos de 
 function ObtenerMenu():void {
   axios.get(import.meta.env.VITE_API_LISTA_DE_PRODUCTOS)
   .then((res:Respuesta)=>{
-    cargandoLista.value = true
     setTimeout(() => {
       listaMenu.value = res.data
       listaMenuFiltrada.value = listaMenu.value.filter(producto => (producto.categoria === "Almuerzo" || producto.categoria === "Raciones") && producto.disponible === true)
@@ -85,7 +84,10 @@ function ObtenerMenu():void {
     console.log("lista Productos", res.data,listaMenu.value)
   })
   .catch((err:AxiosError)=>{
-    errorDeCarga.value = true
+    setTimeout(() => {
+      cargandoLista.value = false
+      errorDeCarga.value = true
+    }, 2000);
     console.log("error",err.response.data.error)
   })
 }
