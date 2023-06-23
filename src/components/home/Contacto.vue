@@ -1,5 +1,5 @@
 <template>
-    <v-container  class="mt-16 pt-16 text-left">
+    <v-container class="mt-16 pt-16 text-left">
       <h2>Contactos:</h2>
       <v-row>
         <v-col >

@@ -29,7 +29,25 @@
         </v-sheet>
       </v-col>
       <v-col v-else cols="12">
+        <v-sheet
+        v-if="!isMobile"
+        color="yellow-darken-2"
+        max-height="120"
+        rounded
+         >
 
+         <h4 class="text-center pt-1">
+           <v-icon>
+           mdi-alert-outline
+           </v-icon>
+           Usted se encuentra usando la app en una PC de escritorio,
+           Si no tiene la aplicacion de whatsapp instalada en su PC no podra hacer el pedido.
+           Se le recomienda usar la app en el navegador del telefono para enviar su pedido.
+           <v-icon>
+           mdi-alert-outline
+           </v-icon>
+         </h4>
+       </v-sheet>
         <v-table>
 
           <thead>

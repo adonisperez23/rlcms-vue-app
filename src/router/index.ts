@@ -15,7 +15,7 @@ function esAdminAuthenticado(to) {
 }
 
 const router = createRouter({
-  history: createWebHashHistory(import.meta.env.BASE_URL),
+  history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
@@ -26,7 +26,7 @@ const router = createRouter({
         // Rutas para todos los usuarios
         {
           path: '/home',
-          component:Home
+          component:Home,
         },
         {
           path: '/about-us',

@@ -1,6 +1,6 @@
 <template>
-  <v-container>
-    <v-row justify="center">
+  <v-container class="mt-6 pt-6 mb-16 pb-16" >
+    <v-row class="mt-6 pt-6 mb-16 pb-16" justify="center">
       <v-col :cols="cols">
         <h2>¿Donde se encuentra nuestro local fisico?</h2>
         <p><strong>Direccion:</strong><br>

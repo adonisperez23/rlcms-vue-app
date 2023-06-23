@@ -51,7 +51,7 @@
             </v-row>
             <v-divider></v-divider>
             <v-row>
-              <v-col v-for="(contorno, index) in contornos" :key="index" :cols="colsContornos">
+              <v-col class="pa-1" v-for="(contorno, index) in contornos" :key="index" :cols="colsContornos">
                 <v-switch
                 v-model="descripcion"
                 :label="contorno"

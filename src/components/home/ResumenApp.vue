@@ -1,6 +1,6 @@
 <template>
-  <v-container class="my-16 py-16">
-    <v-row class="my-16 py-16">
+  <v-container  class="mt-16 pt-16 mb-16 pb-16">
+    <v-row class="mt-16 pt-16 mb-16 pb-16">
       <v-col>
         <h3 class="text-left">En nuestra app-web podras:</h3>
         <v-expansion-panels color="#f3d595" >
