@@ -2,24 +2,24 @@
   <v-container  class="mt-16 pt-16 mb-16 pb-16">
     <v-row class="mt-16 pt-16 mb-16 pb-16">
       <v-col>
-        <h3 class="text-left">En nuestra app-web podras:</h3>
+        <h3 class="text-left">En nuestra APP podras:</h3>
         <v-expansion-panels color="#f3d595" >
 
           <v-expansion-panel
           bg-color="#fcecd2"
           variant="Popout"
-          title="Ver nuestra seccion de el menu del dia"
+          title="Ver nuestra seccion 'Menu'"
           text="Podras visualizar todo nuestro menu disponible del dia, en el menu se
           muestran todos los detalles de cada plato, como el precio del plato y
-          los detalles especificos de como estan elaborados nuestros platos de comida
+          los detalles especificos de como estan elaborados nuestros platos de comida.
           "
           ></v-expansion-panel>
           <v-expansion-panel
           bg-color="#fcecd2"
           variant="Popout"
           title="Registrarse en nuestra app-web"
-          text="De manera facil y rapida podra registrarse en nuestra app-web ingresando, su nombre, correo electronico y
-          su telefono podra habilitar la funcionalidad especial de elegir cada plato, seleccionar los contornos que mas guste
+          text="De manera facil y rapida podra registrarse en nuestra app-web ingresando; su nombre, correo electronico y
+          su telefono podra habilitar la funcionalidad especial de elegir cada plato. Ademas podra seleccionar los contornos que mas guste
           y agregarlo a su lista de pedidos seleccionados.
           "
           ></v-expansion-panel>

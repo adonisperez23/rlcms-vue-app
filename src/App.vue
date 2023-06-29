@@ -22,8 +22,9 @@ let usuario:Usuario = {
   telefono:localStorage.getItem('telefono'),
   email:localStorage.getItem('email'),
   claveUno:localStorage.getItem('claveUno'),
-  esAdmin:localStorage.getItem('esAdmin')
+  esAdmin:(localStorage.getItem('esAdmin') === "true")
 }
+console.log("admin", usuario.esAdmin)
 const sesion = useSesionUsuario()
 
 if(usuario.id){

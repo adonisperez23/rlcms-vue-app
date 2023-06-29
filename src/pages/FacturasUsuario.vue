@@ -8,45 +8,60 @@
     />
     <v-row justify="center" v-else>
       <v-sheet color="#f9cf57" rounded>
-        <h1 v-if="listaVacia" >
-          Usted todavia no ha generado pedidos por los momentos...
-        </h1>
-        <h1 v-if="errorServidor">
-          ¡Ha ocurrido un error al cargar lista de facturas!
-        </h1>
-      </v-sheet>
-      <v-col v-else cols="8">
-            <v-data-table
-
-            density="compact"
-            v-model:items-per-page="itemsPerPage"
-            :headers="headersFacturas"
-            :items="listaFacturas"
-            item-value="name"
-            class="elevation-1"
-            >
-            <template v-slot:item.fechaHora="{ item }">
-              {{$filters.dateFormat(item.raw.fechaHora)}}
-            </template>
-            <template v-slot:item.id="{ item }">
-              <div class="ml-8">
-                {{item.raw.id}}
-              </div>
-            </template>
-
-            <template v-slot:item.actions="{ item }">
-              <v-icon
-              color="blue"
-              size="large"
-              class="me-2 ml-7"
-              @click="mostrarPedido(item.raw.pedido)"
-              >
-              mdi-cursor-default-click
-            </v-icon>
+        <div v-if="listaVacia" align="center">
+          <h1  >
+            Usted todavia no ha generado pedidos por los momentos...
+          </h1>
+          <v-icon
+          color="red"
+          size="100"
+          >
+          mdi-script-text-outline
+        </v-icon>
+        </div>
+        <div v-else-if="errorServidor" align="center">
+          <h1 >
+            ¡Ha ocurrido un error al cargar lista de facturas!
+          </h1>
+          <v-icon
+          color="red"
+          size="100"
+          >
+          mdi-server-network-off
+          </v-icon>
+        </div>
+        <v-col v-else align="center" cols="12">
+          <v-data-table
+          density="compact"
+          v-model:items-per-page="itemsPerPage"
+          :headers="headersFacturas"
+          :items="listaFacturas"
+          item-value="name"
+          class="elevation-1"
+          >
+          <template v-slot:item.fechaHora="{ item }">
+            {{$filters.dateFormat(item.raw.fechaHora)}}
+          </template>
+          <template v-slot:item.id="{ item }">
+            <div class="ml-8">
+              {{item.raw.id}}
+            </div>
           </template>
 
-        </v-data-table>
-      </v-col>
+          <template v-slot:item.actions="{ item }">
+            <v-icon
+            color="blue"
+            size="large"
+            class="me-2 ml-7"
+            @click="mostrarPedido(item.raw.pedido)"
+            >
+            mdi-cursor-default-click
+          </v-icon>
+        </template>
+
+      </v-data-table>
+    </v-col>
+      </v-sheet>
     </v-row>
       <Aviso
       unaAccion
@@ -122,6 +137,7 @@ function pedirFacturasUsuario():void {
     }, 2000);
   })
   .catch((err:AxiosError)=>{
+    cargandoLista.value = false
     errorServidor.value = true
     console.log("error al cargar lista de facturas", err)
   })

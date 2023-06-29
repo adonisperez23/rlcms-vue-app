@@ -16,7 +16,7 @@ export const useSesionUsuario = defineStore('lista-pedidos', () => {
     telefono:'',
     email:'',
     claveUno:'',
-    esAdmin:false
+    esAdmin:null
   })
 
   function obtenerInformacionUsuario(usuario:Usuario):void {

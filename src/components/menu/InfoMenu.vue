@@ -16,7 +16,7 @@
           <v-card-actions >
             <div class="d-flex flex-column">
               <v-btn class="mb-1" size="x-small" variant="flat" rounded="pill" color="yellow-darken-2" prepend-icon="mdi-form-select" @click="propsAviso.activarAviso=true">Detalles del plato</v-btn>
-              <div v-show="sesion.estadoSesion">
+              <div v-if="sesion.estadoSesion">
                 <Pedido
                 :idProducto="id"
                 :precio="precio"

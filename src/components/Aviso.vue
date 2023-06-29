@@ -19,9 +19,9 @@
           <slot name="imagen"></slot>
         </v-card-item>
 
-        <v-card-text>
+        <v-card-item class="text-center">
           <slot name="lista"></slot>
-        </v-card-text>
+        </v-card-item>
 
 
 
