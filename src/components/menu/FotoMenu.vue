@@ -4,6 +4,7 @@
       <div v-for="foto in listaFotosFiltradas" :key="foto.id" class="">
         <v-carousel-item >
           <v-img
+          class="borde-imagen"
           width="300"
           height="200"
           aspect-ratio="16/9"
@@ -17,6 +18,7 @@
   </div>
   <div v-else-if="listaFotosFiltradas.length === 1" class="">
     <v-img
+    class="borde-imagen"
     width="300"
     height="200"
     aspect-ratio="16/9"
@@ -25,12 +27,13 @@
     ></v-img>
   </div>
   <v-img
-  v-else
-  width="300"
-  height="200"
-  aspect-ratio="16/9"
-  cover
-  src="/fotos/cochino-contodo.jpg"
+    v-else
+    class="borde-imagen"
+    width="300"
+    height="200"
+    aspect-ratio="16/9"
+    cover
+    src="/fotos/cochino-contodo.jpg"
   >
   </v-img>
 </template>

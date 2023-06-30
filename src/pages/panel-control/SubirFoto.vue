@@ -23,15 +23,15 @@
             <v-text-field readonly label="Ruta del archivo imagen" v-model="infoFoto.direccionUrl"></v-text-field>
             <v-btn prepend-icon="mdi-upload" color="green" block  @click="guardarInfoFoto">Guardar informacion de imagen</v-btn>
             <v-btn prepend-icon="mdi-image-album" color="blue" block  @click="nuevaFoto">Buscar nueva foto</v-btn>
+            <h3 class="text-center">Instrucciones de uso:</h3>
+            <p>1) Adjuntar imagen </p>
+            <p>2) Subir imagen al servidor </p>
+            <p>3) Guardar informacion de la imagen en la base de datos. Si no se guarda la informacion no se podra visualizar la imagen en el sistema. </p>
+            <h3 class="text-center">Nota:</h3>
+            <p>Antes de cargar una imagen, verifique primero que el nombre del archivo solo contenga caracteres.
+              La carga de la imagen no permite emoticones en su nombre.
+            </p>
           </div>
-          <h3 class="text-center">Instrucciones de uso:</h3>
-          <p>1) Adjuntar imagen </p>
-          <p>2) Subir imagen al servidor </p>
-          <p>3) Guardar informacion de la imagen en la base de datos. Si no se guarda la informacion no se podra visualizar la imagen en el sistema. </p>
-          <h3 class="text-center">Nota:</h3>
-          <p>Antes de cargar una imagen, verifique primero que el nombre del archivo solo contenga caracteres.
-            La carga de la imagen no permite emoticones en su nombre.
-          </p>
         </v-sheet>
       </v-col>
     </v-row>

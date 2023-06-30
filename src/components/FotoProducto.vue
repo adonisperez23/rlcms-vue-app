@@ -2,6 +2,7 @@
   <v-card color="#f3d595" height="290" max-height="400">
     <v-card-item class="pb-0 pt-1 px-1">
       <v-img
+        class="borde-imagen"
         width="300"
         height="200"
         aspect-ratio="16/9"
@@ -10,7 +11,7 @@
       ></v-img>
     </v-card-item>
     <v-card-text class="pb-2 px-1 text-center">
-      {{nombreFoto}}
+        <h6>{{nombreFoto}}</h6>
     </v-card-text>
     <div class="text-center">
       <v-btn size="x-small" class="mt-0 " variant="outlined" color="red" append-icon="mdi-eraser" @click="propsAvisoEliminar.activarAviso = true">Borrar Imagen</v-btn>
@@ -30,6 +31,7 @@
         <v-row justify="center">
           <v-col cols="9">
             <v-img
+            class="borde-imagen"
             width="350"
             aspect-ratio="16/9"
             cover

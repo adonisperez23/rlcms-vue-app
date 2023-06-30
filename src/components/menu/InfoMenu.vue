@@ -3,14 +3,14 @@
         <v-card
           color="#f3d595"
           height="325"
-          max-height="350"
+          max-height="325"
           >
           <v-card-text class="pb-0 px-1 pt-1">
             <FotoMenu :nombreProducto="nombreProducto"/>
-            <h2 class="pt-1">{{nombreProducto}}</h2>
-            <h3 class="money">
+            <h3 class="pt-1">{{nombreProducto}}</h3>
+            <h4 class="money">
               Precio: {{precio}} $
-            </h3>
+            </h4>
           </v-card-text>
           <v-divider></v-divider>
           <v-card-actions >

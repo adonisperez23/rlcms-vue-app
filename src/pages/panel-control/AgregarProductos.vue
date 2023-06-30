@@ -43,13 +43,14 @@
 
 <script setup lang="ts">
 import {ref,reactive} from 'vue'
-import {useRoute} from 'vue-router'
+import {useRoute,useRouter} from 'vue-router'
 import {Producto,Respuesta} from '../../types/interfaces'
 import axios,{AxiosError} from 'axios'
 import {useEstadoAlerta} from '../../stores/estadoAlerta'
 import BarraProgresoAviso from "../../components/BarraProgresoAviso.vue"
 
 const route = useRoute()
+const router = useRouter()
 
 console.log("ruta", route.query)
 
@@ -79,6 +80,8 @@ function nuevoProducto():void {
   producto.descripcion = ''
   producto.precio = 0
   producto.disponible = false
+
+  router.push("/operaciones-productos")
 }
 
 const validatePrecio = [ value => {
