@@ -54,11 +54,12 @@
 <script setup lang="ts">
 import {ref, computed} from 'vue'
 import { useRouter } from 'vue-router'
-import axios , {AxiosError} from 'axios'
-import {Usuario,Respuesta} from "../types/interfaces"
+import axios from 'axios'
 import {useValidarEmail,useValidarNombre,useValidarTelefono,useValidarClaveUno} from "../composables/validadores"
 import {useEstadoAlerta} from '../stores/estadoAlerta'
 import BarraProgresoAviso from '../components/BarraProgresoAviso.vue'
+import type {AxiosError,AxiosResponse} from 'axios'
+import type {Usuario} from "../types/interfaces"
 
 const router = useRouter()
 
@@ -80,7 +81,7 @@ const activarBoton = computed<boolean>(()=>{
 })
 
 
-const validarClave = [ value => {
+const validarClave = [ (value:string) => {
 
         if(value === claveUno.value) return true
 
@@ -90,7 +91,7 @@ const validarClave = [ value => {
 const registrarUsuario = () =>{
 
   axios.post(import.meta.env.VITE_API_REGISTRAR_USUARIO, datosRegistro(nombre.value,email.value,linea.value, telefono.value, claveUno.value) )
-    .then((respuesta:Respuesta)=>{
+    .then((respuesta:AxiosResponse)=>{
 
       alert.gestionarRespuesta(respuesta)
 

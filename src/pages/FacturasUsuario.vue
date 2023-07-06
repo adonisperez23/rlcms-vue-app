@@ -85,8 +85,9 @@
 <script setup lang="ts">
 import {ref,reactive} from 'vue'
 import Aviso from '../components/Aviso.vue'
-import {Factura,Pedido,Modal,Respuesta} from '../types/interfaces'
-import axios,{AxiosError} from 'axios'
+import type {Factura,Pedido,Modal} from '../types/interfaces'
+import axios from 'axios'
+import type {AxiosError,AxiosResponse} from 'axios'
 import BarraProgresoAviso from '../components/BarraProgresoAviso.vue'
 
 
@@ -129,7 +130,7 @@ pedirFacturasUsuario()
 function pedirFacturasUsuario():void {
   axios.get(import.meta.env.VITE_API_LISTA_FACTURA_POR_USUARIO+localStorage.getItem('id'),
 {headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } })
-  .then((res:Respuesta)=>{
+  .then((res:AxiosResponse)=>{
     setTimeout(() => {
       listaFacturas.value = res.data
       cargandoLista.value = false

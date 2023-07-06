@@ -45,11 +45,13 @@
 <script setup lang="ts">
 import FotoProducto from '../../components/FotoProducto.vue'
 import {ref,inject,computed} from 'vue'
-import axios,{AxiosError} from 'axios'
-import {Respesta,Foto} from '../../types/interfaces'
+import type {Ref} from 'vue'
+import axios from 'axios'
 import BarraProgresoAviso from '../../components/BarraProgresoAviso.vue'
+import type {AxiosError,AxiosResponse} from 'axios'
+import type {Foto} from '../../types/interfaces'
 
-const isMobile = inject("isMobile")
+const isMobile = inject("isMobile") as Ref
 const listaFotos = ref<Foto[]>([])
 const cargandoLista =ref<boolean>(false)
 const listaVacia = ref<boolean>(false)
@@ -67,7 +69,7 @@ ObtenerListaFotos()
 
 function ObtenerListaFotos() {
   axios.get(import.meta.env.VITE_API_LISTA_DE_FOTOS)
-  .then((res:Respuesta)=>{
+  .then((res:AxiosResponse)=>{
     console.log('lista fotos', res)
     cargandoLista.value = true
     setTimeout(() => {

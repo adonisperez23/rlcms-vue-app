@@ -107,10 +107,10 @@
                 :key="index"
                 >
                 <td class="text-center">
-                  {{pedido.id}}
+                  {{pedido.idProducto}}
                 </td>
                 <td class="text-center">
-                  {{pedido.producto.nombreProducto}}
+                  {{pedido.nombreProducto}}
                 </td>
                 <td class="text-center">
                   {{pedido.descripcion}}
@@ -133,10 +133,11 @@
 
 <script setup lang="ts">
 import {ref,reactive,computed} from 'vue'
-import axios, {AxiosError} from 'axios'
-import {Respuesta,Factura,Modal,Pedido} from '../../types/interfaces'
+import axios from 'axios'
 import Aviso from '../../components/Aviso.vue'
 import BarraProgresoAviso from '../../components/BarraProgresoAviso.vue'
+import type {AxiosError,AxiosResponse} from 'axios'
+import type {Factura,Modal,Pedido} from '../../types/interfaces'
 
 const listaFacturas = ref<Factura[]>([])
 const listaPedidos = ref<Pedido[]>([])
@@ -150,7 +151,7 @@ const propsAviso = reactive<Modal>({
 })
 
 axios.get(import.meta.env.VITE_API_LISTA_FACTURA,{headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } })
-  .then((res:Respuesta)=>{
+  .then((res:AxiosResponse)=>{
     cargandoLista.value = true
     setTimeout(() => {
       listaFacturas.value = res.data

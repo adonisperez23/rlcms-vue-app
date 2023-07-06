@@ -9,22 +9,25 @@ interface Producto {
 }
 
 interface Respuesta {
-    data:string,
+    data:{
+      mensaje:string,
+      estaRelacionado:boolean,
+    },
     status:number,
     headers:string,
 }
 
 interface Usuario {
-  id:number,
+  id?:number,
   nombre:string,
   telefono:string
   email:string,
-  claveUno:string,
-  esAdmin:boolean,
+  clave?:string,
+  esAdmin?:boolean,
 }
 
 interface Pedido {
-  producto:number,
+  idProducto?:number,
   nombreProducto:string,
   precio:number,
   cantidad:number,
@@ -45,7 +48,7 @@ interface NuevaClave {
 }
 
 interface Factura {
-  idFactura: number,
+  id: number,
   fechaHora: string,
   usuario: Usuario,
   pedido: Pedido[]
@@ -55,7 +58,7 @@ interface Foto {
   id?:number,
   nombreFoto:string,
   direccionUrl:string,
-  producto:number
+  producto?:Producto
 }
 
-export type {Producto,Respuesta,Usuario,Pedido,Aviso,NuevaClave, Factura, Foto};
+export type {Producto,Respuesta,Usuario,Pedido,NuevaClave, Factura, Foto,Modal};

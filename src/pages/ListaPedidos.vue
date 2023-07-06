@@ -115,8 +115,10 @@
 
 <script setup lang="ts">
 import {onMounted,computed,ref,inject} from 'vue'
-import axios, {AxiosError} from 'axios'
-import {Respuesta} from '../types/interfaces'
+import type {Ref} from 'vue'
+import axios from 'axios'
+import type {AxiosError,AxiosResponse} from 'axios'
+// import {Respuesta} from '../types/interfaces'
 import {useSesionUsuario} from "../stores/sesionUsuario"
 import {useEstadoAlerta} from "../stores/estadoAlerta"
 import BarraProgresoAviso from '../components/BarraProgresoAviso.vue'
@@ -129,7 +131,7 @@ const router = useRouter()
 
 const mostrarLista = ref<boolean>(false)
 
-const isMobile = inject('isMobile')
+const isMobile = inject('isMobile') as Ref
 const colsMonto = computed<number>(()=>{
   if(isMobile.value){
     return 6
@@ -161,7 +163,7 @@ function enviarPedido():void {
   axios.post(import.meta.env.VITE_API_GENERAR_FACTURA,
     {usuario:lista.informacionUsuario.id,listaPedidos:lista.listaPedidos},
     {headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } })
-    .then((res:Respuesta)=>{
+    .then((res:AxiosResponse)=>{
       console.log("pedido",res)
       alert.gestionarRespuesta(res)
       setTimeout(() => {

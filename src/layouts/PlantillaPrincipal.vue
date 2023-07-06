@@ -109,7 +109,7 @@
 
    <v-main>
      <v-sheet
-     v-if="sesion.estadoLocalComercial"
+     v-if="estadoLocalComercial"
      color="yellow-darken-2"
      max-height="120"
       >
@@ -136,23 +136,27 @@ import {useRoute,useRouter } from 'vue-router'
 import {computed,ref, inject} from 'vue'
 import {useSesionUsuario} from '../stores/sesionUsuario'
 import PerfilUsuario from "./PerfilUsuario.vue"
+import {storeToRefs} from "pinia"
+import type {Pedido} from "../types/interfaces"
+import type {Ref} from 'vue'
 
 
 const route = useRoute()
 const router = useRouter()
 
-const isMobile = inject("isMobile")
-const width = inject("widthWindow")
+const isMobile = inject("isMobile") as Ref
+const width = inject("widthWindow") as Ref
 const drawer = ref<boolean>(false)
 const drawerSesion = ref<boolean>(false)
 
 const sesion = useSesionUsuario()
+const {estadoLocalComercial} = storeToRefs(sesion)
 
 const cantidadProductos = computed<number>(()=>{
   let totalProductos:number = 0
 
   if(sesion.listaPedidos.length > 0){
-    totalProductos = sesion.listaPedidos.reduce((acum,producto)=> acum+=producto.cantidad,0)
+    totalProductos = sesion.listaPedidos.reduce((acum:number,producto:Pedido)=> acum+=producto.cantidad,0)
   }
 
   return totalProductos
@@ -175,9 +179,9 @@ var controladorHorario = setInterval(()=>{
   let horaCierre = 22   //16
   let diaNolaborable = 0
 
-  if(diaActual === diaNolaborable && !sesion.estadoLocalComercial.value){
+  if(diaActual === diaNolaborable && !estadoLocalComercial.value){
       sesion.cerrarLocalComercial()
-  } else if((horaActual < horaApertura || horaActual >= horaCierre) && (!sesion.estadoLocalComercial.value)) {
+  } else if((horaActual < horaApertura || horaActual >= horaCierre) && (!estadoLocalComercial.value)) {
     sesion.cerrarLocalComercial()
   } else if(horaActual >= horaApertura && horaActual < horaCierre){
     sesion.abrirLocalComercial()

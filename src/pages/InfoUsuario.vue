@@ -42,10 +42,11 @@
 
 <script setup lang="ts">
 import {ref,reactive, onMounted,computed} from "vue"
-import axios, {AxiosError} from 'axios'
+import axios from 'axios'
+import type {AxiosError,AxiosResponse} from 'axios'
 import {useValidarEmail,useValidarNombre,useValidarTelefono,useValidarClaveUno} from "../composables/validadores"
 import {useSesionUsuario} from "../stores/sesionUsuario"
-import {Usuario,Respuesta,NuevaClave} from "../types/interfaces"
+import type {Usuario,NuevaClave} from "../types/interfaces"
 import {useEstadoAlerta} from "../stores/estadoAlerta"
 import BarraProgresoAviso from "../components/BarraProgresoAviso.vue"
 
@@ -59,7 +60,7 @@ const alert = useEstadoAlerta()
 const linea = ref<string>(`${sesion.informacionUsuario.telefono.slice(0,-7)}`)
 const numero = ref<string>(`${sesion.informacionUsuario.telefono.slice(6)}`)
 const datosActualizar = reactive<Usuario>({
-  id:sesion.informacionUsuario.id.toString(),
+  id:sesion.informacionUsuario.id,
   nombre:sesion.informacionUsuario.nombre,
   email:sesion.informacionUsuario.email,
   telefono:linea.value + numero.value
@@ -68,9 +69,9 @@ const datosActualizar = reactive<Usuario>({
 const mostrarFormulario = ref<boolean>(true)
 
 const actualizarDatos = ():void => {
-  axios.put(import.meta.env.VITE_API_ACTUALIZAR_USUARIO+datosActualizar.id, datosActualizar,
+  axios.put(import.meta.env.VITE_API_ACTUALIZAR_USUARIO+datosActualizar.id?.toString(), datosActualizar,
   {headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } })
-    .then((res:Resultado) => {
+    .then((res:AxiosResponse) => {
       mostrarFormulario.value = false
       alert.gestionarRespuesta(res)
       console.log(res)

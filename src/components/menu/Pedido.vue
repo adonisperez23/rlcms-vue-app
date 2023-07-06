@@ -117,17 +117,18 @@
 <script setup lang="ts">
 import {ref,reactive, computed, inject} from "vue"
 import {useSesionUsuario} from '../../stores/sesionUsuario'
-import {Pedido,Modal} from '../../types/interfaces.ts'
+import type {Ref} from "vue"
+import type {Pedido,Modal,Producto} from '../../types/interfaces'
 import Aviso from "../Aviso.vue"
 
 const props = defineProps<{
-  idProducto:number,
+  idProducto?:number,
   menuOpcion: string,
   precio:string,
 }>()
 
 const pedido:Pedido = reactive({
-  producto:props.idProducto,
+  idProducto:props.idProducto,
   nombreProducto:props.menuOpcion,
   precio:Number(props.precio),
   cantidad:1,
@@ -149,6 +150,8 @@ const propsAvisoMaxProductos:Modal = reactive({
 
 const lista = useSesionUsuario()
 
+const descripcion = ref<string[]>([]) // aqui se guardan los contornos que el cliente selecciona
+
 const contornosDisponibles = computed<number>(()=>{
   switch (descripcion.value.length) {
     case 0: return 3
@@ -158,6 +161,9 @@ const contornosDisponibles = computed<number>(()=>{
     case 2: return 1
      break;
     case 3: return 0
+    break;
+
+    default: return 0
     break;
   }
 })
@@ -171,7 +177,7 @@ const desactivar = computed<boolean>(()=>{
 })
 
 
-const isMobile = inject("isMobile")
+const isMobile = inject("isMobile") as Ref
 const widthDisplay = computed<string>(()=>{  //controla el ancho del component card dependiendo del dispositivo
   if(isMobile.value){
     return "350"
@@ -188,13 +194,16 @@ const colsContornos = computed<number>(()=>{ //establece las columnas del compon
 })
 
 const especificacionExtra = ref<string>('')
-const descripcion = ref<string[]>([]) // aqui se guardan los contornos que el cliente selecciona
 
-const listaProductos = inject('listaProductos') // productos.json, mocks para pruebas y cuando se llama a la api la lista de productos
 
-const listaContornos = listaProductos.value.filter(producto => producto.categoria === 'Contorno') // filtro para obtener de la lista solo los productos con categoria contorno
+const listaProductos = inject<Producto[]>('listaProductos') // productos.json, mocks para pruebas y cuando se llama a la api la lista de productos
+let listaContornos = reactive<Producto[]>([])
+let contornos = reactive<string[]>([])
 
-const contornos = listaContornos.map(contorno => contorno.nombreProducto) // devuelve arreglo con solo los contornos disponibles
+if(listaProductos !== undefined){
+ listaContornos = listaProductos.filter((producto:Producto) => producto.categoria === 'Contorno') // filtro para obtener de la lista solo los productos con categoria contorno
+ contornos = listaContornos.map((contorno:Producto) => contorno.nombreProducto) // devuelve arreglo con solo los contornos disponibles
+}
 
 const dialog = ref<boolean>(false) // variable que controla el display del componente Pedido.vue
 
@@ -229,7 +238,7 @@ const guardarEnListaPedidos = (pedido:Pedido):void =>{
     propsAvisoMaxProductos.mensaje = "Usted supera el limite de 10 productos en su lista de pedidos..."
   } else {
      let pedidoOriginal:Pedido = {                  //Elimina la reactividad del pedido
-       producto:pedido.producto,                    // y se agrega a la lista un pedido independiente de cambios que se hagan
+       idProducto:pedido.idProducto,                    // y se agrega a la lista un pedido independiente de cambios que se hagan
        nombreProducto:pedido.nombreProducto,
        precio:pedido.precio,
        cantidad:pedido.cantidad,

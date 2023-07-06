@@ -34,8 +34,9 @@ import {useRoute,useRouter} from 'vue-router'
 import {useEstadoAlerta} from "../stores/estadoAlerta"
 import {useSesionUsuario} from "../stores/sesionUsuario"
 import {useValidarClaveUno} from "../composables/validadores"
-import axios,{AxiosError} from "axios"
-import {Respuesta,NuevaClave} from "../types/interfaces"
+import axios from 'axios'
+import type {AxiosError,AxiosResponse} from 'axios'
+import type {NuevaClave} from "../types/interfaces"
 import BarraProgresoAviso from "../components/BarraProgresoAviso.vue"
 
 const mostrarFormulario=ref<boolean>(true)
@@ -45,7 +46,7 @@ const alert = useEstadoAlerta()
 const sesion = useSesionUsuario()
 
 const nuevaClave = reactive<NuevaClave>({
-  email:route.params.email,
+  email:route.params.email.toString(),
   passwordUno:'',
   passwordDos:''
 })
@@ -57,7 +58,7 @@ const activarCambiarClave = computed<boolean>(()=>{
   return true
 })
 
-const validarClave = [ value => {
+const validarClave = [ (value:string) => {
 
         if(value === nuevaClave.passwordUno) return true
 
@@ -67,7 +68,7 @@ const validarClave = [ value => {
 const cambiarClave = ():void => {
   console.log("nueva clave", nuevaClave)
   axios.put(import.meta.env.VITE_API_CAMBIAR_CLAVE_USUARIO+route.params.token, nuevaClave)
-    .then((res:Resultado) => {
+    .then((res:AxiosResponse) => {
       mostrarFormulario.value = false
       alert.gestionarRespuesta(res)
       console.log(res)

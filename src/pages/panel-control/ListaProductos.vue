@@ -67,7 +67,14 @@
           <td>
             <v-chip
             color="green"
-            :to="{name:'Operaciones con productos', query:producto}"
+            :to="{name:'Operaciones con productos', query:{
+                                                      id:producto.id,
+                                                      nombreProducto:producto.nombreProducto,
+                                                      categoria:producto.categoria,
+                                                      descripcion:producto.descripcion,
+                                                      precio:producto.precio,
+                                                      disponible:producto.disponible.toString()
+                                                      }}"
             prepend-icon="mdi-file-edit-outline">
             Editar
           </v-chip>
@@ -131,14 +138,15 @@
 
 <script setup lang="ts">
 import {ref,reactive} from 'vue'
-import axios,{AxiosError} from 'axios'
-import {Respuesta,Producto,Modal} from '../../types/interfaces'
+import axios from 'axios'
 import Aviso from '../../components/Aviso.vue'
 import BarraProgresoAviso from '../../components/BarraProgresoAviso.vue'
+import type {AxiosError,AxiosResponse} from 'axios'
+import type {Producto,Modal} from '../../types/interfaces'
 
 const listaProductos = ref<Producto[]>([])
 const errorServidor = ref<boolean>(false)
-const cantidadProductos = listaProductos.length
+const cantidadProductos = listaProductos.value.length
 const cargandoLista =ref<boolean>(false)
 const listaVacia = ref<boolean>(false)
 const estaProductoRelacionado = ref<boolean>(false)
@@ -151,7 +159,7 @@ const propsAvisoEliminar:Modal = reactive({
   activarAviso: false,
   mensaje:"",
   color:"",
-  idInfo:undefined
+  idInfo:0
 })
 const propsAviso:Modal = reactive({
   activarAviso: false,
@@ -159,12 +167,9 @@ const propsAviso:Modal = reactive({
   color:""
 })
 
-
-
-
-function obtenerProductos():void {
+function obtenerProductos(){
   axios.get(import.meta.env.VITE_API_LISTA_DE_PRODUCTOS)
-  .then((res:Respuesta)=>{
+  .then((res:AxiosResponse)=>{
     console.log("data",res)
     cargandoLista.value = true
     setTimeout(() => {
@@ -180,25 +185,27 @@ function obtenerProductos():void {
 }
 
 
-function eliminarProductoId(idProducto:number):void {
+function eliminarProductoId(idProducto:number|undefined){
   axios.delete(import.meta.env.VITE_API_ELIMINAR_PRODUCTO+idProducto,{headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } })
-    .then((res:Respuesta)=>{
+    .then((res:AxiosResponse)=>{
       propsAvisoEliminar.activarAviso = false
       propsAviso.activarAviso = true
       propsAviso.mensaje = res.data.mensaje
       obtenerProductos()
     })
-    .catch((err:AxiosError)=>{
-      propsAviso.activarAviso = true
-      propsAviso.mensaje = err.response.data.error
+    .catch((err:unknown)=>{
+      if(axios.isAxiosError(err)){
+        propsAviso.activarAviso = true
+        propsAviso.mensaje = err.response?.data.error
+      }
     })
 }
 
-function verificarProductoMostrarAviso(productoId:number):void {
+function verificarProductoMostrarAviso(productoId:number|undefined){
   axios.get(import.meta.env.VITE_API_VERIFICAR_PRODUCTO+productoId)
-  .then((res:Respuesta)=>{
+  .then((res:AxiosResponse)=>{
     console.log("Verificando producto..",res)
-    estaProductoRelacionado.value = res.data.mensaje
+    estaProductoRelacionado.value = res.data.estaRelacionado
 
     if(estaProductoRelacionado.value){
       console.log("mensaje",estaProductoRelacionado.value)

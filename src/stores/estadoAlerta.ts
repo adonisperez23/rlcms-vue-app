@@ -1,27 +1,30 @@
 import { ref, computed } from 'vue';
 import { defineStore } from 'pinia';
-import {AxiosError} from 'axios';
-import type {Respuesta} from '../types/interfaces.ts'
-
+import {isAxiosError} from 'axios'
+import type {AxiosError,AxiosResponse} from 'axios'
+// import type {AxiosError} from 'axios';
+// import type {Respuesta} from '../types/interfaces'
 
 export const useEstadoAlerta = defineStore('alerta', () => {
-  const mensaje = ref('')
-  const icon = ref('$success')
-  const color = ref('success')
-  const mostrarAlert = ref(false)
+  const mensaje = ref<string>('')
+  const icon = ref<string>('$success')
+  const color = ref<string>('success')
+  const mostrarAlert = ref<boolean>(false)
 
-  function gestionarError(err:AxiosError):void {
-    mensaje.value = err.response.data.error
-    icon.value ='$error'
-    color.value ='error'
-    mostrarAlert.value = true
+  function gestionarError(err:unknown):void {
+      if(isAxiosError(err)){
+        mensaje.value = err.response?.data.error
+        icon.value ='$error'
+        color.value ='error'
+        mostrarAlert.value = true
 
-    setTimeout(() => {
-      mostrarAlert.value = false
-    }, 3000);
-
+        setTimeout(() => {
+          mostrarAlert.value = false
+        }, 3000);
+       }
   }
-  function gestionarRespuesta(res:Respuesta):void {
+
+  function gestionarRespuesta(res:AxiosResponse):void {
     mensaje.value = res.data.mensaje
     icon.value ='$success'
     color.value ='success'

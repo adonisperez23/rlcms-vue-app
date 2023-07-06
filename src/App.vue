@@ -21,7 +21,7 @@ let usuario:Usuario = {
   nombre:localStorage.getItem('nombre'),
   telefono:localStorage.getItem('telefono'),
   email:localStorage.getItem('email'),
-  claveUno:localStorage.getItem('claveUno'),
+  claveUno:localStorage.getItem('clave'),
   esAdmin:(localStorage.getItem('esAdmin') === "true")
 }
 console.log("admin", usuario.esAdmin)

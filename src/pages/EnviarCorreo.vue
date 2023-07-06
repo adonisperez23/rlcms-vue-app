@@ -26,8 +26,8 @@ import {ref} from 'vue'
 import {useEstadoAlerta} from "../stores/estadoAlerta"
 import {useSesionUsuario} from "../stores/sesionUsuario"
 import {useValidarEmail} from "../composables/validadores"
-import axios,{AxiosError} from "axios"
-import {Respuesta} from "../types/interfaces"
+import axios from 'axios'
+import type {AxiosError,AxiosResponse} from 'axios'
 import BarraProgresoAviso from "../components/BarraProgresoAviso.vue"
 
 const mostrarFormulario=ref<boolean>(true)
@@ -38,7 +38,7 @@ const alert = useEstadoAlerta()
 
 function enviarCorreo():void {
   axios.post(import.meta.env.VITE_API_ENVIAR_CORREO_RECUPERACION, {email:correo.value})
-    .then((res:Respuesta)=>{
+    .then((res:AxiosResponse)=>{
 
       mostrarFormulario.value = false
 

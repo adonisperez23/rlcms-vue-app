@@ -1,4 +1,5 @@
-import { createRouter, createWebHistory,createWebHashHistory } from 'vue-router'
+import { createRouter, createWebHistory,createWebHashHistory} from 'vue-router'
+import type {RouteLocationNormalized}  from 'vue-router'
 import AutenticarUsuario from '../pages/AutenticarUsuario.vue'
 import RegistroUsuario from '../pages/RegistroUsuario.vue'
 import Menu from '../pages/Menu.vue'
@@ -8,7 +9,7 @@ import InfoUsuario from '../pages/InfoUsuario.vue'
 import Home from '../pages/Home.vue'
 import QuienesSomos from '../pages/QuienesSomos.vue'
 
-function esAdminAuthenticado(to) {
+function esAdminAuthenticado(to:RouteLocationNormalized) {
   if(to.meta.requiereAuthAdmin && localStorage.getItem('esAdmin')) return true
 
   return {path:"/menu"}

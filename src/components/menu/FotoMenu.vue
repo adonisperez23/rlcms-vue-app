@@ -39,9 +39,10 @@
 </template>
 
 <script setup lang="ts">
-import axios,{AxiosError} from "axios"
-import {Respuesta,Foto} from "../../types/interfaces"
+import axios from 'axios'
 import {ref, onMounted} from "vue"
+import type {AxiosError,AxiosResponse} from 'axios'
+import type {Foto} from "../../types/interfaces"
 // import listaFotos from '../../assets/fotos.json'
 
 const listaFotos = ref<Foto[]>([])
@@ -57,15 +58,15 @@ const props = withDefaults(defineProps<{
 ObtenerFotos()
 
 
-function ObtenerFotos(params:type) {
+function ObtenerFotos() {
   axios.get(import.meta.env.VITE_API_LISTA_DE_FOTOS)
-    .then((res:Respuesta)=>{
+    .then((res:AxiosResponse)=>{
       listaFotos.value = res.data
-      listaFotosFiltradas.value = listaFotos.value.filter(foto=>foto.producto.nombreProducto == props.nombreProducto)
+      listaFotosFiltradas.value = listaFotos.value.filter(foto=>foto.producto?.nombreProducto == props.nombreProducto)
       console.log("fotos",res.data)
     })
     .catch((err:AxiosError)=>{
-      console.log("error foto",err.response.data.error)
+      console.log("error foto",err)
     })
 
 }

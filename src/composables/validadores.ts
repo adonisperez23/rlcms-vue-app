@@ -1,4 +1,4 @@
-export const useValidarEmail = [(value) => {
+export const useValidarEmail = [(value:string) => {
 
         if (/^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/.test(value)) return true
 
@@ -6,14 +6,14 @@ export const useValidarEmail = [(value) => {
 
         }]
 
-export const useValidarNombre = [ value => {
+export const useValidarNombre = [ (value:string) => {
             if(value.length >= 3) return true
 
             return 'Su nombre debe contener mas de 2 caracteres'
 
           },
 
-          value => {
+          (value:string) => {
 
             if (/^([a-zA-Z]+\s?){4}?$/.test(value) || value.length === 3) return true
 
@@ -21,7 +21,7 @@ export const useValidarNombre = [ value => {
 
           },
 
-          value =>{
+          (value:string) =>{
 
           if (value.length <= 50) return true
 
@@ -29,7 +29,7 @@ export const useValidarNombre = [ value => {
 
         }]
 
-export const useValidarTelefono =[ value => {
+export const useValidarTelefono =[ (value:string) => {
 
             if(value.length === 7) return true
 
@@ -37,7 +37,7 @@ export const useValidarTelefono =[ value => {
 
         }]
 
-export const useValidarClaveUno = [value => {
+export const useValidarClaveUno = [(value:string) => {
 
                   if (value.length >= 5) return true
 

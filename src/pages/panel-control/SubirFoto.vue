@@ -42,19 +42,20 @@
 import {ref,reactive} from 'vue'
 import {useRoute,useRouter} from 'vue-router'
 import {useEstadoAlerta} from '../../stores/estadoAlerta'
-import {Respuesta,Foto} from '../../types/interfaces'
-import axios,{AxiosError} from 'axios'
+import axios from 'axios'
 import BarraProgresoAviso from '../../components/BarraProgresoAviso.vue'
+import type {Foto} from '../../types/interfaces'
+import type {AxiosError,AxiosResponse} from 'axios'
 
 const alert = useEstadoAlerta()
 const route = useRoute()
 const router = useRouter()
 
-const imagen = ref<undefined>()
+const imagen = ref<File[]>()
 const infoFoto = reactive<Foto>({
   nombreFoto:'',
   direccionUrl:'',
-  producto:Number(route.query.id)
+  id:Number(route.query.id)
 })
 
 const mostrarFormulario = ref<boolean>(true)
@@ -62,9 +63,11 @@ const mostrarInfoFoto = ref<boolean>(false)
 
 function subirFoto():void {
   let data = new FormData()
-  data.append('foto',imagen.value[0])
+  if(imagen.value !== undefined){
+    data.append('foto',imagen.value[0])
+  }
   axios.post(import.meta.env.VITE_API_SUBIR_FOTO, data, {headers:{'Content-type':'multipart/form-data',Authorization: `Bearer ${localStorage.getItem('token')}`}})
-    .then((res:Respuesta)=>{
+    .then((res:AxiosResponse)=>{
       console.log('res',res)
       mostrarFormulario.value = false
       alert.gestionarRespuesta(res)
@@ -87,7 +90,7 @@ function subirFoto():void {
 }
 function guardarInfoFoto():void {
   axios.post(import.meta.env.VITE_API_GUARDAR_INFO_FOTO,infoFoto,{headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } })
-    .then((res:Respuesta)=>{
+    .then((res:AxiosResponse)=>{
       console.log('res',res)
       mostrarInfoFoto.value = false
       alert.gestionarRespuesta(res)

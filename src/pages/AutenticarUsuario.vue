@@ -37,8 +37,9 @@ import { useRouter } from 'vue-router'
 import {useValidarEmail} from '../composables/validadores';
 import {useEstadoAlerta} from '../stores/estadoAlerta';
 import {useSesionUsuario} from '../stores/sesionUsuario'
-import {Respuesta,Usuario} from '../types/interfaces.ts'
-import axios, {AxiosError} from 'axios'
+import type {Usuario} from '../types/interfaces'
+import axios from 'axios'
+import type {AxiosError,AxiosResponse} from 'axios'
 import BarraProgresoAviso from '../components/BarraProgresoAviso.vue'
 
 // router
@@ -59,7 +60,7 @@ const mostrarFormulario = ref<boolean>(true) //Variable que controla el momento 
 
 const autenticarUsuario = ():void=> {
     axios.post(import.meta.env.VITE_API_AUTENTICAR_USUARIO, datosLogin(correo.value,clave.value))
-          .then((res:Respuesta)=>{
+          .then((res:AxiosResponse)=>{
 
             mostrarFormulario.value = false
 
@@ -95,12 +96,14 @@ function datosLogin(correo:string,clave:string){
   }
 }
 function setDataInLocalStorage(usuario:Usuario):void {
-  localStorage.setItem('id',usuario.id)
   localStorage.setItem('nombre',usuario.nombre)
   localStorage.setItem('telefono',usuario.telefono)
   localStorage.setItem('email',usuario.email)
-  localStorage.setItem('claveUno',usuario.claveUno)
-  localStorage.setItem('esAdmin',usuario.esAdmin)
+  if(usuario.esAdmin !== undefined && usuario.id !== undefined && usuario.clave !== undefined){
+    localStorage.setItem('clave',usuario.clave.toString())
+    localStorage.setItem('id',usuario.id.toString())
+    localStorage.setItem('esAdmin',usuario.esAdmin.toString())
+  }
 }
 
 </script>

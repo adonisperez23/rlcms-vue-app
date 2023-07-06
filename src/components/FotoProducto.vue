@@ -63,9 +63,10 @@
 
 <script setup lang="ts">
 import {ref,reactive} from 'vue'
-import axios,{AxiosError} from 'axios'
+import axios from 'axios'
 import Aviso from './Aviso.vue'
-import {Modal,Resultado} from '../types/interfaces'
+import type {AxiosError,AxiosResponse} from 'axios'
+import type {Modal} from '../types/interfaces'
 
 const emit = defineEmits<{
   (e:'foto-eliminada'):void
@@ -89,16 +90,18 @@ const propsAviso = reactive<Modal>({
 
 function borrarImagen():void {
   axios.delete(import.meta.env.VITE_API_BORRAR_FOTO+props.idFoto,{headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } })
-    .then((res:Resultado)=>{
+    .then((res:AxiosResponse)=>{
       console.log("foto eliminada con exito",res)
       propsAviso.activarAviso = true
       propsAvisoEliminar.activarAviso = false
       propsAviso.mensaje = res.data.mensaje
     })
-    .catch((err:AxiosError)=>{
-      console.log("error al borrar foto",err)
-      propsAviso.activarAviso = true
-      propsAviso.mensaje = err.response.data.error
+    .catch((err:unknown)=>{
+      if(axios.isAxiosError(err)){
+        console.log("error al borrar foto",err)
+        propsAviso.activarAviso = true
+        propsAviso.mensaje = err.response?.data.error
+      }
     })
 }
 

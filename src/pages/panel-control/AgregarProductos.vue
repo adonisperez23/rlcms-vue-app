@@ -44,10 +44,11 @@
 <script setup lang="ts">
 import {ref,reactive} from 'vue'
 import {useRoute,useRouter} from 'vue-router'
-import {Producto,Respuesta} from '../../types/interfaces'
-import axios,{AxiosError} from 'axios'
+import axios from 'axios'
 import {useEstadoAlerta} from '../../stores/estadoAlerta'
 import BarraProgresoAviso from "../../components/BarraProgresoAviso.vue"
+import type {Producto} from '../../types/interfaces'
+import type {AxiosError,AxiosResponse} from 'axios'
 
 const route = useRoute()
 const router = useRouter()
@@ -64,9 +65,11 @@ const producto = reactive<Producto>({
 })
 
 if(route.query.id){
-  producto.nombreProducto = route.query.nombreProducto
-  producto.categoria = route.query.categoria
-  producto.descripcion = route.query.descripcion
+  if(route.query.nombreProducto !== null && route.query.categoria !== null &&  route.query.descripcion !== null){
+    producto.nombreProducto = route.query.nombreProducto.toString()
+    producto.categoria = route.query.categoria.toString()
+    producto.descripcion = route.query.descripcion.toString()
+  }
   producto.precio = Number(route.query.precio)
   producto.disponible = (route.query.disponible === 'true')
 }
@@ -84,17 +87,17 @@ function nuevoProducto():void {
   router.push("/operaciones-productos")
 }
 
-const validatePrecio = [ value => {
+const validatePrecio = [ (value:number) => {
   if(value <=15) return true
 
   return "Valor del producto muy alto"
 },
-value => {
+(value:number) => {
   if(value >=0) return true
 
   return "Valor del producto no puede ser negativo"
 },
-value => {
+(value:number) => {
   let decimal = (value + "").split(".")[1];
   console.log(decimal.length); // Output: 4
   if(decimal.length <=2) return true
@@ -102,7 +105,7 @@ value => {
   return "Valor del producto no puede tener mas de dos decimales"
 }]
 
-const validateProducto = [ value => {
+const validateProducto = [ (value:string) => {
   if(value.length > 0) return true
 
   return "Debe ingresar un nombre para el producto"
@@ -110,7 +113,7 @@ const validateProducto = [ value => {
 
 function registrarProducto():void {
   axios.post(import.meta.env.VITE_API_REGISTRAR_PRODUCTO, producto,{headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } })
-    .then((res:Respuesta)=>{
+    .then((res:AxiosResponse)=>{
       mostrarFormulario.value = false
       alert.gestionarRespuesta(res)
       setTimeout(() => {
@@ -129,7 +132,7 @@ function registrarProducto():void {
 
 function actualizarProducto():void {
   axios.put(import.meta.env.VITE_API_ACTUALIZAR_PRODUCTO+route.query.id, producto,{headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } })
-    .then((res:Respuesta)=>{
+    .then((res:AxiosResponse)=>{
       mostrarFormulario.value = false
       alert.gestionarRespuesta(res)
       setTimeout(() => {

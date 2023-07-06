@@ -54,17 +54,18 @@
 <script setup lang="ts">
 import InfoMenu from "../components/menu/InfoMenu.vue"
 import { ref , reactive , onMounted, provide } from 'vue'
-import axios,{AxiosError} from 'axios'
-import {Respuesta,Producto} from "../types/interfaces"
+import axios from 'axios'
+import type {AxiosError,AxiosResponse} from 'axios'
+import type {Producto} from "../types/interfaces"
 import BarraProgresoAviso from '../components/BarraProgresoAviso.vue'
 // import listaProductos from '../assets/productos.json'
 
 
-const listaMenu = ref<Producto[]>([]) // Variable que almacena todos los productos de la base de datos
+let listaMenu = reactive<Producto[]>([]) // Variable que almacena todos los productos de la base de datos
 const cargandoLista =ref<boolean>(true) //Variable que activa la BarraProgresoAviso cuando se hace la llamada a la api
 const listaVacia = ref<boolean>(false) // Controla el escrito cuando la lista de productos esta vacia o hay algun error en la llamada
 const errorDeCarga = ref<boolean>(false)
-const listaMenuFiltrada = ref<Producto[]>([])  //Variable que almacena solo los productos con categoria Almuerzo y Raciones
+let listaMenuFiltrada = reactive<Producto[]>([])  //Variable que almacena solo los productos con categoria Almuerzo y Raciones
 // const listaFiltrada = listaMenu.value.filter(producto => producto.categoria === "Almuerzo" || producto.categoria === "Raciones")
 
 ObtenerMenu()
@@ -74,21 +75,21 @@ provide('listaProductos', listaMenu) // provee a todos los componentes hijos de 
 
 function ObtenerMenu():void {
   axios.get(import.meta.env.VITE_API_LISTA_DE_PRODUCTOS)
-  .then((res:Respuesta)=>{
+  .then((res:AxiosResponse)=>{
     setTimeout(() => {
-      listaMenu.value = res.data
-      listaMenuFiltrada.value = listaMenu.value.filter(producto => (producto.categoria === "Almuerzo" || producto.categoria === "Raciones") && producto.disponible === true)
-      estaListaVacia(listaMenu.value)
+      listaMenu = res.data
+      listaMenuFiltrada = listaMenu.filter(producto => (producto.categoria === "Almuerzo" || producto.categoria === "Raciones") && producto.disponible === true)
+      estaListaVacia(listaMenu)
       cargandoLista.value = false
     }, 2000);
-    console.log("lista Productos", res.data,listaMenu.value)
+    console.log("lista Productos", res.data.listaMenu)
   })
   .catch((err:AxiosError)=>{
     setTimeout(() => {
       cargandoLista.value = false
       errorDeCarga.value = true
     }, 2000);
-    console.log("error",err.response.data.error)
+    // console.log("error",err.response.data.error)
   })
 }
 

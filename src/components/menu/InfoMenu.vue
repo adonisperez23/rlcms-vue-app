@@ -19,7 +19,7 @@
               <div v-if="sesion.estadoSesion">
                 <Pedido
                 :idProducto="id"
-                :precio="precio"
+                :precio="precio.toString()"
                 :menuOpcion="nombreProducto"/>
               </div>
             </div>
@@ -50,9 +50,10 @@ import FotoMenu from "./FotoMenu.vue"
 import Pedido from "./Pedido.vue"
 import {useSesionUsuario} from "../../stores/sesionUsuario"
 import Aviso from "../Aviso.vue"
-import {Modal} from "../../types/interfaces"
+import type {Modal,Producto} from "../../types/interfaces"
+import type {Ref} from "vue"
 
-const isMobile:boolean = inject('isMobile')
+const isMobile = inject('isMobile') as Ref
 const deviceDisplay = computed<number>(()=>{
   if(isMobile.value){
     return 6
@@ -61,16 +62,7 @@ const deviceDisplay = computed<number>(()=>{
   }
 })
 
-const props = defineProps<{
-
-    id:number,
-    nombreProducto:string,
-    categoria:string,
-    descripcion:string,
-    precio:string,
-    disponible:boolean,
-
-}>()
+const props = defineProps<Producto>()
 
 const propsAviso =reactive<Modal>({
   activarAviso:false,
