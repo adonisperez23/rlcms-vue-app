@@ -8,29 +8,40 @@
 <script setup lang="ts">
 import {provide} from 'vue'
 import {useSesionUsuario} from './stores/sesionUsuario'
-import {Usuario} from './types/interfaces'
+import type {Usuario} from './types/interfaces'
 import { useDisplay } from 'vuetify'
 
 const {xs,width} = useDisplay()
 
 provide('isMobile', xs)
 provide('widthWindow', width)
-
-let usuario:Usuario = {
-  id:localStorage.getItem('id'),
-  nombre:localStorage.getItem('nombre'),
-  telefono:localStorage.getItem('telefono'),
-  email:localStorage.getItem('email'),
-  claveUno:localStorage.getItem('clave'),
-  esAdmin:(localStorage.getItem('esAdmin') === "true")
-}
-console.log("admin", usuario.esAdmin)
 const sesion = useSesionUsuario()
 
-if(usuario.id){
-  sesion.abrirSesion()
-  sesion.obtenerInformacionUsuario(usuario)
+if(localStorage.length > 0){
+  let usuario:Usuario = {
+    id:Number(localStorage.getItem('id')) ,
+    nombre:localStorage.getItem('nombre') as string,
+    telefono:localStorage.getItem('telefono') as string,
+    email:localStorage.getItem('email') as string,
+    clave:localStorage.getItem('clave') as string,
+    esAdmin:(localStorage.getItem('esAdmin') === "true")
+  }
+  if(usuario.id){
+    sesion.abrirSesion()
+    sesion.obtenerInformacionUsuario(usuario)
+  }
 }
+
+// console.log("admin", usuario.esAdmin)
+
+// function validar(propiedad:string) {
+//   if(localStorage.getItem(propiedad)){
+//     return localStorage.getItem(propiedad)
+//   }
+// }
+
+
+
 
 
 

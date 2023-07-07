@@ -62,7 +62,14 @@ const deviceDisplay = computed<number>(()=>{
   }
 })
 
-const props = defineProps<Producto>()
+const props = defineProps<{
+  id?:number,
+  nombreProducto:string,
+  categoria:string,
+  descripcion:string,
+  precio:number,
+  disponible:boolean
+}>()
 
 const propsAviso =reactive<Modal>({
   activarAviso:false,

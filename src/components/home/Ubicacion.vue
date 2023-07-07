@@ -26,8 +26,9 @@
 
 <script setup lang="ts">
 import {inject, computed} from 'vue'
+import type {Ref} from 'vue'
 
-const mobile = inject('isMobile')
+const mobile = inject('isMobile') as Ref
 const cols = computed<string>(()=>{
   if(mobile.value){
     return "12"

@@ -17,8 +17,9 @@
 
 <script setup lang="ts">
 import {inject, computed} from "vue"
+import type {Ref} from "vue"
 
-const isMobile = inject("isMobile")
+const isMobile = inject("isMobile") as Ref
 
 const colsAlert = computed<number>(()=>{
   if(isMobile.value){

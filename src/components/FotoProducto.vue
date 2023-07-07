@@ -73,7 +73,7 @@ const emit = defineEmits<{
 }>()
 
 const props = defineProps<{
-  idFoto:number,
+  idFoto?:number,
   srcFoto:string,
   nombreFoto:string
 }>()

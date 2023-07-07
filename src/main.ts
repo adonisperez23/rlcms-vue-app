@@ -13,8 +13,8 @@ import moment from 'moment'
 const app = createApp(App)
 
 app.config.globalProperties.$filters = {
-  dateFormat (date:string, format = 'DD/MM/YYYY h:mm a') {
-    return moment(date).format(format)
+  dateFormat (date:string) {
+    return moment(date).format('DD/MM/YYYY h:mm a')
   }
 }
 
