@@ -27,11 +27,21 @@ interface Usuario {
 }
 
 interface Pedido {
-  idProducto?:number,
+  id?:number,
   nombreProducto:string,
   precio:number,
   cantidad:number,
-  descripcion:string
+  descripcion:string,
+  producto?:Producto
+}
+
+interface PedidoProducto {
+  id?:number,
+  nombreProducto:string,
+  precio:number,
+  cantidad:number,
+  descripcion:string,
+  producto:Producto
 }
 
 interface Modal {
@@ -51,7 +61,7 @@ interface Factura {
   id: number,
   fechaHora: string,
   usuario: Usuario,
-  pedido: Pedido[]
+  pedido: PedidoProducto[]
 }
 
 interface Foto {
@@ -61,4 +71,4 @@ interface Foto {
   producto?:Producto
 }
 
-export type {Producto,Respuesta,Usuario,Pedido,NuevaClave, Factura, Foto,Modal};
+export type {Producto,Respuesta,Usuario,Pedido,NuevaClave, Factura, Foto,Modal,PedidoProducto};

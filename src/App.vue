@@ -32,15 +32,6 @@ if(localStorage.length > 0){
   }
 }
 
-// console.log("admin", usuario.esAdmin)
-
-// function validar(propiedad:string) {
-//   if(localStorage.getItem(propiedad)){
-//     return localStorage.getItem(propiedad)
-//   }
-// }
-
-
 
 
 

@@ -34,7 +34,7 @@
           <v-btn prepend-icon="mdi-menu" to="/menu" variant="text">
             Menu
           </v-btn>
-          <v-btn :disabled="sesion.estadoLocalComercial" prepend-icon="mdi-cart-outline" to="/lista-pedidos" v-show="sesion.estadoSesion" variant="text" >
+          <v-btn :disabled="estadoLocalComercial" prepend-icon="mdi-cart-outline" to="/lista-pedidos" v-show="sesion.estadoSesion" variant="text" >
             Pedidos ({{cantidadProductos}})
           </v-btn>
           <v-btn prepend-icon="mdi-domain" to="/about-us" variant="text" >
@@ -109,7 +109,7 @@
 
    <v-main>
      <v-sheet
-     v-if="estadoLocalComercial"
+     v-if="estadoLocalComercial && sesion.estadoSesion"
      color="yellow-darken-2"
      max-height="120"
       >
@@ -169,24 +169,23 @@ const salir = ()=>{
   localStorage.clear()
 }
 
-const servicioHabilitado = ref<boolean>(false)
-
 var controladorHorario = setInterval(()=>{
   let date = new Date()
   let horaActual = date.getHours()
   let diaActual = date.getDay()
   let horaApertura = 8 //12
   let horaCierre = 22   //16
-  let diaNolaborable = 0
+  let diaNolaborable = 1
 
-  if(diaActual === diaNolaborable && !estadoLocalComercial.value){
+  if(diaActual === diaNolaborable){
       sesion.cerrarLocalComercial()
-  } else if((horaActual < horaApertura || horaActual >= horaCierre) && (!estadoLocalComercial.value)) {
+  } else if((horaActual < horaApertura || horaActual >= horaCierre)) {
     sesion.cerrarLocalComercial()
   } else if(horaActual >= horaApertura && horaActual < horaCierre){
     sesion.abrirLocalComercial()
   }
 
+  console.log("dia hoy", diaActual, estadoLocalComercial.value)
   },1000)
 
 

@@ -107,10 +107,10 @@
                 :key="index"
                 >
                 <td class="text-center">
-                  {{pedido.idProducto}}
+                  {{pedido.id}}
                 </td>
                 <td class="text-center">
-                  {{pedido.nombreProducto}}
+                  {{pedido.producto.nombreProducto}}
                 </td>
                 <td class="text-center">
                   {{pedido.descripcion}}
@@ -137,10 +137,10 @@ import axios from 'axios'
 import Aviso from '../../components/Aviso.vue'
 import BarraProgresoAviso from '../../components/BarraProgresoAviso.vue'
 import type {AxiosError,AxiosResponse} from 'axios'
-import type {Factura,Modal,Pedido} from '../../types/interfaces'
+import type {Factura,Modal,PedidoProducto} from '../../types/interfaces'
 
 const listaFacturas = ref<Factura[]>([])
-const listaPedidos = ref<Pedido[]>([])
+const listaPedidos = ref<PedidoProducto[]>([])
 const cargandoLista = ref<boolean>(false)
 const listaVacia = ref<boolean>(false)
 const errorServidor = ref<boolean>(false)
@@ -164,7 +164,7 @@ axios.get(import.meta.env.VITE_API_LISTA_FACTURA,{headers: { Authorization: `Bea
     console.log("error al cargar lista de facturas", err)
   })
 
-function mostrarPedido(lista:Pedido[]):void {
+function mostrarPedido(lista:PedidoProducto[]):void {
   propsAviso.activarAviso = true
   listaPedidos.value = lista
   console.log("pedidos",lista)

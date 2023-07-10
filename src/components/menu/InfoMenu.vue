@@ -19,7 +19,7 @@
               <div v-if="sesion.estadoSesion">
                 <Pedido
                 :idProducto="id"
-                :precio="precio.toString()"
+                :precio="precio"
                 :menuOpcion="nombreProducto"/>
               </div>
             </div>

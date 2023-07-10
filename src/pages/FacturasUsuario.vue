@@ -71,7 +71,7 @@
         <template v-slot:lista>
           <v-data-table
               density="compact"
-              v-model:items-per-page="itemsPerPage"
+              v-model:items-per-page="itemsPerPageModal"
               :headers="headersPedidos"
               :items="listaPedidos"
               item-value="name2"
@@ -106,6 +106,7 @@ const listaVacia = ref<boolean>(false)
 const errorServidor = ref<boolean>(false)
 
 const itemsPerPage= ref<number>(5)
+const itemsPerPageModal= ref<number>(5)
 
 const headersFacturas = ref <Header[]>([
   {title:'Id Factura',align:'center',key:'id'},

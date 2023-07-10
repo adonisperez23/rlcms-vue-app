@@ -124,11 +124,11 @@ import Aviso from "../Aviso.vue"
 const props = defineProps<{
   idProducto?:number,
   menuOpcion: string,
-  precio:string,
+  precio:number,
 }>()
 
 const pedido:Pedido = reactive({
-  idProducto:props.idProducto,
+  id:props.idProducto,
   nombreProducto:props.menuOpcion,
   precio:Number(props.precio),
   cantidad:1,
@@ -196,15 +196,15 @@ const colsContornos = computed<number>(()=>{ //establece las columnas del compon
 const especificacionExtra = ref<string>('')
 
 
-const listaProductos = inject<Producto[]>('listaProductos') // productos.json, mocks para pruebas y cuando se llama a la api la lista de productos
+const listaMenu = inject('listaMenu') as Ref// productos.json, mocks para pruebas y cuando se llama a la api la lista de productos
 let listaContornos = reactive<Producto[]>([])
 let contornos = reactive<string[]>([])
 
-if(listaProductos !== undefined){
- listaContornos = listaProductos.filter((producto:Producto) => producto.categoria === 'Contorno') // filtro para obtener de la lista solo los productos con categoria contorno
- contornos = listaContornos.map((contorno:Producto) => contorno.nombreProducto) // devuelve arreglo con solo los contornos disponibles
-}
 
+listaContornos = listaMenu.value.filter((producto:Producto) => producto.categoria === 'Contorno') // filtro para obtener de la lista solo los productos con categoria contorno
+contornos = listaContornos.map((contorno:Producto) => contorno.nombreProducto) // devuelve arreglo con solo los contornos disponibles
+
+console.log("listaProductos",listaMenu)
 const dialog = ref<boolean>(false) // variable que controla el display del componente Pedido.vue
 
 const resetearSeleccion = ():void =>{  //resetea los valores de los contornos seleccionados por el cliente
@@ -238,7 +238,7 @@ const guardarEnListaPedidos = (pedido:Pedido):void =>{
     propsAvisoMaxProductos.mensaje = "Usted supera el limite de 10 productos en su lista de pedidos..."
   } else {
      let pedidoOriginal:Pedido = {                  //Elimina la reactividad del pedido
-       idProducto:pedido.idProducto,                    // y se agrega a la lista un pedido independiente de cambios que se hagan
+       id:pedido.id,                    // y se agrega a la lista un pedido independiente de cambios que se hagan
        nombreProducto:pedido.nombreProducto,
        precio:pedido.precio,
        cantidad:pedido.cantidad,

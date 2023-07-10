@@ -61,7 +61,7 @@ import BarraProgresoAviso from '../components/BarraProgresoAviso.vue'
 // import listaProductos from '../assets/productos.json'
 
 
-let listaMenu = reactive<Producto[]>([]) // Variable que almacena todos los productos de la base de datos
+let listaMenu = ref<Producto[]>([]) // Variable que almacena todos los productos de la base de datos
 const cargandoLista =ref<boolean>(true) //Variable que activa la BarraProgresoAviso cuando se hace la llamada a la api
 const listaVacia = ref<boolean>(false) // Controla el escrito cuando la lista de productos esta vacia o hay algun error en la llamada
 const errorDeCarga = ref<boolean>(false)
@@ -70,16 +70,16 @@ let listaMenuFiltrada = reactive<Producto[]>([])  //Variable que almacena solo l
 
 ObtenerMenu()
 
-provide('listaProductos', listaMenu) // provee a todos los componentes hijos de la lista de productos luego de realizar la llamada a la api
+provide('listaMenu', listaMenu) // provee a todos los componentes hijos de la lista de productos luego de realizar la llamada a la api
 
 
 function ObtenerMenu():void {
   axios.get(import.meta.env.VITE_API_LISTA_DE_PRODUCTOS)
   .then((res:AxiosResponse)=>{
     setTimeout(() => {
-      listaMenu = res.data
-      listaMenuFiltrada = listaMenu.filter(producto => (producto.categoria === "Almuerzo" || producto.categoria === "Raciones") && producto.disponible === true)
-      estaListaVacia(listaMenu)
+      listaMenu.value = res.data
+      listaMenuFiltrada = listaMenu.value.filter(producto => (producto.categoria === "Almuerzo" || producto.categoria === "Raciones") && producto.disponible === true)
+      estaListaVacia(listaMenu.value)
       cargandoLista.value = false
     }, 2000);
     console.log("lista Productos", res.data.listaMenu)
