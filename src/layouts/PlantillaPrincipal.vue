@@ -173,9 +173,9 @@ var controladorHorario = setInterval(()=>{
   let date = new Date()
   let horaActual = date.getHours()
   let diaActual = date.getDay()
-  let horaApertura = 8 //12
-  let horaCierre = 22   //16
-  let diaNolaborable = 1
+  let horaApertura = 8 //12 hora de apertura es a las 12 pm
+  let horaCierre = 22   //16 hora de cierre es a las 4 pm es decir a las 16
+  let diaNolaborable = 0 // dia no laborable domingo; es el 0
 
   if(diaActual === diaNolaborable){
       sesion.cerrarLocalComercial()
