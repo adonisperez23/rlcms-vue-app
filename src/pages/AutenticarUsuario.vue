@@ -77,10 +77,10 @@ const autenticarUsuario = ():void=> {
               router.push('/menu')
             }, 4000);
 
-            console.log("token", localStorage.getItem('token'),localStorage.getItem('esAdmin'))
+            // console.log("token", localStorage.getItem('token'),localStorage.getItem('esAdmin'))
           })
           .catch((err:AxiosError)=>{
-            console.log("error",err)
+            // console.log("error",err)
             mostrarFormulario.value = false
             setTimeout(() => {
               mostrarFormulario.value = true

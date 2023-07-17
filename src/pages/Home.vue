@@ -32,18 +32,6 @@ import Contacto from "../components/home/Contacto.vue";
 import Ubicacion from "../components/home/Ubicacion.vue";
 import TheFooter from "../components/home/TheFooter.vue";
 
-onMounted(()=>{
-  window.document.querySelector("resumen")
-})
-
-const titulo = ref<null>(null)
-const resumen= ref<null>(null)
-function scroll(altura:number):void {
-  window.scrollTo(0,altura)
-}
-function mostrar() {
-  console.log(resumen)
-}
 </script>
 
 <style lang="css" scoped>

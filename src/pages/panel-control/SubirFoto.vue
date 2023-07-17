@@ -68,7 +68,7 @@ function subirFoto():void {
   }
   axios.post(import.meta.env.VITE_API_SUBIR_FOTO, data, {headers:{'Content-type':'multipart/form-data',Authorization: `Bearer ${localStorage.getItem('token')}`}})
     .then((res:AxiosResponse)=>{
-      console.log('res',res)
+      // console.log('res',res)
       mostrarFormulario.value = false
       alert.gestionarRespuesta(res)
       infoFoto.nombreFoto = res.data.nombreArchivo
@@ -79,7 +79,7 @@ function subirFoto():void {
 
     })
     .catch((err:AxiosError)=>{
-      console.log('err',err)
+      // console.log('err',err)
       mostrarFormulario.value = false
       alert.gestionarError(err)
       setTimeout(() => {
@@ -91,7 +91,7 @@ function subirFoto():void {
 function guardarInfoFoto():void {
   axios.post(import.meta.env.VITE_API_GUARDAR_INFO_FOTO,infoFoto,{headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } })
     .then((res:AxiosResponse)=>{
-      console.log('res',res)
+      // console.log('res',res)
       mostrarInfoFoto.value = false
       alert.gestionarRespuesta(res)
       setTimeout(() => {
@@ -99,7 +99,7 @@ function guardarInfoFoto():void {
       }, 3000);
     })
     .catch((err:AxiosError)=>{
-      console.log('err',err)
+      // console.log('err',err)
       mostrarInfoFoto.value = false
       alert.gestionarError(err)
       setTimeout(() => {

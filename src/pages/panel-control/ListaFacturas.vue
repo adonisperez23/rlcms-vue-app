@@ -167,7 +167,7 @@ axios.get(import.meta.env.VITE_API_LISTA_FACTURA,{headers: { Authorization: `Bea
 function mostrarPedido(lista:PedidoProducto[]):void {
   propsAviso.activarAviso = true
   listaPedidos.value = lista
-  console.log("pedidos",lista)
+  // console.log("pedidos",lista)
 }
 
 function estaListaVacia(lista:Factura[]) {

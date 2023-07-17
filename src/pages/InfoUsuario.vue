@@ -50,9 +50,9 @@ import type {Usuario,NuevaClave} from "../types/interfaces"
 import {useEstadoAlerta} from "../stores/estadoAlerta"
 import BarraProgresoAviso from "../components/BarraProgresoAviso.vue"
 
-onMounted(()=>{
-  console.log("datos actualizar", datosActualizar)
-})
+// onMounted(()=>{
+//   console.log("datos actualizar", datosActualizar)
+// })
 
 const sesion = useSesionUsuario()
 const alert = useEstadoAlerta()

@@ -204,7 +204,7 @@ let contornos = reactive<string[]>([])
 listaContornos = listaMenu.value.filter((producto:Producto) => producto.categoria === 'Contorno') // filtro para obtener de la lista solo los productos con categoria contorno
 contornos = listaContornos.map((contorno:Producto) => contorno.nombreProducto) // devuelve arreglo con solo los contornos disponibles
 
-console.log("listaProductos",listaMenu)
+// console.log("listaProductos",listaMenu)
 const dialog = ref<boolean>(false) // variable que controla el display del componente Pedido.vue
 
 const resetearSeleccion = ():void =>{  //resetea los valores de los contornos seleccionados por el cliente

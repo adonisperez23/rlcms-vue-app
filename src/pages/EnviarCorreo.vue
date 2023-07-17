@@ -44,7 +44,7 @@ function enviarCorreo():void {
 
       alert.gestionarRespuesta(res)
 
-      console.log("respuesta", res)
+      // console.log("respuesta", res)
 
       setTimeout(() => {
         mostrarFormulario.value = true
@@ -56,7 +56,7 @@ function enviarCorreo():void {
 
       alert.gestionarError(err)
 
-      console.log("error",err)
+      // console.log("error",err)
 
       setTimeout(() => {
         mostrarFormulario.value = true

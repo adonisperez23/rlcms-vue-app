@@ -66,7 +66,7 @@ const validarClave = [ (value:string) => {
       }]
 
 const cambiarClave = ():void => {
-  console.log("nueva clave", nuevaClave)
+  // console.log("nueva clave", nuevaClave)
   axios.put(import.meta.env.VITE_API_CAMBIAR_CLAVE_USUARIO+route.params.token, nuevaClave)
     .then((res:AxiosResponse) => {
       mostrarFormulario.value = false

@@ -70,7 +70,7 @@ ObtenerListaFotos()
 function ObtenerListaFotos() {
   axios.get(import.meta.env.VITE_API_LISTA_DE_FOTOS)
   .then((res:AxiosResponse)=>{
-    console.log('lista fotos', res)
+    // console.log('lista fotos', res)
     cargandoLista.value = true
     setTimeout(() => {
       cargandoLista.value = false

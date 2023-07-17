@@ -12,7 +12,7 @@
           height="400"
           aspect-ratio="1/1"
           cover
-          src="/ubicacion/fachada-rest2.jpg"
+          src="/fotos/fachada-rest.jpg"
         >
         </v-img>
         <v-btn class="mt-3" variant="tonal" color="#f88905" @click="abrirGoogleMaps">

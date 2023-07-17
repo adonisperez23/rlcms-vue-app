@@ -53,7 +53,7 @@ import type {AxiosError,AxiosResponse} from 'axios'
 const route = useRoute()
 const router = useRouter()
 
-console.log("ruta", route.query)
+// console.log("ruta", route.query)
 
 
 const producto = reactive<Producto>({
@@ -99,7 +99,7 @@ const validatePrecio = [ (value:number) => {
 },
 (value:number) => {
   let decimal = (value + "").split(".")[1];
-  console.log(decimal.length); // Output: 4
+  // console.log(decimal.length); // Output: 4
   if(decimal.length <=2) return true
 
   return "Valor del producto no puede tener mas de dos decimales"
@@ -121,7 +121,7 @@ function registrarProducto():void {
       }, 3000)
     })
     .catch((err:AxiosError)=>{
-      console.log("error",err,producto)
+      // console.log("error",err,producto)
       mostrarFormulario.value = false
       alert.gestionarError(err)
       setTimeout(() => {

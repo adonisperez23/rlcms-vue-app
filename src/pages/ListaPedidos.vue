@@ -164,14 +164,14 @@ function enviarPedido():void {
     {usuario:lista.informacionUsuario.id,listaPedidos:lista.listaPedidos},
     {headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } })
     .then((res:AxiosResponse)=>{
-      console.log("pedido",res)
+      // console.log("pedido",res)
       alert.gestionarRespuesta(res)
       setTimeout(() => {
         armarEnlancePedido(res.data.mensajeEncoded)
       }, 3000);
     })
     .catch((err:AxiosError)=>{
-      console.log("error al enviar pedido", err)
+      // console.log("error al enviar pedido", err)
       alert.gestionarError(err)
     })
 

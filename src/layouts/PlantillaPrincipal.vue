@@ -185,7 +185,7 @@ var controladorHorario = setInterval(()=>{
     sesion.abrirLocalComercial()
   }
 
-  console.log("dia hoy", diaActual, estadoLocalComercial.value)
+  // console.log("dia hoy", diaActual, estadoLocalComercial.value)
   },1000)
 
 

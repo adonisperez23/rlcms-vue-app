@@ -33,7 +33,7 @@
     height="200"
     aspect-ratio="16/9"
     cover
-    src="/fotos/cochino-contodo.jpg"
+    src="/fotos/pabellon.jpg"
   >
   </v-img>
 </template>

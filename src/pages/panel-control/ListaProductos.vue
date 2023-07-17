@@ -170,7 +170,7 @@ const propsAviso:Modal = reactive({
 function obtenerProductos(){
   axios.get(import.meta.env.VITE_API_LISTA_DE_PRODUCTOS)
   .then((res:AxiosResponse)=>{
-    console.log("data",res)
+    // console.log("data",res)
     cargandoLista.value = true
     setTimeout(() => {
       listaProductos.value = res.data
@@ -180,7 +180,7 @@ function obtenerProductos(){
   })
   .catch((err:AxiosError) => {
     errorServidor.value = true
-    console.log("error al cargar lista de productos", err)
+    // console.log("error al cargar lista de productos", err)
   })
 }
 
@@ -204,7 +204,7 @@ function eliminarProductoId(idProducto:number|undefined){
 function verificarProductoMostrarAviso(productoId:number|undefined){
   axios.get(import.meta.env.VITE_API_VERIFICAR_PRODUCTO+productoId)
   .then((res:AxiosResponse)=>{
-    console.log("Verificando producto..",res)
+    // console.log("Verificando producto..",res)
     estaProductoRelacionado.value = res.data.estaRelacionado
 
     if(estaProductoRelacionado.value){
@@ -218,10 +218,10 @@ function verificarProductoMostrarAviso(productoId:number|undefined){
     propsAvisoEliminar.idInfo = productoId
   })
   .catch((err:AxiosError) => {
-    console.log("Error al verificar producto", err)
+    // console.log("Error al verificar producto", err)
+    props.propsAvisoEliminar.mensaje = "No se pudo verificar producto"
+    propsAvisoEliminar.activarAviso = true
   })
-
-
 
 }
 

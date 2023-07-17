@@ -141,14 +141,14 @@ function pedirFacturasUsuario():void {
   .catch((err:AxiosError)=>{
     cargandoLista.value = false
     errorServidor.value = true
-    console.log("error al cargar lista de facturas", err)
+    // console.log("error al cargar lista de facturas", err)
   })
 }
 
 function mostrarPedido(lista:Pedido[]):void {
   propsAviso.activarAviso = true
   listaPedidos.value = lista
-  console.log("pedidos usuario",lista)
+  // console.log("pedidos usuario",lista)
 }
 
 function estaListaVacia(lista:Factura[]) {

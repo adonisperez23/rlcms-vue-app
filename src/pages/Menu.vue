@@ -82,7 +82,7 @@ function ObtenerMenu():void {
       estaListaVacia(listaMenu.value)
       cargandoLista.value = false
     }, 2000);
-    console.log("lista Productos", res.data.listaMenu)
+    // console.log("lista Productos", res.data.listaMenu)
   })
   .catch((err:AxiosError)=>{
     setTimeout(() => {
