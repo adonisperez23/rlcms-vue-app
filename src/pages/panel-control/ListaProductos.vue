@@ -219,7 +219,7 @@ function verificarProductoMostrarAviso(productoId:number|undefined){
   })
   .catch((err:AxiosError) => {
     // console.log("Error al verificar producto", err)
-    props.propsAvisoEliminar.mensaje = "No se pudo verificar producto"
+    propsAvisoEliminar.mensaje = "No se pudo verificar producto"
     propsAvisoEliminar.activarAviso = true
   })
 
