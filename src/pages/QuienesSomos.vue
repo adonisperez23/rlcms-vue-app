@@ -90,6 +90,18 @@
           </section>
         </section>
       </v-col>
+      <v-col cols="12" align="center">
+        <section>
+          <h3>Nuestro fabuloso equipo de trabajo</h3>
+          <v-img
+          class="borde-imagen"
+          src="/fotos/nuestroequipo.jpg"
+          width="180"
+          height="384"
+          aspect-ratio="1/1"
+          ></v-img>
+        </section>
+      </v-col>
     </v-row>
   </v-container>
 </template>
