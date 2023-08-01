@@ -74,7 +74,8 @@ function subirFoto():void {
       infoFoto.nombreFoto = res.data.nombreArchivo
       infoFoto.direccionUrl = res.data.path
       setTimeout(() => {
-        mostrarInfoFoto.value = true
+        guardarInfoFoto()
+        // mostrarInfoFoto.value = true // muestra el formulario de datos de imagen para guardar en la base de datos
       }, 3000);
 
     })

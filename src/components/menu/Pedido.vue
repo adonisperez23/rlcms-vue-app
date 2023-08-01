@@ -201,7 +201,7 @@ let listaContornos = reactive<Producto[]>([])
 let contornos = reactive<string[]>([])
 
 
-listaContornos = listaMenu.value.filter((producto:Producto) => producto.categoria === 'Contorno') // filtro para obtener de la lista solo los productos con categoria contorno
+listaContornos = listaMenu.value.filter((producto:Producto) => producto.categoria === 'Contorno' && producto.disponible === true) // filtro para obtener de la lista solo los productos con categoria contorno
 contornos = listaContornos.map((contorno:Producto) => contorno.nombreProducto) // devuelve arreglo con solo los contornos disponibles
 
 // console.log("listaProductos",listaMenu)
