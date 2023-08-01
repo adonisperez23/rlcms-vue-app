@@ -1,18 +1,17 @@
 <template>
-  <v-container class="mt-10 pt-10">
-    <v-row>
-      <v-col class="mt-16 pt-16">
-          <div class="text-center">
+  <v-container class="mt-1 pt-1 fondo-comida mobile">
+    <v-row class="mt-16 pt-16">
+      <v-col class="mt-6 pt-6">
+          <div class="text-center fondo-titulo">
 
-            <h1 >¡BIENVENIDOS A LA APP WEB DEL RESTAURANT lOS CINCO MEJORES SABORES!</h1>
-            <h4 >¡VEN Y OBSERVA TODOS NUESTROS PLATOS DEL DIA Y ARMA TUS PLATOS CON LOS CONTORNOS QUE MAS DESEES!</h4>
+            <h1>¡BIENVENIDOS A LA APP WEB DEL RESTAURANT lOS CINCO SABORES!</h1>
+            <h3 >¡VEN Y OBSERVA TODOS NUESTROS PLATOS DEL DIA Y ARMA TUS PLATOS CON LOS CONTORNOS QUE MAS DESEES!</h3>
             <div>
             <v-btn-toggle
-
              >
-              <v-btn href="#resumen" size="x-small" variant="tonal" >Como usar la app</v-btn>
-              <v-btn href="#ubicacion" size="x-small" variant="tonal" >Nuestra Ubicacion</v-btn>
-              <v-btn href="#contacto" size="x-small" variant="tonal" >Contactos</v-btn>
+              <v-btn href="#resumen" size="x-small" variant="flat" >Como usar la app</v-btn>
+              <v-btn href="#ubicacion" size="x-small" variant="flat" >Nuestra Ubicacion</v-btn>
+              <v-btn href="#contacto" size="x-small" variant="flat" >Contactos</v-btn>
              </v-btn-toggle>
             </div>
           </div>
@@ -34,5 +33,23 @@ import TheFooter from "../components/home/TheFooter.vue";
 
 </script>
 
-<style lang="css" scoped>
+<style scoped>
+.fondo-comida {
+  background-image: url("/fotos/fotocomida.jpg");
+  background-size: 1200px 560px;
+  height: 560px;
+  border: solid 5px orange;
+}
+.fondo-titulo{
+  background-color: #fcecd2;
+  opacity: 0.7;
+  border: solid 2px orange;
+}
+@media (max-width:400px) {
+  .mobile{
+    background-image: url("/fotos/mobilefoto.jpg");
+    background-size:400px 660px;
+    height: 660px;
+  }
+}
 </style>
