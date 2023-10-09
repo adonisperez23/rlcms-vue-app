@@ -40,9 +40,9 @@
            <v-icon>
            mdi-alert-outline
            </v-icon>
-           Usted se encuentra usando la app en una PC de escritorio,
-           Si no tiene la aplicacion de whatsapp instalada en su PC no podra hacer el pedido.
-           Se le recomienda usar la app en el navegador del telefono para enviar su pedido.
+           Usted está usando la app-web en una PC de escritorio,
+           Debe usar la app-web en el navegador del telefono para poder enviar su pedido.
+           Disculpe las molestias.
            <v-icon>
            mdi-alert-outline
            </v-icon>
@@ -98,10 +98,11 @@
               $ {{montoTotal}}
             </v-card-text>
 
-              <v-btn  class="ml-1" size="x-small" append-icon="mdi-send-circle-outline" variant="outlined" @click="enviarPedido" rounded="pill" color="blue">
+              <v-btn v-show="isMobile" class="ml-1" size="x-small" append-icon="mdi-send-circle-outline" variant="outlined" @click="enviarPedido" rounded="pill" color="blue">
                 Enviar Pedido
               </v-btn>
-              <v-btn  class="ml-1" size="x-small" append-icon="mdi-send-circle-outline" variant="outlined" @click="armarNuevoPedido" rounded="pill" color="green">
+
+              <v-btn  v-show="isMobile" class="ml-1" size="x-small" append-icon="mdi-send-circle-outline" variant="outlined" @click="armarNuevoPedido" rounded="pill" color="green">
                 Armar nuevo pedido
               </v-btn>
 
@@ -178,7 +179,7 @@ function enviarPedido():void {
 }
 
 function armarEnlancePedido(mensaje:string) {
-  window.open(`https://api.whatsapp.com/send?phone=+584148942782&text=${mensaje}+`)
+  window.open(`https://api.whatsapp.com/send?phone=584249683161&text=${mensaje}+`)
 }
 
 function armarNuevoPedido():void {

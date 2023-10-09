@@ -32,7 +32,7 @@
               su inauguración el restaurante ha venido acoplando el desarrollo de
               sus actividades internas con las necesidades y gustos de sus clientes,
               ayudando a sus dueños a crear nuevos productos y servicios incrementando
-              el crecimiento de la empresa. Teniendo ya 14 años desempañando la actividad
+              el crecimiento de la empresa. Teniendo ya 14 años desempeñando la actividad
               comercial, el “Restaurant Los Cinco Mejores Sabores C.A”, ha ido
               consolidando el compromiso y la responsabilidad con sus clientes
               aportando toda la creatividad necesaria para ofrecer una comida

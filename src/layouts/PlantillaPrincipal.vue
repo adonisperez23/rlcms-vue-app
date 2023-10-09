@@ -118,7 +118,7 @@
         <v-icon>
         mdi-alert-outline
         </v-icon>
-        Lo sentimos, estamos fuera de servicio. Nuestro horario de servicio es de lunes a viernes entre 12 pm a 4 pm y sabado de 12 pm a 3 pm
+        Lo sentimos, estamos fuera de servicio. Nuestro horario de servicio es de lunes a viernes entre 11 am a 4 pm y sabado de 11 am a 3 pm
         <v-icon>
         mdi-alert-outline
         </v-icon>
@@ -173,8 +173,8 @@ var controladorHorario = setInterval(()=>{
   let date = new Date()
   let horaActual = date.getHours()
   let diaActual = date.getDay()
-  let horaApertura = 8 //12 hora de apertura es a las 12 pm
-  let horaCierre = 22   //16 hora de cierre es a las 4 pm es decir a las 16
+  let horaApertura = 11 //12 hora de apertura es a las 12 pm
+  let horaCierre = 16   //16 hora de cierre es a las 4 pm es decir a las 16
   let diaNolaborable = 0 // dia no laborable domingo; es el 0
 
   if(diaActual === diaNolaborable){

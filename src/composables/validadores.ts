@@ -15,7 +15,7 @@ export const useValidarNombre = [ (value:string) => {
 
           (value:string) => {
 
-            if (/^([a-zA-Z]+\s?){4}?$/.test(value) || value.length === 3) return true
+            if (/^([a-zA-ZÁ-ÿ\u00f1\u00d1]+\s?){4}?$/.test(value) || value.length === 3) return true
 
             return 'Verifique que no tenga numeros, simbolos o excesos de caracteres'
 

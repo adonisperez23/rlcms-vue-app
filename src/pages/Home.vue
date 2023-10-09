@@ -4,8 +4,8 @@
       <v-col class="mt-6 pt-6">
           <div class="text-center fondo-titulo">
 
-            <h1>¡BIENVENIDOS A LA APP WEB DEL RESTAURANT lOS CINCO SABORES!</h1>
-            <h3 >¡VEN Y OBSERVA TODOS NUESTROS PLATOS DEL DIA Y ARMA TUS PLATOS CON LOS CONTORNOS QUE MAS DESEES!</h3>
+            <h1>¡Bienvenidos a la app web del restaurant los cinco mejores sabores!</h1>
+            <h3 >¡Ven y observa todos nuestros platos del dia y arma tus platos con los contornos que mas desees!</h3>
             <div>
             <v-btn-toggle
              >
