@@ -26,6 +26,7 @@ html {
 
 .borde-imagen {
   border: 2px solid #f88905;
+  border-radius: 5px;
 }
 /* #f3d595  color beige claro
    #f9cf57 color beige mas oscuro*/

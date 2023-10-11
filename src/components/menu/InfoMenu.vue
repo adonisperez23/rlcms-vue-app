@@ -2,8 +2,8 @@
     <v-col :cols="deviceDisplay">
         <v-card
           color="#f3d595"
-          height="325"
-          max-height="325"
+          height="410"
+          max-height="450"
           >
           <v-card-text class="pb-0 px-1 pt-1">
             <FotoMenu :nombreProducto="nombreProducto"/>
@@ -56,9 +56,9 @@ import type {Ref} from "vue"
 const isMobile = inject('isMobile') as Ref
 const deviceDisplay = computed<number>(()=>{
   if(isMobile.value){
-    return 6
+    return 12
   } else {
-    return 3
+    return 4
   }
 })
 

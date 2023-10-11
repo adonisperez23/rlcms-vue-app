@@ -1,12 +1,12 @@
 <template>
   <div v-if="listaFotosFiltradas.length > 1" class="">
-    <v-carousel cycle hide-delimiters show-arrows="hover" height="200">
+    <v-carousel cycle hide-delimiters show-arrows="hover" height="300">
       <div v-for="foto in listaFotosFiltradas" :key="foto.id" class="">
         <v-carousel-item >
           <v-img
           class="borde-imagen"
-          width="300"
-          height="200"
+          width="400"
+          height="300"
           aspect-ratio="16/9"
           cover
           :src="foto.direccionUrl"
@@ -19,8 +19,8 @@
   <div v-else-if="listaFotosFiltradas.length === 1" class="">
     <v-img
     class="borde-imagen"
-    width="300"
-    height="200"
+    width="400"
+    height="300"
     aspect-ratio="16/9"
     cover
     :src="listaFotosFiltradas[0].direccionUrl"
@@ -29,8 +29,8 @@
   <v-img
     v-else
     class="borde-imagen"
-    width="300"
-    height="200"
+    width="400"
+    height="300"
     aspect-ratio="16/9"
     cover
     src="/fotos/pabellon.jpg"

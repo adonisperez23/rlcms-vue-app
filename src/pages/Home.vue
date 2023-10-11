@@ -39,17 +39,20 @@ import TheFooter from "../components/home/TheFooter.vue";
   background-size: 1200px 560px;
   height: 560px;
   border: solid 5px orange;
+  border-radius: 5px;
 }
 .fondo-titulo{
   background-color: #fcecd2;
   opacity: 0.7;
   border: solid 2px orange;
+  border-radius: 5px;
 }
 @media (max-width:400px) {
   .mobile{
     background-image: url("/fotos/mobilefoto.jpg");
     background-size:400px 660px;
     height: 660px;
+    border-radius: 5px;
   }
 }
 </style>
